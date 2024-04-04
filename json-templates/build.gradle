@@ -16,7 +16,7 @@ dependencies {
     // The templates expect classes from this library as models
     // but I'm not sure in what context these templates are used
     // They were previously compileOnly
-    implementation libs.grails.datastore.gorm.mongodb
+    compileOnly libs.grails.datastore.gorm.mongodb
 
     compileOnly libs.slf4j.nop // Get rid of warning about missing slf4j implementation during compileGsonViews task
 }
