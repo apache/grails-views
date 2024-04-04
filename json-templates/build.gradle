@@ -12,11 +12,15 @@ dependencies {
 
     api project(':views-json')
 
-    // Should this be api, implementation, compileOnly or provided?
-    // The templates expect classes from this library as models
-    // but I'm not sure in what context these templates are used
-    // They were previously compileOnly
-    compileOnly libs.grails.datastore.gorm.mongodb
+    // The templates in this project use classes from these dependencies so they should be in the implementation configuration.
+    //
+    // But, setting them as implementation will make grails apps using this project try to autoconfigure MongoDB beans,
+    // even without the real MongoDB dependencies on the classpath, which fails with ClassNotFoundExeption.
+    //
+    // Therefore, because this project is only supposed to work with MongoDB, setting them as compileOnly/provided is
+    // probably best, as it will not break apps that erroneously include this project as a dependency but don't use MongoDB.
+    compileOnly libs.grails.datastore.gorm.mongodb // provided
+    compileOnly libs.mongodb.bson // provided
 
     compileOnly libs.slf4j.nop // Get rid of warning about missing slf4j implementation during compileGsonViews task
 }

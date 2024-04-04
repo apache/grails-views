@@ -11,6 +11,7 @@ groovy = '3.0.21'
 java-baseline = '11'
 javax-annotation-api = '1.3.2'
 micronaut = '3.10.4'
+mongodb = '4.11.1'
 slf4j = '1.7.36'
 spock = '2.3-groovy-3.0'
 spring = '5.3.33'
@@ -37,6 +38,7 @@ groovy-json = { module = 'org.codehaus.groovy:groovy-json', version.ref = 'groov
 groovy-templates = { module = 'org.codehaus.groovy:groovy-templates', version.ref = 'groovy' }
 javax-annotation-api = { module = 'javax.annotation:javax.annotation-api', version.ref = 'javax-annotation-api' }
 micronaut-http-client = { module = 'io.micronaut:micronaut-http-client', version.ref = 'micronaut' }
+mongodb-bson = { module = 'org.mongodb:bson', version.ref = 'mongodb' }
 slf4j-api = { module = 'org.slf4j:slf4j-api', version.ref = 'slf4j' }
 slf4j-nop = { module = 'org.slf4j:slf4j-nop', version.ref = 'slf4j' }
 spock-core = { module = 'org.spockframework:spock-core', version.ref = 'spock' }
