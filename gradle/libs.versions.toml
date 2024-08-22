@@ -15,7 +15,7 @@ mongodb = '4.11.2'
 slf4j = '1.7.36'
 spock = '2.3-groovy-3.0'
 spring = '5.3.33'
-spring-boot = '2.7.18'
+spring-boot = '3.3.3'
 
 [libraries]
 assetpipeline = { module = 'com.bertramlabs.plugins:asset-pipeline-grails', version.ref = 'assetpipeline' }
