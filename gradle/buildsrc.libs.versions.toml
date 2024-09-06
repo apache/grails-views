@@ -1,8 +1,8 @@
 [versions]
 asciidoctor-gradle-jvm = '4.0.2'
-assetpipeline = '4.4.0'
-grails-gradle-plugin = '6.1.2'
-grails-views = '3.2.3'
+assetpipeline = '4.5.1'
+grails-gradle-plugin = '7.0.0-SNAPSHOT'
+grails-views = '4.0.0-SNAPSHOT'
 groovy-doc = '1.0.1'
 nexus-publish-gradle-plugin = '1.3.0'
 

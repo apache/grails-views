@@ -111,9 +111,9 @@ import grails.plugin.json.view.*
 @Field Collection<Player> players
 
 json jsonapi.render(players, [pagination: [resource: Player, total: 11]])
-''', [players: players]) {
+''', [players: players], {
             uri = "/foo"
-        }
+        })
 
         then: "The result is an array"
         renderResult.jsonText == '{"data":[{"type":"player","id":"1","attributes":{"name":"Cantona"},"relationships":{"team":{"data":null}}},{"type":"player","id":"2","attributes":{"name":"Louis"},"relationships":{"team":{"data":null}}}],"links":{"self":"/foo","first":"http://localhost:8080/player?offset=0&max=10","next":"http://localhost:8080/player?offset=10&max=10","last":"http://localhost:8080/player?offset=10&max=10"}}'

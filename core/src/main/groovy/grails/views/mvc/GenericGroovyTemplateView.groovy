@@ -18,8 +18,8 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.servlet.LocaleResolver
 import org.springframework.web.servlet.view.AbstractUrlBasedView
 
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 
 /**
  * An implementation of the Spring AbstractUrlBaseView class for ResolvableGroovyTemplateEngine

@@ -1,6 +1,6 @@
 package functional.tests
 
-class Car extends Vehicle {
+class Car /** extends Vehicle **/ {
     String make
     String model
     Integer year

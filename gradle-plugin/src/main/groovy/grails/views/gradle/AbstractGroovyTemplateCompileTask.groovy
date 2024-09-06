@@ -29,7 +29,7 @@ abstract class AbstractGroovyTemplateCompileTask extends AbstractCompile {
     @InputDirectory
     File srcDir
 
-    @Nested
+    @Input
     ViewCompileOptions compileOptions = new ViewCompileOptions()
 
     @Override

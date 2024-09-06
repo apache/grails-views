@@ -3,5 +3,9 @@ dependencyResolutionManagement {
         buildsrcLibs {
             from(files('../gradle/buildsrc.libs.versions.toml'))
         }
+
+        libs {
+            from(files('../gradle/libs.versions.toml'))
+        }
     }
 }

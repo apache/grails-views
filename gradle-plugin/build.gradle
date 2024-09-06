@@ -18,6 +18,7 @@ dependencies {
     }
     implementation libs.grails.gradle.plugin
     implementation libs.spring.boot.gradle.plugin
+    implementation libs.jakarta.annotation.api
 
     compileOnly libs.groovy.core // @CompileStatic
 }

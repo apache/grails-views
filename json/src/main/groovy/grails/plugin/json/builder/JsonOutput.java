@@ -28,7 +28,7 @@ import org.apache.groovy.json.internal.CharBuf;
 import org.apache.groovy.json.internal.Chr;
 import org.grails.buffer.FastStringWriter;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.io.*;
 import java.net.URL;
 import java.util.*;

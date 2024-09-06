@@ -19,8 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired
  */
 @CompileStatic
 @InheritConstructors
-abstract class AbstractJsonViewContainerRenderer<C,T> extends DefaultJsonRenderer<T> implements ContainerRenderer<C, T> {
-
+abstract class AbstractJsonViewContainerRenderer<C,T> extends DefaultJsonRenderer<T> {
 
     @Autowired
     JsonViewResolver jsonViewResolver

@@ -7,24 +7,21 @@ on:
     branches:
       - '[2-9]+.[0-9]+.x'
 env:
-  GIT_USER_NAME: puneetbehl
-  GIT_USER_EMAIL: behlp@unityfoundation.io
+  GIT_USER_NAME: 'grails-build'
+  GIT_USER_EMAIL: 'grails-build@users.noreply.github.com'
 
 jobs:
 
   test_project:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
-    strategy:
-        fail-fast: false
-        matrix: { java: [11, 17] }
     steps:
       - uses: actions/checkout@v4
       - uses: gradle/wrapper-validation-action@v2
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: ${{ matrix.java }}
+          java-version: 17
       - name: Run Tests
         if: github.event_name == 'pull_request'
         id: tests
@@ -43,7 +40,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: gradle/wrapper-validation-action@v2
       - uses: actions/setup-java@v4
-        with: { java-version: 11, distribution: temurin }
+        with: { java-version: 17, distribution: temurin }
       - name: Run Build
         uses: gradle/actions/setup-gradle@v3
         env:

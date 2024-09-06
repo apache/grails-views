@@ -13,7 +13,7 @@ import groovy.transform.CompileStatic
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.validation.Errors
 
-import javax.annotation.PostConstruct
+import jakarta.annotation.PostConstruct
 /**
  * @author Graeme Rocher
  * @since 1.0

@@ -18,6 +18,7 @@ dependencies {
     implementation libs.grails.encoder
     implementation libs.groovy.core
     implementation libs.groovy.json
+    implementation libs.jakarta.validation.api
 
     testImplementation libs.grails.testing.support.core
     testImplementation libs.grails.testing.support.gorm

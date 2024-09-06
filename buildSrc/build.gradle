@@ -18,3 +18,5 @@ dependencies {
     runtimeOnly buildsrcLibs.grails.views.gradle.plugin
     runtimeOnly buildsrcLibs.groovydoc.gradle.plugin
 }
+
+apply from: rootProject.layout.projectDirectory.file('../gradle/dependency-updates.gradle')

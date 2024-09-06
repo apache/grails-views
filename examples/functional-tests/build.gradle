@@ -55,3 +55,11 @@ assets {
 java {
     sourceCompatibility = JavaVersion.toVersion(libs.versions.java.baseline.get())
 }
+
+distTar {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+distZip {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}

@@ -95,3 +95,5 @@ if (isReleaseVersion) {
 tasks.withType(InitializeNexusStagingRepository).configureEach {
     shouldRunAfter = tasks.withType(Sign)
 }
+
+apply from: rootProject.layout.projectDirectory.file('gradle/dependency-updates.gradle')

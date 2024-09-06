@@ -20,7 +20,7 @@ dependencies {
     implementation libs.spring.beans
     implementation libs.spring.boot // For @ConfigurationProperties
 
-    compileOnly libs.javax.annotation.api // Provided
+    compileOnly libs.jakarta.annotation.api // Provided
 
     testImplementation libs.grails.web.urlmappings
     testImplementation libs.spock.core

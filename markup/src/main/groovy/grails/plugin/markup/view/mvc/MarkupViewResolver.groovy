@@ -10,7 +10,7 @@ import grails.views.mvc.SmartViewResolver
 import grails.web.mime.MimeType
 import groovy.transform.CompileStatic
 import org.springframework.beans.factory.annotation.Autowired
-import javax.annotation.PostConstruct
+import jakarta.annotation.PostConstruct
 
 /**
  * @author Graeme Rocher
