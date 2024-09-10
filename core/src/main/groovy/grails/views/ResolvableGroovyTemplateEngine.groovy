@@ -22,6 +22,7 @@ import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ASTTransformationCustomizer
 import org.codehaus.groovy.control.customizers.ImportCustomizer
 import org.grails.datastore.mapping.model.MappingContext
+import org.grails.spring.context.support.PluginAwareResourceBundleMessageSource
 import org.grails.web.mime.DefaultMimeUtility
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
@@ -152,6 +153,10 @@ abstract class ResolvableGroovyTemplateEngine extends TemplateEngine {
     }
 
     @Autowired(required = false)
+    void setMessageSource(PluginAwareResourceBundleMessageSource messageSource) {
+        this.messageSource = messageSource
+    }
+
     void setMessageSource(MessageSource messageSource) {
         this.messageSource = messageSource
     }
