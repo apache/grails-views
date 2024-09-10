@@ -18,6 +18,7 @@ import org.grails.datastore.mapping.model.MappingContext
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.MessageSource
+import org.springframework.context.support.StaticMessageSource
 import org.springframework.http.HttpStatus
 
 /**
@@ -30,12 +31,9 @@ import org.springframework.http.HttpStatus
 @CompileStatic
 trait JsonViewTest {
 
-    MessageSource messageSource
-
     @Autowired(required = false)
-    void setMessageSource(@Qualifier("pluginAwareResourceBundleMessageSource") MessageSource messageSource) {
-        this.messageSource = messageSource
-    }
+    @Qualifier("pluginAwareResourceBundleMessageSource")
+    MessageSource messageSource = new StaticMessageSource()
 
     @Autowired(required = false)
     MappingContext mappingContext = {
