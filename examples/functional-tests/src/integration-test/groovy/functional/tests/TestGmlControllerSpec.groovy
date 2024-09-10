@@ -2,7 +2,8 @@ package functional.tests
 
 import grails.testing.mixin.integration.Integration
 import grails.testing.spock.RunOnce
-import groovy.util.slurpersupport.GPathResult
+import groovy.xml.XmlSlurper
+import groovy.xml.slurpersupport.GPathResult
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import org.junit.jupiter.api.BeforeEach
