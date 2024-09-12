@@ -24,6 +24,7 @@ dependencies {
     testImplementation libs.grails.testing.support.gorm
     testImplementation libs.grails.datastore.gorm.hibernate5
     testImplementation libs.spock.core
+    testImplementation libs.jackson.databind
 
     testRuntimeOnly libs.slf4j.nop // Get rid of warning about missing slf4j implementation during test task
 }

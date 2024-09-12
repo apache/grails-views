@@ -9,6 +9,7 @@ grails-gradle-plugin = '7.0.0-SNAPSHOT'
 grails-testing-support = '4.0.0-SNAPSHOT'
 groovy = '4.0.22'
 java-baseline = '17'
+jackson-databind = '2.17.2'
 jakarta-annotation-api = '3.0.0'
 jakarta-servlet-api = '6.0.0'
 jakarta-validation-api = '3.0.2'
@@ -38,6 +39,7 @@ grails-web-urlmappings = { module = 'org.grails:grails-web-url-mappings', versio
 groovy-core = { module = 'org.apache.groovy:groovy', version.ref = 'groovy' }
 groovy-json = { module = 'org.apache.groovy:groovy-json', version.ref = 'groovy' }
 groovy-templates = { module = 'org.apache.groovy:groovy-templates', version.ref = 'groovy' }
+jackson-databind = { module = 'com.fasterxml.jackson.core:jackson-databind', version.ref = 'jackson-databind' }
 jakarta-annotation-api = { module = 'jakarta.annotation:jakarta.annotation-api', version.ref = 'jakarta-annotation-api' }
 jakarta-servlet-api = { module = 'jakarta.servlet:jakarta.servlet-api', version.ref = 'jakarta-servlet-api' }
 jakarta-validation-api = { module = 'jakarta.validation:jakarta.validation-api', version.ref = 'jakarta-validation-api' }
