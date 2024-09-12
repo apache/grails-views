@@ -1,10 +1,11 @@
 package grails.views.gradle
 
 import org.gradle.api.model.ObjectFactory
+import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Nested
 import org.gradle.api.tasks.compile.GroovyForkOptions
-import jakarta.inject.Inject;
+import javax.inject.Inject;
 
 /**
  * @author Graeme Rocher
@@ -12,17 +13,17 @@ import jakarta.inject.Inject;
  */
 class ViewCompileOptions implements Serializable {
 
-    private static final long serialVersionUID = 0L;
+    private static final long serialVersionUID = 0L
 
     @Input
-    String encoding = "UTF-8"
-
-    @Inject
-    protected ObjectFactory getObjectFactory() {
-        throw new UnsupportedOperationException();
-    }
+    final Property<String> encoding
 
     @Nested
-    GroovyForkOptions forkOptions = getObjectFactory().newInstance(GroovyForkOptions.class)
+    GroovyForkOptions forkOptions
 
+    @Inject
+    ViewCompileOptions(ObjectFactory objects) {
+        encoding = objects.property(String).convention('UTF-8')
+        forkOptions = objects.newInstance(GroovyForkOptions)
+    }
 }

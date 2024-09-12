@@ -3,15 +3,21 @@ package grails.views.gradle
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
 import org.gradle.api.Action
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.model.ObjectFactory
+import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.Nested
 import org.gradle.api.tasks.Optional
+import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.compile.AbstractCompile
 import org.gradle.process.ExecResult
 import org.gradle.process.JavaExecSpec
 import org.gradle.work.InputChanges
+
+import javax.inject.Inject
 
 /**
  * Abstract Gradle task for compiling templates, using GenericGroovyTemplateCompiler
@@ -24,25 +30,28 @@ abstract class AbstractGroovyTemplateCompileTask extends AbstractCompile {
 
     @Input
     @Optional
-    String packageName
+    final Property<String> packageName
 
     @InputDirectory
-    File srcDir
+    final DirectoryProperty srcDir
 
-    @Input
-    ViewCompileOptions compileOptions = new ViewCompileOptions()
+    @Nested
+    final ViewCompileOptions compileOptions
+
+    @Inject
+    AbstractGroovyTemplateCompileTask(ObjectFactory objectFactory) {
+        packageName = objectFactory.property(String)
+        srcDir = objectFactory.directoryProperty()
+        compileOptions = new ViewCompileOptions(objectFactory)
+    }
 
     @Override
     void setSource(Object source) {
-        try {
-            srcDir = project.file(source)
-            if(srcDir.exists() && !srcDir.isDirectory()) {
-                throw new IllegalArgumentException("The source for GSP compilation must be a single directory, but was $source")
-            }
-            super.setSource(source)
-        } catch (e) {
+        srcDir.set(project.layout.projectDirectory.dir(source.toString()))
+        if (!srcDir.getAsFile().get().isDirectory()) {
             throw new IllegalArgumentException("The source for GSP compilation must be a single directory, but was $source")
         }
+        super.setSource(source)
     }
 
     @TaskAction
@@ -51,50 +60,43 @@ abstract class AbstractGroovyTemplateCompileTask extends AbstractCompile {
     }
 
     protected void compile() {
-        def projectPackageNames = getProjectPackageNames(project.projectDir)
+        Iterable<String> projectPackageNames = getProjectPackageNames(project.projectDir)
 
-        if(packageName == null) {
-            packageName = project.name
-            if(!packageName) {
-                packageName = project.projectDir.canonicalFile.name
-            }
+        if (packageName.isPresent()) {
+            packageName.set(project.name ?: project.projectDir.canonicalFile.name)
         }
 
         ExecResult result = project.javaexec(
                 new Action<JavaExecSpec>() {
-                    @Override
-                    @CompileDynamic
+                    @Override @CompileDynamic
                     void execute(JavaExecSpec javaExecSpec) {
                         javaExecSpec.mainClass.set(getCompilerName())
-                        javaExecSpec.setClasspath(getClasspath())
+                        javaExecSpec.classpath = getClasspath()
 
-                        def jvmArgs = compileOptions.forkOptions.jvmArgs
-                        if(jvmArgs) {
+                        List<String> jvmArgs = compileOptions.forkOptions.jvmArgs
+                        if (jvmArgs) {
                             javaExecSpec.jvmArgs(jvmArgs)
                         }
-                        javaExecSpec.setMaxHeapSize( compileOptions.forkOptions.memoryMaximumSize )
-                        javaExecSpec.setMinHeapSize( compileOptions.forkOptions.memoryInitialSize )
+                        javaExecSpec.maxHeapSize = compileOptions.forkOptions.memoryMaximumSize
+                        javaExecSpec.minHeapSize = compileOptions.forkOptions.memoryInitialSize
 
-
-                        String packageImports = projectPackageNames.join(',') ?: packageName
-                        def arguments = [
-                                srcDir.canonicalPath,
-                                destinationDirectory.getAsFile().get()?.canonicalPath,
+                        String packageImports = projectPackageNames.join(',') ?: packageName.get()
+                        List<String> arguments = [
+                                srcDir.get().asFile.canonicalPath,
+                                destinationDirectory.get().asFile.canonicalPath,
                                 targetCompatibility,
                                 packageImports,
-                                packageName,
-                                project.file("grails-app/conf/application.yml").canonicalPath,
+                                packageName.get(),
+                                project.file('grails-app/conf/application.yml').canonicalPath,
                                 compileOptions.encoding
-                                ]
+                        ] as List<String>
 
                         prepareArguments(arguments)
                         javaExecSpec.args(arguments)
                     }
-
                 }
         )
         result.assertNormalExitValue()
-
     }
 
     void prepareArguments(List<String> arguments) {
@@ -103,7 +105,7 @@ abstract class AbstractGroovyTemplateCompileTask extends AbstractCompile {
 
     @Input
     protected String getCompilerName() {
-        "grails.views.GenericGroovyTemplateCompiler"
+        'grails.views.GenericGroovyTemplateCompiler'
     }
 
     @Input
@@ -116,17 +118,16 @@ abstract class AbstractGroovyTemplateCompileTask extends AbstractCompile {
         File rootDir = baseDir ? new File(baseDir, "grails-app${File.separator}domain") : null
         Set<String> packageNames = []
         if (rootDir?.exists()) {
-            populatePackages(rootDir, packageNames, "")
+            populatePackages(rootDir, packageNames, '')
         }
         return packageNames
     }
 
     protected populatePackages(File rootDir, Collection<String> packageNames, String prefix) {
         rootDir.eachDir { File dir ->
-            def dirName = dir.name
+            String dirName = dir.name
             if (!dir.hidden && !dirName.startsWith('.')) {
                 packageNames << "${prefix}${dirName}".toString()
-
                 populatePackages(dir, packageNames, "${prefix}${dirName}.")
             }
         }

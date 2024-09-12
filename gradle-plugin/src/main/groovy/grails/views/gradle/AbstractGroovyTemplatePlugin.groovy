@@ -62,7 +62,7 @@ class AbstractGroovyTemplatePlugin implements Plugin<Project> {
         def allClasspath = classesDir + project.configurations.named('compileClasspath').get()
         templateCompileTask.getDestinationDirectory().set( destDir )
         templateCompileTask.classpath = allClasspath
-        templateCompileTask.setPackageName(project.name)
+        templateCompileTask.packageName.set(project.name)
         templateCompileTask.setSource(project.file("${project.projectDir}/$pathToSource"))
         templateCompileTask.dependsOn( allTasks.named('classes').get() )
         project.plugins.withType(SpringBootPlugin).configureEach {plugin ->
