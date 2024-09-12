@@ -6,6 +6,7 @@ import grails.plugin.json.view.JsonViewTemplateEngine
 import grails.plugin.json.view.api.JsonView
 import grails.plugin.json.view.api.jsonapi.DefaultJsonApiIdRenderer
 import grails.plugin.json.view.api.jsonapi.JsonApiIdRenderStrategy
+import grails.util.GrailsMessageSourceUtils
 import grails.views.api.HttpView
 import grails.views.api.http.Response
 import grails.web.mapping.LinkGenerator
@@ -31,9 +32,16 @@ import org.springframework.http.HttpStatus
 @CompileStatic
 trait JsonViewTest {
 
-    @Autowired(required = false)
-    @Qualifier("pluginAwareResourceBundleMessageSource")
     MessageSource messageSource = new StaticMessageSource()
+
+    @Autowired(required = false)
+    setMessageSource(List<MessageSource> messageSources) {
+        setMessageSource(GrailsMessageSourceUtils.findPreferredMessageSource(messageSources))
+    }
+
+    void setMessageSource(MessageSource messageSource) {
+        this.messageSource = messageSource
+    }
 
     @Autowired(required = false)
     MappingContext mappingContext = {

@@ -5,6 +5,7 @@ import com.github.benmanes.caffeine.cache.Caffeine
 import grails.core.support.proxy.DefaultProxyHandler
 import grails.core.support.proxy.ProxyHandler
 import grails.util.Environment
+import grails.util.GrailsMessageSourceUtils
 import grails.util.GrailsStringUtils
 import grails.views.api.GrailsView
 import grails.views.compiler.ViewsTransform
@@ -152,11 +153,14 @@ abstract class ResolvableGroovyTemplateEngine extends TemplateEngine {
     }
 
     @Autowired(required = false)
-    @Qualifier("pluginAwareResourceBundleMessageSource")
+    void setMessageSource(List<MessageSource> messageSources) {
+        setMessageSource(GrailsMessageSourceUtils.findPreferredMessageSource(messageSources))
+    }
+
     void setMessageSource(MessageSource messageSource) {
         this.messageSource = messageSource
     }
-
+    
     @Autowired(required = false)
     void setMimeUtility(MimeUtility mimeUtility) {
         this.mimeUtility = mimeUtility
