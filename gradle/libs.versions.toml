@@ -10,6 +10,7 @@ grails-testing-support = '4.0.0-SNAPSHOT'
 groovy = '4.0.22'
 java-baseline = '17'
 jakarta-annotation-api = '3.0.0'
+jakarta-servlet-api = '6.0.0'
 jakarta-validation-api = '3.0.2'
 micronaut = '4.5.3'
 mongodb = '4.11.2'
@@ -38,6 +39,7 @@ groovy-core = { module = 'org.apache.groovy:groovy', version.ref = 'groovy' }
 groovy-json = { module = 'org.apache.groovy:groovy-json', version.ref = 'groovy' }
 groovy-templates = { module = 'org.apache.groovy:groovy-templates', version.ref = 'groovy' }
 jakarta-annotation-api = { module = 'jakarta.annotation:jakarta.annotation-api', version.ref = 'jakarta-annotation-api' }
+jakarta-servlet-api = { module = 'jakarta.servlet:jakarta.servlet-api', version.ref = 'jakarta-servlet-api' }
 jakarta-validation-api = { module = 'jakarta.validation:jakarta.validation-api', version.ref = 'jakarta-validation-api' }
 micronaut-http-client = { module = 'io.micronaut:micronaut-http-client', version.ref = 'micronaut' }
 mongodb-bson = { module = 'org.mongodb:bson', version.ref = 'mongodb' }

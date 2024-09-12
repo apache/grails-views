@@ -38,6 +38,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
     implementation 'org.springframework.boot:spring-boot-starter-logging'
     implementation 'org.springframework.boot:spring-boot-starter-tomcat'
+    implementation libs.jakarta.servlet.api
 
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'org.apache.tomcat:tomcat-jdbc'
