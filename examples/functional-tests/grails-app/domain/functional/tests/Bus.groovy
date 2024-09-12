@@ -1,6 +1,6 @@
 package functional.tests
 
-class Bus /** extends Vehicle **/ {
+class Bus extends Vehicle {
     String route
 
     static mapping = {
