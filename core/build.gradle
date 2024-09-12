@@ -18,6 +18,7 @@ dependencies {
     api libs.spring.context // MessageSource is used in public API
 
     implementation libs.grails.bootstrap
+    implementation libs.grails.core
     implementation libs.grails.datastore.gorm.support
     implementation libs.slf4j.api
     implementation libs.spring.beans
