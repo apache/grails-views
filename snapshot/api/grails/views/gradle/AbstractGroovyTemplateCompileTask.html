@@ -164,13 +164,13 @@ extends <a href='../../../org.gradle.api.tasks.compile.AbstractCompile.html'>Abs
                         </tr>
                         
                         <tr class="rowColor">
-                            <td class="colFirst"><code><strong>private&nbsp;java.lang.String</strong></code>&nbsp;</td>
+                            <td class="colFirst"><code><strong>private&nbsp;Property&lt;java.lang.String&gt;</strong></code>&nbsp;</td>
                             <td class="colLast"><code><a href="#packageName">packageName</a></code></td>
                             <td class="colLast"></td>
                         </tr>
                         
                         <tr class="altColor">
-                            <td class="colFirst"><code><strong>private&nbsp;java.io.File</strong></code>&nbsp;</td>
+                            <td class="colFirst"><code><strong>private&nbsp;<a href='../../../org.gradle.api.file.DirectoryProperty.html'>DirectoryProperty</a></strong></code>&nbsp;</td>
                             <td class="colLast"><code><a href="#srcDir">srcDir</a></code></td>
                             <td class="colLast"></td>
                         </tr>
@@ -201,12 +201,12 @@ extends <a href='../../../org.gradle.api.tasks.compile.AbstractCompile.html'>Abs
                         </tr>
                         
                         <tr class="rowColor">
-                            <td class="colFirst"><code><strong>java.lang.String</strong></code>&nbsp;</td>
+                            <td class="colFirst"><code><strong>Property&lt;java.lang.String&gt;</strong></code>&nbsp;</td>
                             <td class="colLast"><code><a href="#packageName">packageName</a></code><br></td>
                         </tr>
                         
                         <tr class="altColor">
-                            <td class="colFirst"><code><strong>java.io.File</strong></code>&nbsp;</td>
+                            <td class="colFirst"><code><strong><a href='../../../org.gradle.api.file.DirectoryProperty.html'>DirectoryProperty</a></strong></code>&nbsp;</td>
                             <td class="colLast"><code><a href="#srcDir">srcDir</a></code><br></td>
                         </tr>
                         
@@ -233,8 +233,8 @@ extends <a href='../../../org.gradle.api.tasks.compile.AbstractCompile.html'>Abs
                         
                         <tr class="altColor">
                             <td class="colFirst">
-                                <code><a href="#AbstractGroovyTemplateCompileTask()">AbstractGroovyTemplateCompileTask</a>
-                                ()</code><br></td>
+                                <code><a href="#AbstractGroovyTemplateCompileTask(org.gradle.api.model.ObjectFactory)">AbstractGroovyTemplateCompileTask</a>
+                                (<a href='../../../org.gradle.api.model.ObjectFactory.html'>ObjectFactory</a> objectFactory)</code><br></td>
                         </tr>
                         
                     </table>
@@ -339,7 +339,7 @@ extends <a href='../../../org.gradle.api.tasks.compile.AbstractCompile.html'>Abs
                         <ul class="blockListLast">
                             <li class="blockList">
                                 <h4>@org.gradle.api.tasks.Nested
-private&nbsp;<a href='../../../grails/views/gradle/ViewCompileOptions.html'>ViewCompileOptions</a> <strong>compileOptions</strong></h4>
+private&nbsp;final&nbsp;<a href='../../../grails/views/gradle/ViewCompileOptions.html'>ViewCompileOptions</a> <strong>compileOptions</strong></h4>
                                 <p></p>
                             </li>
                         </ul>
@@ -349,7 +349,7 @@ private&nbsp;<a href='../../../grails/views/gradle/ViewCompileOptions.html'>View
                             <li class="blockList">
                                 <h4>@org.gradle.api.tasks.Input
 @java.util.Optional
-private&nbsp;java.lang.String <strong>packageName</strong></h4>
+private&nbsp;final&nbsp;Property&lt;java.lang.String&gt; <strong>packageName</strong></h4>
                                 <p></p>
                             </li>
                         </ul>
@@ -358,7 +358,7 @@ private&nbsp;java.lang.String <strong>packageName</strong></h4>
                         <ul class="blockListLast">
                             <li class="blockList">
                                 <h4>@org.gradle.api.tasks.InputDirectory
-private&nbsp;java.io.File <strong>srcDir</strong></h4>
+private&nbsp;final&nbsp;<a href='../../../org.gradle.api.file.DirectoryProperty.html'>DirectoryProperty</a> <strong>srcDir</strong></h4>
                                 <p></p>
                             </li>
                         </ul>
@@ -379,7 +379,7 @@ private&nbsp;java.io.File <strong>srcDir</strong></h4>
                         <ul class="blockListLast">
                             <li class="blockList">
                                 <h4>@org.gradle.api.tasks.Nested
-<a href='../../../grails/views/gradle/ViewCompileOptions.html'>ViewCompileOptions</a> <strong>compileOptions</strong></h4>
+final&nbsp;<a href='../../../grails/views/gradle/ViewCompileOptions.html'>ViewCompileOptions</a> <strong>compileOptions</strong></h4>
                                 <p></p>
                             </li>
                         </ul>
@@ -389,7 +389,7 @@ private&nbsp;java.io.File <strong>srcDir</strong></h4>
                             <li class="blockList">
                                 <h4>@org.gradle.api.tasks.Input
 @java.util.Optional
-java.lang.String <strong>packageName</strong></h4>
+final&nbsp;Property&lt;java.lang.String&gt; <strong>packageName</strong></h4>
                                 <p></p>
                             </li>
                         </ul>
@@ -398,7 +398,7 @@ java.lang.String <strong>packageName</strong></h4>
                         <ul class="blockListLast">
                             <li class="blockList">
                                 <h4>@org.gradle.api.tasks.InputDirectory
-java.io.File <strong>srcDir</strong></h4>
+final&nbsp;<a href='../../../org.gradle.api.file.DirectoryProperty.html'>DirectoryProperty</a> <strong>srcDir</strong></h4>
                                 <p></p>
                             </li>
                         </ul>
@@ -417,10 +417,11 @@ java.io.File <strong>srcDir</strong></h4>
                 </a>
                     <h3>Constructor Detail</h3>
                     
-                        <a name="AbstractGroovyTemplateCompileTask()"><!-- --></a>
+                        <a name="AbstractGroovyTemplateCompileTask(org.gradle.api.model.ObjectFactory)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4><strong>AbstractGroovyTemplateCompileTask</strong>()</h4>
+                                <h4>@javax.inject.Inject
+<strong>AbstractGroovyTemplateCompileTask</strong>(<a href='../../../org.gradle.api.model.ObjectFactory.html'>ObjectFactory</a> objectFactory)</h4>
                                 <p></p>
                             </li>
                         </ul>

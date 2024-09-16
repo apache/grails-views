@@ -480,22 +480,28 @@ extends groovy.text.TemplateEngine</pre>
                         <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code>void</code></td>
-                            <td class="colLast"><code><strong><a href="#setMessageSource(org.springframework.context.MessageSource)">setMessageSource</a></strong>(<a href='../../org.springframework.context.MessageSource.html'>MessageSource</a> messageSource)</code><br></td>
+                            <td class="colLast"><code><strong><a href="#setMessageSource(List)">setMessageSource</a></strong>(java.util.List&lt;MessageSource&gt; messageSources)</code><br></td>
                         </tr>
                         
                         <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code>void</code></td>
-                            <td class="colLast"><code><strong><a href="#setMimeUtility(grails.web.mime.MimeUtility)">setMimeUtility</a></strong>(<a href='../../grails.web.mime.MimeUtility.html'>MimeUtility</a> mimeUtility)</code><br></td>
+                            <td class="colLast"><code><strong><a href="#setMessageSource(org.springframework.context.MessageSource)">setMessageSource</a></strong>(<a href='../../org.springframework.context.MessageSource.html'>MessageSource</a> messageSource)</code><br></td>
                         </tr>
                         
                         <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code>void</code></td>
-                            <td class="colLast"><code><strong><a href="#setProxyHandler(grails.core.support.proxy.ProxyHandler)">setProxyHandler</a></strong>(<a href='../../grails.core.support.proxy.ProxyHandler.html'>ProxyHandler</a> proxyHandler)</code><br></td>
+                            <td class="colLast"><code><strong><a href="#setMimeUtility(grails.web.mime.MimeUtility)">setMimeUtility</a></strong>(<a href='../../grails.web.mime.MimeUtility.html'>MimeUtility</a> mimeUtility)</code><br></td>
                         </tr>
                         
                         <tr class="altColor">
+                            <td class="colFirst"><code></code></td>
+                            <td class="colLast"><code>void</code></td>
+                            <td class="colLast"><code><strong><a href="#setProxyHandler(grails.core.support.proxy.ProxyHandler)">setProxyHandler</a></strong>(<a href='../../grails.core.support.proxy.ProxyHandler.html'>ProxyHandler</a> proxyHandler)</code><br></td>
+                        </tr>
+                        
+                        <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code>private&nbsp;<a href='../../grails/views/WritableScriptTemplate.html'>WritableScriptTemplate</a></code></td>
                             <td class="colLast"><code><strong><a href="#templateByPath(java.lang.String)">templateByPath</a></strong>(java.lang.String path)</code><br></td>
@@ -517,7 +523,7 @@ extends groovy.text.TemplateEngine</pre>
                         
                         <tr class="altColor">
                             <td class="colFirst"><code>class groovy.text.TemplateEngine</code></td>
-                            <td class="colLast"><code>groovy.text.TemplateEngine#createTemplate(java.net.URL), groovy.text.TemplateEngine#createTemplate(java.io.File, java.nio.charset.Charset), groovy.text.TemplateEngine#createTemplate(java.net.URL, java.nio.charset.Charset), groovy.text.TemplateEngine#createTemplate(java.io.File), groovy.text.TemplateEngine#createTemplate(java.io.Reader), groovy.text.TemplateEngine#createTemplate(java.lang.String), groovy.text.TemplateEngine#wait(long), groovy.text.TemplateEngine#wait(long, int), groovy.text.TemplateEngine#wait(), groovy.text.TemplateEngine#equals(java.lang.Object), groovy.text.TemplateEngine#toString(), groovy.text.TemplateEngine#hashCode(), groovy.text.TemplateEngine#getClass(), groovy.text.TemplateEngine#notify(), groovy.text.TemplateEngine#notifyAll()</code></td>
+                            <td class="colLast"><code>groovy.text.TemplateEngine#createTemplate(java.net.URL), groovy.text.TemplateEngine#createTemplate(java.io.File, java.nio.charset.Charset), groovy.text.TemplateEngine#createTemplate(java.net.URL, java.nio.charset.Charset), groovy.text.TemplateEngine#createTemplate(java.io.File), groovy.text.TemplateEngine#createTemplate(java.io.Reader), groovy.text.TemplateEngine#createTemplate(java.lang.String), groovy.text.TemplateEngine#wait(long, int), groovy.text.TemplateEngine#wait(), groovy.text.TemplateEngine#wait(long), groovy.text.TemplateEngine#equals(java.lang.Object), groovy.text.TemplateEngine#toString(), groovy.text.TemplateEngine#hashCode(), groovy.text.TemplateEngine#getClass(), groovy.text.TemplateEngine#notify(), groovy.text.TemplateEngine#notifyAll()</code></td>
                         </tr>
                     </table>
                    </ul>
@@ -941,11 +947,19 @@ void <strong>setMappingContext</strong>(<a href='../../org.grails.datastore.mapp
                             </li>
                         </ul>
                     
-                        <a name="setMessageSource(org.springframework.context.MessageSource)"><!-- --></a>
+                        <a name="setMessageSource(List)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
                                 <h4>@org.springframework.beans.factory.annotation.Autowired(required: false)
-void <strong>setMessageSource</strong>(<a href='../../org.springframework.context.MessageSource.html'>MessageSource</a> messageSource)</h4>
+void <strong>setMessageSource</strong>(java.util.List&lt;MessageSource&gt; messageSources)</h4>
+                                <p></p>
+                            </li>
+                        </ul>
+                    
+                        <a name="setMessageSource(org.springframework.context.MessageSource)"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>void <strong>setMessageSource</strong>(<a href='../../org.springframework.context.MessageSource.html'>MessageSource</a> messageSource)</h4>
                                 <p></p>
                             </li>
                         </ul>
