@@ -17,7 +17,7 @@ micronaut = '4.5.3'
 mongodb = '4.11.2'
 slf4j = '1.7.36'
 spock = '2.3-groovy-4.0'
-spring = '6.1.8'
+spring = '6.1.13'
 spring-boot = '3.2.6'
 
 [libraries]
