@@ -2,6 +2,8 @@ package grails.views.gradle.markup
 
 import grails.views.gradle.AbstractGroovyTemplateCompileTask
 import groovy.transform.CompileStatic
+import org.gradle.api.model.ObjectFactory
+import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 
 /**
@@ -14,21 +16,18 @@ import org.gradle.api.tasks.Input
 class MarkupViewCompilerTask extends AbstractGroovyTemplateCompileTask {
 
     @Input
-    @Override
-    String getFileExtension() {
-        "gml"
-    }
+    final Property<String> fileExtension
 
     @Input
-    @Override
-    String getScriptBaseName() {
-        "grails.plugin.markup.view.MarkupViewTemplate"
-    }
+    final Property<String> scriptBaseName
 
     @Input
-    @Override
-    protected String getCompilerName() {
-        "grails.plugin.markup.view.MarkupViewCompiler"
-    }
+    final Property<String> compilerName
 
+    MarkupViewCompilerTask(ObjectFactory objectFactory) {
+        super(objectFactory)
+        fileExtension.convention('gml')
+        scriptBaseName.convention('grails.plugin.markup.view.MarkupViewTemplate')
+        compilerName.convention('grails.plugin.markup.view.MarkupViewCompiler')
+    }
 }

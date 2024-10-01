@@ -38,11 +38,23 @@ abstract class AbstractGroovyTemplateCompileTask extends AbstractCompile {
     @Nested
     final ViewCompileOptions compileOptions
 
+    @Input
+    final Property<String> fileExtension
+
+    @Input
+    final Property<String> scriptBaseName
+
+    @Input
+    final Property<String> compilerName
+
     @Inject
     AbstractGroovyTemplateCompileTask(ObjectFactory objectFactory) {
-        packageName = objectFactory.property(String)
+        packageName = objectFactory.property(String).convention(project.name ?: project.projectDir.canonicalFile.name)
         srcDir = objectFactory.directoryProperty()
         compileOptions = new ViewCompileOptions(objectFactory)
+        fileExtension = objectFactory.property(String)
+        scriptBaseName = objectFactory.property(String)
+        compilerName = objectFactory.property(String)
     }
 
     @Override
@@ -62,16 +74,18 @@ abstract class AbstractGroovyTemplateCompileTask extends AbstractCompile {
     protected void compile() {
         Iterable<String> projectPackageNames = getProjectPackageNames(project.projectDir)
 
+/*
         if (packageName.isPresent()) {
             packageName.set(project.name ?: project.projectDir.canonicalFile.name)
         }
+*/
 
         ExecResult result = project.javaexec(
                 new Action<JavaExecSpec>() {
                     @Override @CompileDynamic
                     void execute(JavaExecSpec javaExecSpec) {
-                        javaExecSpec.mainClass.set(getCompilerName())
-                        javaExecSpec.classpath = getClasspath()
+                        javaExecSpec.mainClass.set(compilerName)
+                        javaExecSpec.classpath = classpath
 
                         List<String> jvmArgs = compileOptions.forkOptions.jvmArgs
                         if (jvmArgs) {
@@ -88,7 +102,7 @@ abstract class AbstractGroovyTemplateCompileTask extends AbstractCompile {
                                 packageImports,
                                 packageName.get(),
                                 project.file('grails-app/conf/application.yml').canonicalPath,
-                                compileOptions.encoding
+                                compileOptions.encoding.get()
                         ] as List<String>
 
                         prepareArguments(arguments)
@@ -102,17 +116,6 @@ abstract class AbstractGroovyTemplateCompileTask extends AbstractCompile {
     void prepareArguments(List<String> arguments) {
         // no-op
     }
-
-    @Input
-    protected String getCompilerName() {
-        'grails.views.GenericGroovyTemplateCompiler'
-    }
-
-    @Input
-    abstract String getFileExtension()
-
-    @Input
-    abstract String getScriptBaseName()
 
     Iterable<String> getProjectPackageNames(File baseDir) {
         File rootDir = baseDir ? new File(baseDir, "grails-app${File.separator}domain") : null

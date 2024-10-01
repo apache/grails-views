@@ -5,7 +5,7 @@ import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Nested
 import org.gradle.api.tasks.compile.GroovyForkOptions
-import javax.inject.Inject;
+import javax.inject.Inject
 
 /**
  * @author Graeme Rocher

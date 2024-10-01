@@ -13,7 +13,7 @@ import groovy.transform.CompileStatic
 class GrailsJsonViewsPlugin extends AbstractGroovyTemplatePlugin {
 
     GrailsJsonViewsPlugin() {
-        super(JsonViewCompilerTask, "gson")
+        super(JsonViewCompilerTask, 'gson')
     }
 }
 
