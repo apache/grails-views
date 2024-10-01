@@ -10,7 +10,6 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.Nested
 import org.gradle.api.tasks.Optional
-import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.compile.AbstractCompile
 import org.gradle.process.ExecResult
@@ -73,12 +72,6 @@ abstract class AbstractGroovyTemplateCompileTask extends AbstractCompile {
 
     protected void compile() {
         Iterable<String> projectPackageNames = getProjectPackageNames(project.projectDir)
-
-/*
-        if (packageName.isPresent()) {
-            packageName.set(project.name ?: project.projectDir.canonicalFile.name)
-        }
-*/
 
         ExecResult result = project.javaexec(
                 new Action<JavaExecSpec>() {
