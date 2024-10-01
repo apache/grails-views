@@ -31,7 +31,7 @@ jobs:
           GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
           GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
         with:
-          arguments: check -Dgeb.env=chromeHeadless -x test -x integrationTest
+          arguments: check -Dgeb.env=chromeHeadless
 
   build_project:
     runs-on: ubuntu-latest
@@ -48,7 +48,7 @@ jobs:
           GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
           GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
         with:
-          arguments: build -Dgeb.env=chromeHeadless  -x test -x integrationTest
+          arguments: build -Dgeb.env=chromeHeadless
 
       - name: Publish Snapshot artifacts to Artifactory (repo.grails.org)
         if: success()
