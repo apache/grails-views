@@ -317,6 +317,10 @@ if (location.href.indexOf('is-external=true') == -1) {
 </dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/views/ResolvableGroovyTemplateEngine.html#compilerConfiguration" title="Field in ResolvableGroovyTemplateEngine">compilerConfiguration</a></span> - Field in <a href="grails/views/ResolvableGroovyTemplateEngine.html">ResolvableGroovyTemplateEngine</a>
 </dt><dd> <div class="block">Whether to reload views</div></dd>
+<dt><span class="strong"><a href="grails/views/gradle/AbstractGroovyTemplateCompileTask.html#compilerName" title="Property in AbstractGroovyTemplateCompileTask">compilerName</a></span> - Property in <a href="grails/views/gradle/AbstractGroovyTemplateCompileTask.html">AbstractGroovyTemplateCompileTask</a>
+</dt><dd> <div class="block"></div></dd>
+<dt><span class="strong"><a href="grails/views/gradle/markup/MarkupViewCompilerTask.html#compilerName" title="Property in MarkupViewCompilerTask">compilerName</a></span> - Property in <a href="grails/views/gradle/markup/MarkupViewCompilerTask.html">MarkupViewCompilerTask</a>
+</dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/views/GenericViewConfiguration.html#compileStatic" title="Property in GenericViewConfiguration">compileStatic</a></span> - Property in <a href="grails/views/GenericViewConfiguration.html">GenericViewConfiguration</a>
 </dt><dd> <div class="block">Whether to compile templates statically</div></dd>
 <dt><span class="strong"><a href="grails/plugin/json/view/JsonViewTemplateEngine.html#compileStatic" title="Field in JsonViewTemplateEngine">compileStatic</a></span> - Field in <a href="grails/plugin/json/view/JsonViewTemplateEngine.html">JsonViewTemplateEngine</a>
@@ -705,7 +709,11 @@ if (location.href.indexOf('is-external=true') == -1) {
 </dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/views/WritableScriptTemplate.FieldSetter.html#FieldSetter(java.lang.reflect.Field)" title="Constructor in WritableScriptTemplate.FieldSetter">FieldSetter(java.lang.reflect.Field)</a></span> - Constructor in <a href="grails/views/WritableScriptTemplate.FieldSetter.html">WritableScriptTemplate.FieldSetter</a>
 </dt><dd> <div class="block"></div></dd>
+<dt><span class="strong"><a href="grails/views/gradle/AbstractGroovyTemplateCompileTask.html#fileExtension" title="Property in AbstractGroovyTemplateCompileTask">fileExtension</a></span> - Property in <a href="grails/views/gradle/AbstractGroovyTemplateCompileTask.html">AbstractGroovyTemplateCompileTask</a>
+</dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/views/gradle/AbstractGroovyTemplatePlugin.html#fileExtension" title="Property in AbstractGroovyTemplatePlugin">fileExtension</a></span> - Property in <a href="grails/views/gradle/AbstractGroovyTemplatePlugin.html">AbstractGroovyTemplatePlugin</a>
+</dt><dd> <div class="block"></div></dd>
+<dt><span class="strong"><a href="grails/views/gradle/markup/MarkupViewCompilerTask.html#fileExtension" title="Property in MarkupViewCompilerTask">fileExtension</a></span> - Property in <a href="grails/views/gradle/markup/MarkupViewCompilerTask.html">MarkupViewCompilerTask</a>
 </dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/views/ViewCompilationException.html#fileName" title="Property in ViewCompilationException">fileName</a></span> - Property in <a href="grails/views/ViewCompilationException.html">ViewCompilationException</a>
 </dt><dd> <div class="block"></div></dd>
@@ -836,12 +844,6 @@ if (location.href.indexOf('is-external=true') == -1) {
 </dt><dd> <div class="block"> <DL><DT><B>Returns:</B></DT><DD>The request character encoding</DD></DL></div></dd>
 <dt><span class="strong"><a href="grails/views/ResolvableGroovyTemplateEngine.html#getCompilerConfiguration()" title="Method in ResolvableGroovyTemplateEngine">getCompilerConfiguration()</a></span> - Method in <a href="grails/views/ResolvableGroovyTemplateEngine.html">ResolvableGroovyTemplateEngine</a>
 </dt><dd> <div class="block"></div></dd>
-<dt><span class="strong"><a href="grails/views/gradle/AbstractGroovyTemplateCompileTask.html#getCompilerName()" title="Method in AbstractGroovyTemplateCompileTask">getCompilerName()</a></span> - Method in <a href="grails/views/gradle/AbstractGroovyTemplateCompileTask.html">AbstractGroovyTemplateCompileTask</a>
-</dt><dd> <div class="block"></div></dd>
-<dt><span class="strong"><a href="grails/views/gradle/json/JsonViewCompilerTask.html#getCompilerName()" title="Method in JsonViewCompilerTask">getCompilerName()</a></span> - Method in <a href="grails/views/gradle/json/JsonViewCompilerTask.html">JsonViewCompilerTask</a>
-</dt><dd> <div class="block"></div></dd>
-<dt><span class="strong"><a href="grails/views/gradle/markup/MarkupViewCompilerTask.html#getCompilerName()" title="Method in MarkupViewCompilerTask">getCompilerName()</a></span> - Method in <a href="grails/views/gradle/markup/MarkupViewCompilerTask.html">MarkupViewCompilerTask</a>
-</dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/views/mvc/GenericGroovyTemplateView.HttpViewRequest.html#getContentType()" title="Method in GenericGroovyTemplateView.HttpViewRequest">getContentType()</a></span> - Method in <a href="grails/views/mvc/GenericGroovyTemplateView.HttpViewRequest.html">GenericGroovyTemplateView.HttpViewRequest</a>
 </dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/views/api/http/Request.html#getContentType()" title="Method in Request">getContentType()</a></span> - Method in <a href="grails/views/api/http/Request.html">Request</a>
@@ -872,12 +874,6 @@ if (location.href.indexOf('is-external=true') == -1) {
 </dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/views/ViewConfiguration.html#getExtension()" title="Method in ViewConfiguration">getExtension()</a></span> - Method in <a href="grails/views/ViewConfiguration.html">ViewConfiguration</a>
 </dt><dd> <div class="block"> <DL><DT><B>Returns:</B></DT><DD>The file extension</DD></DL></div></dd>
-<dt><span class="strong"><a href="grails/views/gradle/AbstractGroovyTemplateCompileTask.html#getFileExtension()" title="Method in AbstractGroovyTemplateCompileTask">getFileExtension()</a></span> - Method in <a href="grails/views/gradle/AbstractGroovyTemplateCompileTask.html">AbstractGroovyTemplateCompileTask</a>
-</dt><dd> <div class="block"></div></dd>
-<dt><span class="strong"><a href="grails/views/gradle/json/JsonViewCompilerTask.html#getFileExtension()" title="Method in JsonViewCompilerTask">getFileExtension()</a></span> - Method in <a href="grails/views/gradle/json/JsonViewCompilerTask.html">JsonViewCompilerTask</a>
-</dt><dd> <div class="block"></div></dd>
-<dt><span class="strong"><a href="grails/views/gradle/markup/MarkupViewCompilerTask.html#getFileExtension()" title="Method in MarkupViewCompilerTask">getFileExtension()</a></span> - Method in <a href="grails/views/gradle/markup/MarkupViewCompilerTask.html">MarkupViewCompilerTask</a>
-</dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/views/ViewRenderException.html#getFileName()" title="Method in ViewRenderException">getFileName()</a></span> - Method in <a href="grails/views/ViewRenderException.html">ViewRenderException</a>
 </dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/views/api/GrailsView.html#getG()" title="Method in GrailsView">getG()</a></span> - Method in <a href="grails/views/api/GrailsView.html">GrailsView</a>
@@ -973,12 +969,6 @@ if (location.href.indexOf('is-external=true') == -1) {
 <dt><span class="strong"><a href="grails/plugin/json/view/api/internal/DefaultJsonApiViewHelper.html#getRelationships(org.grails.datastore.mapping.model.PersistentEntity)" title="Method in DefaultJsonApiViewHelper">getRelationships(org.grails.datastore.mapping.model.PersistentEntity)</a></span> - Method in <a href="grails/plugin/json/view/api/internal/DefaultJsonApiViewHelper.html">DefaultJsonApiViewHelper</a>
 </dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/plugin/json/view/api/internal/DefaultJsonViewHelper.html#getRenderNulls(java.util.Map)" title="Method in DefaultJsonViewHelper">getRenderNulls(java.util.Map)</a></span> - Method in <a href="grails/plugin/json/view/api/internal/DefaultJsonViewHelper.html">DefaultJsonViewHelper</a>
-</dt><dd> <div class="block"></div></dd>
-<dt><span class="strong"><a href="grails/views/gradle/AbstractGroovyTemplateCompileTask.html#getScriptBaseName()" title="Method in AbstractGroovyTemplateCompileTask">getScriptBaseName()</a></span> - Method in <a href="grails/views/gradle/AbstractGroovyTemplateCompileTask.html">AbstractGroovyTemplateCompileTask</a>
-</dt><dd> <div class="block"></div></dd>
-<dt><span class="strong"><a href="grails/views/gradle/json/JsonViewCompilerTask.html#getScriptBaseName()" title="Method in JsonViewCompilerTask">getScriptBaseName()</a></span> - Method in <a href="grails/views/gradle/json/JsonViewCompilerTask.html">JsonViewCompilerTask</a>
-</dt><dd> <div class="block"></div></dd>
-<dt><span class="strong"><a href="grails/views/gradle/markup/MarkupViewCompilerTask.html#getScriptBaseName()" title="Method in MarkupViewCompilerTask">getScriptBaseName()</a></span> - Method in <a href="grails/views/gradle/markup/MarkupViewCompilerTask.html">MarkupViewCompilerTask</a>
 </dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/views/api/internal/DefaultGrailsViewHelper.html#getServerBaseURL()" title="Method in DefaultGrailsViewHelper">getServerBaseURL()</a></span> - Method in <a href="grails/views/api/internal/DefaultGrailsViewHelper.html">DefaultGrailsViewHelper</a>
 </dt><dd> <div class="block"></div></dd>
@@ -1322,7 +1312,7 @@ if (location.href.indexOf('is-external=true') == -1) {
 </dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/views/gradle/json/JsonViewCompilerTask.html" title="Class in grails.views.gradle.json">JsonViewCompilerTask</a></span> - Class in <a href="./grails/views/gradle/json/package-summary.html">grails.views.gradle.json</a>
 </dt><dd><div class="block">Concrete implementation that compiles JSON templates</div></dd>
-<dt><span class="strong"><a href="grails/views/gradle/json/JsonViewCompilerTask.html#JsonViewCompilerTask()" title="Constructor in JsonViewCompilerTask">JsonViewCompilerTask()</a></span> - Constructor in <a href="grails/views/gradle/json/JsonViewCompilerTask.html">JsonViewCompilerTask</a>
+<dt><span class="strong"><a href="grails/views/gradle/json/JsonViewCompilerTask.html#JsonViewCompilerTask(org.gradle.api.model.ObjectFactory)" title="Constructor in JsonViewCompilerTask">JsonViewCompilerTask(org.gradle.api.model.ObjectFactory)</a></span> - Constructor in <a href="grails/views/gradle/json/JsonViewCompilerTask.html">JsonViewCompilerTask</a>
 </dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/plugin/json/view/JsonViewConfiguration.html" title="Class in grails.plugin.json.view">JsonViewConfiguration</a></span> - Class in <a href="./grails/plugin/json/view/package-summary.html">grails.plugin.json.view</a>
 </dt><dd><div class="block">Default configuration for JSON views</div></dd>
@@ -1499,7 +1489,7 @@ if (location.href.indexOf('is-external=true') == -1) {
 </dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/views/gradle/markup/MarkupViewCompilerTask.html" title="Class in grails.views.gradle.markup">MarkupViewCompilerTask</a></span> - Class in <a href="./grails/views/gradle/markup/package-summary.html">grails.views.gradle.markup</a>
 </dt><dd><div class="block">MarkupView compiler task for Gradle</div></dd>
-<dt><span class="strong"><a href="grails/views/gradle/markup/MarkupViewCompilerTask.html#MarkupViewCompilerTask()" title="Constructor in MarkupViewCompilerTask">MarkupViewCompilerTask()</a></span> - Constructor in <a href="grails/views/gradle/markup/MarkupViewCompilerTask.html">MarkupViewCompilerTask</a>
+<dt><span class="strong"><a href="grails/views/gradle/markup/MarkupViewCompilerTask.html#MarkupViewCompilerTask(org.gradle.api.model.ObjectFactory)" title="Constructor in MarkupViewCompilerTask">MarkupViewCompilerTask(org.gradle.api.model.ObjectFactory)</a></span> - Constructor in <a href="grails/views/gradle/markup/MarkupViewCompilerTask.html">MarkupViewCompilerTask</a>
 </dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/plugin/markup/view/MarkupViewConfiguration.html" title="Class in grails.plugin.markup.view">MarkupViewConfiguration</a></span> - Class in <a href="./grails/plugin/markup/view/package-summary.html">grails.plugin.markup.view</a>
 </dt><dd><div class="block"> <DL><DT><B>Authors:</B></DT><DD>Graeme Rocher</DD></DL></div></dd>
@@ -1953,6 +1943,10 @@ if (location.href.indexOf('is-external=true') == -1) {
 <dt><span class="strong"><a href="grails/plugin/json/view/JsonViewGrailsPlugin.html#scm" title="Property in JsonViewGrailsPlugin">scm</a></span> - Property in <a href="grails/plugin/json/view/JsonViewGrailsPlugin.html">JsonViewGrailsPlugin</a>
 </dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/plugin/markup/view/MarkupViewGrailsPlugin.html#scm" title="Property in MarkupViewGrailsPlugin">scm</a></span> - Property in <a href="grails/plugin/markup/view/MarkupViewGrailsPlugin.html">MarkupViewGrailsPlugin</a>
+</dt><dd> <div class="block"></div></dd>
+<dt><span class="strong"><a href="grails/views/gradle/AbstractGroovyTemplateCompileTask.html#scriptBaseName" title="Property in AbstractGroovyTemplateCompileTask">scriptBaseName</a></span> - Property in <a href="grails/views/gradle/AbstractGroovyTemplateCompileTask.html">AbstractGroovyTemplateCompileTask</a>
+</dt><dd> <div class="block"></div></dd>
+<dt><span class="strong"><a href="grails/views/gradle/markup/MarkupViewCompilerTask.html#scriptBaseName" title="Property in MarkupViewCompilerTask">scriptBaseName</a></span> - Property in <a href="grails/views/gradle/markup/MarkupViewCompilerTask.html">MarkupViewCompilerTask</a>
 </dt><dd> <div class="block"></div></dd>
 <dt><span class="strong"><a href="grails/plugin/json/view/api/internal/DefaultHalViewHelper.html#SELF_ATTRIBUTE" title="Field in DefaultHalViewHelper">SELF_ATTRIBUTE</a></span> - Field in <a href="grails/plugin/json/view/api/internal/DefaultHalViewHelper.html">DefaultHalViewHelper</a>
 </dt><dd> <div class="block"></div></dd>

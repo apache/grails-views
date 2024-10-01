@@ -165,11 +165,29 @@ extends <a href='../../../org.gradle.api.tasks.compile.AbstractCompile.html'>Abs
                         
                         <tr class="rowColor">
                             <td class="colFirst"><code><strong>private&nbsp;Property&lt;java.lang.String&gt;</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#compilerName">compilerName</a></code></td>
+                            <td class="colLast"></td>
+                        </tr>
+                        
+                        <tr class="altColor">
+                            <td class="colFirst"><code><strong>private&nbsp;Property&lt;java.lang.String&gt;</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#fileExtension">fileExtension</a></code></td>
+                            <td class="colLast"></td>
+                        </tr>
+                        
+                        <tr class="rowColor">
+                            <td class="colFirst"><code><strong>private&nbsp;Property&lt;java.lang.String&gt;</strong></code>&nbsp;</td>
                             <td class="colLast"><code><a href="#packageName">packageName</a></code></td>
                             <td class="colLast"></td>
                         </tr>
                         
                         <tr class="altColor">
+                            <td class="colFirst"><code><strong>private&nbsp;Property&lt;java.lang.String&gt;</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#scriptBaseName">scriptBaseName</a></code></td>
+                            <td class="colLast"></td>
+                        </tr>
+                        
+                        <tr class="rowColor">
                             <td class="colFirst"><code><strong>private&nbsp;<a href='../../../org.gradle.api.file.DirectoryProperty.html'>DirectoryProperty</a></strong></code>&nbsp;</td>
                             <td class="colLast"><code><a href="#srcDir">srcDir</a></code></td>
                             <td class="colLast"></td>
@@ -202,10 +220,25 @@ extends <a href='../../../org.gradle.api.tasks.compile.AbstractCompile.html'>Abs
                         
                         <tr class="rowColor">
                             <td class="colFirst"><code><strong>Property&lt;java.lang.String&gt;</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#compilerName">compilerName</a></code><br></td>
+                        </tr>
+                        
+                        <tr class="altColor">
+                            <td class="colFirst"><code><strong>Property&lt;java.lang.String&gt;</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#fileExtension">fileExtension</a></code><br></td>
+                        </tr>
+                        
+                        <tr class="rowColor">
+                            <td class="colFirst"><code><strong>Property&lt;java.lang.String&gt;</strong></code>&nbsp;</td>
                             <td class="colLast"><code><a href="#packageName">packageName</a></code><br></td>
                         </tr>
                         
                         <tr class="altColor">
+                            <td class="colFirst"><code><strong>Property&lt;java.lang.String&gt;</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#scriptBaseName">scriptBaseName</a></code><br></td>
+                        </tr>
+                        
+                        <tr class="rowColor">
                             <td class="colFirst"><code><strong><a href='../../../org.gradle.api.file.DirectoryProperty.html'>DirectoryProperty</a></strong></code>&nbsp;</td>
                             <td class="colLast"><code><a href="#srcDir">srcDir</a></code><br></td>
                         </tr>
@@ -272,41 +305,23 @@ extends <a href='../../../org.gradle.api.tasks.compile.AbstractCompile.html'>Abs
                         
                         <tr class="altColor">
                             <td class="colFirst"><code></code></td>
-                            <td class="colLast"><code>protected&nbsp;java.lang.String</code></td>
-                            <td class="colLast"><code><strong><a href="#getCompilerName()">getCompilerName</a></strong>()</code><br></td>
-                        </tr>
-                        
-                        <tr class="rowColor">
-                            <td class="colFirst"><code></code></td>
-                            <td class="colLast"><code>abstract&nbsp;java.lang.String</code></td>
-                            <td class="colLast"><code><strong><a href="#getFileExtension()">getFileExtension</a></strong>()</code><br></td>
-                        </tr>
-                        
-                        <tr class="altColor">
-                            <td class="colFirst"><code></code></td>
                             <td class="colLast"><code>java.lang.Iterable&lt;java.lang.String&gt;</code></td>
                             <td class="colLast"><code><strong><a href="#getProjectPackageNames(java.io.File)">getProjectPackageNames</a></strong>(java.io.File baseDir)</code><br></td>
                         </tr>
                         
                         <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
-                            <td class="colLast"><code>abstract&nbsp;java.lang.String</code></td>
-                            <td class="colLast"><code><strong><a href="#getScriptBaseName()">getScriptBaseName</a></strong>()</code><br></td>
-                        </tr>
-                        
-                        <tr class="altColor">
-                            <td class="colFirst"><code></code></td>
                             <td class="colLast"><code>protected&nbsp;java.lang.Object</code></td>
                             <td class="colLast"><code><strong><a href="#populatePackages(java.io.File, Collection, java.lang.String)">populatePackages</a></strong>(java.io.File rootDir, java.util.Collection&lt;java.lang.String&gt; packageNames, java.lang.String prefix)</code><br></td>
                         </tr>
                         
-                        <tr class="rowColor">
+                        <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code>void</code></td>
                             <td class="colLast"><code><strong><a href="#prepareArguments(List)">prepareArguments</a></strong>(java.util.List&lt;java.lang.String&gt; arguments)</code><br></td>
                         </tr>
                         
-                        <tr class="altColor">
+                        <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code>void</code></td>
                             <td class="colLast"><code><strong><a href="#setSource(java.lang.Object)">setSource</a></strong>(java.lang.Object source)</code><br></td>
@@ -344,12 +359,39 @@ private&nbsp;final&nbsp;<a href='../../../grails/views/gradle/ViewCompileOptions
                             </li>
                         </ul>
                     
+                        <a name="compilerName"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>@org.gradle.api.tasks.Input
+private&nbsp;final&nbsp;Property&lt;java.lang.String&gt; <strong>compilerName</strong></h4>
+                                <p></p>
+                            </li>
+                        </ul>
+                    
+                        <a name="fileExtension"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>@org.gradle.api.tasks.Input
+private&nbsp;final&nbsp;Property&lt;java.lang.String&gt; <strong>fileExtension</strong></h4>
+                                <p></p>
+                            </li>
+                        </ul>
+                    
                         <a name="packageName"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
                                 <h4>@org.gradle.api.tasks.Input
 @java.util.Optional
 private&nbsp;final&nbsp;Property&lt;java.lang.String&gt; <strong>packageName</strong></h4>
+                                <p></p>
+                            </li>
+                        </ul>
+                    
+                        <a name="scriptBaseName"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>@org.gradle.api.tasks.Input
+private&nbsp;final&nbsp;Property&lt;java.lang.String&gt; <strong>scriptBaseName</strong></h4>
                                 <p></p>
                             </li>
                         </ul>
@@ -384,12 +426,39 @@ final&nbsp;<a href='../../../grails/views/gradle/ViewCompileOptions.html'>ViewCo
                             </li>
                         </ul>
                     
+                        <a name="compilerName"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>@org.gradle.api.tasks.Input
+final&nbsp;Property&lt;java.lang.String&gt; <strong>compilerName</strong></h4>
+                                <p></p>
+                            </li>
+                        </ul>
+                    
+                        <a name="fileExtension"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>@org.gradle.api.tasks.Input
+final&nbsp;Property&lt;java.lang.String&gt; <strong>fileExtension</strong></h4>
+                                <p></p>
+                            </li>
+                        </ul>
+                    
                         <a name="packageName"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
                                 <h4>@org.gradle.api.tasks.Input
 @java.util.Optional
 final&nbsp;Property&lt;java.lang.String&gt; <strong>packageName</strong></h4>
+                                <p></p>
+                            </li>
+                        </ul>
+                    
+                        <a name="scriptBaseName"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>@org.gradle.api.tasks.Input
+final&nbsp;Property&lt;java.lang.String&gt; <strong>scriptBaseName</strong></h4>
                                 <p></p>
                             </li>
                         </ul>
@@ -456,37 +525,10 @@ void <strong>execute</strong>(<a href='../../../org.gradle.work.InputChanges.htm
                             </li>
                         </ul>
                     
-                        <a name="getCompilerName()"><!-- --></a>
-                        <ul class="blockListLast">
-                            <li class="blockList">
-                                <h4>@org.gradle.api.tasks.Input
-protected&nbsp;java.lang.String <strong>getCompilerName</strong>()</h4>
-                                <p></p>
-                            </li>
-                        </ul>
-                    
-                        <a name="getFileExtension()"><!-- --></a>
-                        <ul class="blockListLast">
-                            <li class="blockList">
-                                <h4>@org.gradle.api.tasks.Input
-abstract&nbsp;java.lang.String <strong>getFileExtension</strong>()</h4>
-                                <p></p>
-                            </li>
-                        </ul>
-                    
                         <a name="getProjectPackageNames(java.io.File)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
                                 <h4>java.lang.Iterable&lt;java.lang.String&gt; <strong>getProjectPackageNames</strong>(java.io.File baseDir)</h4>
-                                <p></p>
-                            </li>
-                        </ul>
-                    
-                        <a name="getScriptBaseName()"><!-- --></a>
-                        <ul class="blockListLast">
-                            <li class="blockList">
-                                <h4>@org.gradle.api.tasks.Input
-abstract&nbsp;java.lang.String <strong>getScriptBaseName</strong>()</h4>
                                 <p></p>
                             </li>
                         </ul>
