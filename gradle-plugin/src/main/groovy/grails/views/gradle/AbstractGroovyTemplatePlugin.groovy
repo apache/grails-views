@@ -53,7 +53,7 @@ class AbstractGroovyTemplatePlugin implements Plugin<Project> {
         ).get()
         SourceSetOutput output = SourceSets.findMainSourceSet(project)?.output
         FileCollection classesDir = resolveClassesDirs(output, project)
-        File destDir = new File(project.layout.buildDirectory.get().asFile, "${templateCompileTask.fileExtension}-classes/main")
+        File destDir = new File(project.layout.buildDirectory.get().asFile, "${templateCompileTask.fileExtension.get()}-classes/main")
         output?.dir(destDir)
         project.afterEvaluate {
             GrailsExtension grailsExt = project.extensions.getByType(GrailsExtension)
