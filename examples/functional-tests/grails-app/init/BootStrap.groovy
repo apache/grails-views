@@ -36,10 +36,13 @@ class BootStrap {
 
         new Proxy(name: "Sally").save(flush: true, failOnError: true)
 
+        // GORM inheritance not working in Groovy 4
+        /*
         new Garage(owner: "Jay Leno")
                 .addToVehicles(new Bus(maxPassengers: 30, route: "around town"))
                 .addToVehicles(new Car(maxPassengers: 4, make: "Subaru", model: "WRX", year: 2016))
                 .save(flush: true, failOnError: true)
+         */
 
         new Customer(name: "Nokia")
                 .addToSites(new Site(name: "Salo"))

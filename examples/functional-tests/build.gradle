@@ -10,14 +10,9 @@ group = 'functional.tests'
 
 dependencies {
 
-
     implementation project(':examples-functional-tests-plugin')
     implementation project(':views-json')
     implementation project(':views-markup')
-
-    runtimeOnly project(':views-json-templates')
-
-    testImplementation project(':views-json-testing-support')
 
     implementation 'org.grails:grails-core'
     implementation 'org.grails:grails-logging'
@@ -38,14 +33,20 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
     implementation 'org.springframework.boot:spring-boot-starter-logging'
     implementation 'org.springframework.boot:spring-boot-starter-tomcat'
-    implementation libs.jakarta.servlet.api
 
+    compileOnly libs.jakarta.servlet.api // Provided by Tomcat
+
+    runtimeOnly project(':views-json-templates')
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'org.apache.tomcat:tomcat-jdbc'
     runtimeOnly libs.assetpipeline
 
+    testImplementation project(':views-json-testing-support')
     testImplementation libs.grails.testing.support.core
-    testImplementation libs.micronaut.http.client
+
+    integrationTestImplementation libs.jackson.databind
+    integrationTestImplementation libs.micronaut.http.client
+    integrationTestImplementation libs.micronaut.jackson.databind
 }
 
 assets {

@@ -4,6 +4,7 @@ class Garage {
 
     String owner
 
-    static hasMany = [vehicles: Vehicle]
+    // GORM Inheritance not working in Groovy 4
+    //static hasMany = [vehicles: Vehicle]
 
 }

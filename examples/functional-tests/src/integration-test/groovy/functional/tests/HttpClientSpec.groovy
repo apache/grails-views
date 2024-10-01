@@ -1,6 +1,5 @@
 package functional.tests
 
-
 import grails.testing.spock.RunOnce
 import io.micronaut.http.client.HttpClient
 import org.junit.jupiter.api.BeforeEach

@@ -1,5 +1,5 @@
 [versions]
-assetpipeline = '4.5.1'
+assetpipeline = '5.0.1'
 caffeine = '2.9.3'
 gorm = '9.0.0-SNAPSHOT'
 gorm-hibernate5 = '9.0.0-SNAPSHOT'
@@ -13,12 +13,12 @@ jackson-databind = '2.17.2'
 jakarta-annotation-api = '3.0.0'
 jakarta-servlet-api = '6.0.0'
 jakarta-validation-api = '3.0.2'
-micronaut = '4.5.3'
+micronaut = '4.6.2'
 mongodb = '4.11.2'
 slf4j = '1.7.36'
 spock = '2.3-groovy-4.0'
-spring = '6.1.8'
-spring-boot = '3.2.6'
+spring = '6.1.13'
+spring-boot = '3.3.4'
 
 [libraries]
 assetpipeline = { module = 'com.bertramlabs.plugins:asset-pipeline-grails', version.ref = 'assetpipeline' }
@@ -43,6 +43,7 @@ jackson-databind = { module = 'com.fasterxml.jackson.core:jackson-databind', ver
 jakarta-annotation-api = { module = 'jakarta.annotation:jakarta.annotation-api', version.ref = 'jakarta-annotation-api' }
 jakarta-servlet-api = { module = 'jakarta.servlet:jakarta.servlet-api', version.ref = 'jakarta-servlet-api' }
 jakarta-validation-api = { module = 'jakarta.validation:jakarta.validation-api', version.ref = 'jakarta-validation-api' }
+micronaut-jackson-databind = { module = 'io.micronaut:micronaut-jackson-databind', version.ref = 'micronaut' }
 micronaut-http-client = { module = 'io.micronaut:micronaut-http-client', version.ref = 'micronaut' }
 mongodb-bson = { module = 'org.mongodb:bson', version.ref = 'mongodb' }
 slf4j-api = { module = 'org.slf4j:slf4j-api', version.ref = 'slf4j' }

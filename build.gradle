@@ -46,9 +46,9 @@ allprojects {
 
     version = rootProject.version
     repositories {
-        mavenLocal() // Used by Groovy Joint workflow github action after building Groovy
         mavenCentral()
         maven { url = 'https://repo.grails.org/grails/core' }
+        // mavenLocal() // Keep, this will be uncommented and used by CI (groovy-joint-workflow)
         if (libs.versions.groovy.get().endsWith('-SNAPSHOT')) {
             maven {
                 name = 'JFrog Groovy snapshot repo'
