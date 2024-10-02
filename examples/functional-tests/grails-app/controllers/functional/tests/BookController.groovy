@@ -16,7 +16,6 @@ class BookController extends RestfulController<Book> {
         [books: listAllResources(params)]
     }
 
-
     def listExcludesRespond() {
         respond([books: listAllResources(params)])
     }
@@ -34,7 +33,7 @@ class BookController extends RestfulController<Book> {
     }
 
     def nonStandardTemplate() {
-        respond([book: new Book(title: 'template found'), custom: new CustomClass(name: "Sally")], view:'/non-standard/template')
+        respond([book: new Book(title: 'template found'), custom: new CustomClass(name: 'Sally')], view:'/non-standard/template')
     }
 
     def showWithParams() {

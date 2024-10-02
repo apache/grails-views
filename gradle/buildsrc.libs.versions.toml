@@ -1,6 +1,6 @@
 [versions]
 asciidoctor-gradle-jvm = '4.0.2'
-assetpipeline = '4.5.1'
+assetpipeline = '5.0.1'
 grails-gradle-plugin = '7.0.0-SNAPSHOT'
 grails-views = '4.0.0-SNAPSHOT'
 groovy-doc = '1.0.1'

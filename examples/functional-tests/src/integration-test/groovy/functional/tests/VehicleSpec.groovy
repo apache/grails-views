@@ -6,6 +6,7 @@ import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
 import org.junit.jupiter.api.BeforeEach
+import spock.lang.PendingFeature
 
 @Integration(applicationClass = Application)
 class VehicleSpec extends HttpClientSpec {
@@ -16,6 +17,7 @@ class VehicleSpec extends HttpClientSpec {
         super.init()
     }
 
+    @PendingFeature(reason = 'GORM inheritance not working in Groovy 4')
     void "Test that domain subclasses render their properties"() {
         when:
         HttpRequest request = HttpRequest.GET('/vehicle/list')
@@ -27,6 +29,7 @@ class VehicleSpec extends HttpClientSpec {
 
     }
 
+    @PendingFeature(reason = 'GORM inheritance not working in Groovy 4')
     void "Test that domain association subclasses render their properties"() {
         when:
         HttpRequest request = HttpRequest.GET('/vehicle/garage')

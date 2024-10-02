@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'org.grails.grails-plugin'
-    //id 'org.grails.plugins.views-json'
+    id 'org.grails.plugins.views-json'
 }
 
 group = 'functional.tests.plugin'

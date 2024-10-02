@@ -20,6 +20,7 @@ dependencies {
     implementation libs.groovy.json
     implementation libs.jakarta.validation.api
 
+    testImplementation project(':views-json-testing-support')
     testImplementation libs.grails.testing.support.core
     testImplementation libs.grails.testing.support.gorm
     testImplementation libs.grails.datastore.gorm.hibernate5

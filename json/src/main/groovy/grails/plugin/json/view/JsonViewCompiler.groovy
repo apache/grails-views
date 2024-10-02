@@ -7,6 +7,7 @@ import groovy.transform.CompileStatic
 import groovy.transform.InheritConstructors
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ASTTransformationCustomizer
+
 /**
  * A compiler for JSON views
  *
@@ -22,7 +23,14 @@ class JsonViewCompiler extends AbstractGroovyTemplateCompiler {
         CompilerConfiguration compiler = super.configureCompiler(configuration)
         if(viewConfiguration.compileStatic) {
             configuration.addCompilationCustomizers(
-                    new ASTTransformationCustomizer(Collections.singletonMap("extensions", "grails.plugin.json.view.internal.JsonTemplateTypeCheckingExtension"), CompileStatic.class))
+                    new ASTTransformationCustomizer(
+                            Collections.singletonMap(
+                                    'extensions',
+                                    'grails.plugin.json.view.internal.JsonTemplateTypeCheckingExtension'
+                            ),
+                            CompileStatic
+                    )
+            )
         }
         configuration.setScriptBaseClass(
                 viewConfiguration.baseTemplateClass.name
@@ -32,12 +40,10 @@ class JsonViewCompiler extends AbstractGroovyTemplateCompiler {
 
     @Override
     protected ViewsTransform newViewsTransform() {
-        return new JsonViewsTransform(this.viewConfiguration.extension)
+        return new JsonViewsTransform(viewConfiguration.extension)
     }
-
 
     static void main(String[] args) {
         run(args, JsonViewConfiguration, JsonViewCompiler)
     }
-
 }
