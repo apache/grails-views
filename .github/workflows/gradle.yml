@@ -1,4 +1,4 @@
-name: Java CI
+name: "Java CI"
 on:
   push:
     branches:
@@ -9,72 +9,73 @@ on:
 env:
   GIT_USER_NAME: 'grails-build'
   GIT_USER_EMAIL: 'grails-build@users.noreply.github.com'
-
 jobs:
-
   test_project:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
-      - uses: actions/checkout@v4
-      - uses: gradle/wrapper-validation-action@v2
-      - uses: actions/setup-java@v4
+      - name: "📥 Checkout repository"
+        uses: actions/checkout@v4
+      - name: "☕️ Setup JDK"
+        uses: actions/setup-java@v4
         with:
-          distribution: temurin
           java-version: 17
-      - name: Run Tests
-        if: github.event_name == 'pull_request'
-        id: tests
-        uses: gradle/actions/setup-gradle@v3
-        env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
+          distribution: temurin
+      - name: "🐘 Setup Gradle"
+        uses: gradle/actions/setup-gradle@v4
         with:
-          arguments: check -Dgeb.env=chromeHeadless
-
+          develocity-access-key: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
+      - name: "🏃 Run Tests"
+        env:
+          DEVELOCITY_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
+          DEVELOCITY_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
+        run: >
+          ./gradlew
+          -Dgeb.env=chromeHeadless
+          check
   build_project:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
     steps:
-      - uses: actions/checkout@v4
-      - uses: gradle/wrapper-validation-action@v2
-      - uses: actions/setup-java@v4
-        with: { java-version: 17, distribution: temurin }
-      - name: Run Build
-        uses: gradle/actions/setup-gradle@v3
-        env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
+      - name: "📥 Checkout repository"
+        uses: actions/checkout@v4
+      - name: "☕️ Setup JDK"
+        uses: actions/setup-java@v4
         with:
-          arguments: build -Dgeb.env=chromeHeadless
-
-      - name: Publish Snapshot artifacts to Artifactory (repo.grails.org)
-        if: success()
-        uses: gradle/actions/setup-gradle@v3
+          java-version: 17
+          distribution: temurin
+      - name: "🐘 Setup Gradle"
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          develocity-access-key: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
+      - name: "🔨 Build project"
         env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
+          DEVELOCITY_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
+          DEVELOCITY_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
+        run: >
+          ./gradlew
+          -Dgeb.env=chromeHeadless
+          build
+      - name: "📤 Publish Snapshot Artifacts to Artifactory (repo.grails.org)"
+        if: success()
+        env:
+          DEVELOVITY_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
+          DEVELOCITY_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
           ORG_GRADLE_PROJECT_artifactoryUsername: ${{ secrets.ARTIFACTORY_USERNAME }}
           ORG_GRADLE_PROJECT_artifactoryPassword: ${{ secrets.ARTIFACTORY_PASSWORD }}
-        with:
-          arguments: |
-            -Dorg.gradle.internal.publish.checksums.insecure=true
-            publish
-
-      - name: Generate Snapshot Documentation
+        run: >
+          ./gradlew
+          -Dorg.gradle.internal.publish.checksums.insecure=true
+          publish
+      - name: "📖 Generate Snapshot Documentation"
         if: success()
-        uses: gradle/actions/setup-gradle@v3
         env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
-        with:
-          arguments: views-docs:docs
-
-      - name: Publish Snapshot Documentation to Github Pages
+          DEVELOCITY_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
+          DEVELOCITY_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
+        run: >
+          ./gradlew
+          views-docs:docs
+      - name: "📤 Publish Snapshot Documentation to Github Pages"
         if: success()
         uses: micronaut-projects/github-pages-deploy-action@grails
         env:

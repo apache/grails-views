@@ -1,123 +1,130 @@
-name: Release
+name: "Release"
 on:
   release:
     types: [published]
+env:
+  GIT_USER_NAME: 'grails-build'
+  GIT_USER_EMAIL: 'grails-build@users.noreply.github.com'
 jobs:
   publish:
     outputs:
       release_version: ${{ steps.release_version.outputs.value }}
     runs-on: ubuntu-latest
-    env:
-      GIT_USER_NAME: 'grails-build'
-      GIT_USER_EMAIL: 'grails-build@users.noreply.github.com'
     steps:
-      - uses: actions/checkout@v4
-      - uses: gradle/wrapper-validation-action@v2
-      - uses: actions/setup-java@v4
+      - name: "📥 Checkout repository"
+        uses: actions/checkout@v4
+      - name: "☕️ Setup JDK"
+        uses: actions/setup-java@v4
         with:
           java-version: 17
           distribution: temurin
-      - name: Get the current release version
+      - name: "🐘 Setup Gradle"
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          develocity-access-key: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
+      - name: "📝 Store the current release version"
         id: release_version
         run: echo "value=${GITHUB_REF:11}" >> $GITHUB_OUTPUT
-      - name: Set projectVersion to the release version
+      - name: "⚙ Run pre-release"
         uses: micronaut-projects/github-actions/pre-release@master
-      - name: Run Assemble
+      - name: "🧩 Run Assemble"
         if: success()
         id: assemble
-        uses: gradle/gradle-build-action@v3
-        with:
-          arguments: assemble
         env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
-      - name: Upload Distribution
+          DEVELOCITY_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
+          DEVELOCITY_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
+        run: ./gradlew assemble
+      - name: "📤 Upload Distribution"
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: grails-views-${{ steps.release_version.outputs.value }}
           path: ./**/build/libs/*
-      - name: Generate key file for artifact signing
+      - name: "🔐 Generate key file for artifact signing"
         env:
           SECRING_FILE: ${{ secrets.SECRING_FILE }}
         run: echo $SECRING_FILE | base64 -d > ${{ github.workspace }}/secring.gpg
-      - name: Publish release artifacts to Sonatype
-        id: publish_to_sonatype
-        uses: gradle/actions/setup-gradle@v3
+      - name: "📤 Publish release artifacts to Sonatype"
         env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
+          DEVELOCITY_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
+          DEVELOCITY_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
           ORG_GRADLE_PROJECT_sonatypeOssUsername: ${{ secrets.SONATYPE_USERNAME }}
           ORG_GRADLE_PROJECT_sonatypeOssPassword: ${{ secrets.SONATYPE_PASSWORD }}
           ORG_GRADLE_PROJECT_sonatypeOssStagingProfileId: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}
           ORG_GRADLE_PROJECT_sonatypeOssRepo: ${{ secrets.SONATYPE_NEXUS_URL }}
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
           SIGNING_PASSPHRASE: ${{ secrets.SIGNING_PASSPHRASE }}
-        with:
-          arguments: |
-            -Psigning.secretKeyRingFile=${{ github.workspace }}/secring.gpg 
-            publishToSonatype 
-            closeSonatypeStagingRepository
+        run: >
+          ./gradlew
+          -Psigning.secretKeyRingFile=${{ github.workspace }}/secring.gpg 
+          publishToSonatype 
+          closeSonatypeStagingRepository
   release:
     needs: publish
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: read # limit to read access
     steps:
-      - name: Checkout repository
+      - name: "📥 Checkout repository"
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GH_TOKEN }}
           ref: v${{ needs.publish.outputs.release_version }}
-      - name: Nexus Staging Close And Release
-        uses: gradle/gradle-build-action@v3
+      - name: "☕️ Setup JDK"
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: temurin
+      - name: "🐘 Setup Gradle"
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          develocity-access-key: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
+      - name: "🚪 Nexus Staging Close And Release"
         env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
+          DEVELOCITY_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
+          DEVELOCITY_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
           ORG_GRADLE_PROJECT_sonatypeOssUsername: ${{ secrets.SONATYPE_USERNAME }}
           ORG_GRADLE_PROJECT_sonatypeOssPassword: ${{ secrets.SONATYPE_PASSWORD }}
           ORG_GRADLE_PROJECT_sonatypeOssStagingProfileId: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}
           ORG_GRADLE_PROJECT_sonatypeOssRepo: ${{ secrets.SONATYPE_NEXUS_URL }}
-        with:
-          arguments: |
-            findSonatypeStagingRepository
-            releaseSonatypeStagingRepository
-      - name: Run post-release
+        run: >
+          ./gradlew
+          findSonatypeStagingRepository
+          releaseSonatypeStagingRepository
+      - name: "⚙️ Run post-release"
         if: success()
         uses: micronaut-projects/github-actions/post-release@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-        env:
-          SNAPSHOT_SUFFIX: -SNAPSHOT
   docs:
     needs: publish
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - name: Checkout repository
+      - name: "📥 Checkout repository"
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GH_TOKEN }}
           ref: v${{ needs.publish.outputs.release_version }}
-      - name: Set up JDK
+      - name: "☕️ Setup JDK"
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '17'
-      - name: Generate Documentation
-        if: success()
-        uses: gradle/actions/setup-gradle@v3
-        env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
-          GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
+          java-version: 17
+          distribution: temurin
+      - name: "🐘 Setup Gradle"
+        uses: gradle/actions/setup-gradle@v4
         with:
-          arguments: views-docs:docs
-      - name: Publish Documentation to Github Pages
+          develocity-access-key: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
+      - name: "📖 Generate Documentation"
+        if: success()
+        env:
+          DEVELOCITY_BUILD_CACHE_NODE_USER: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_USER }}
+          DEVELOCITY_BUILD_CACHE_NODE_KEY: ${{ secrets.GRADLE_ENTERPRISE_BUILD_CACHE_NODE_KEY }}
+        run: >
+          ./gradlew
+          views-docs:docs
+      - name: "📤 Publish Documentation to Github Pages"
         if: success()
         uses: micronaut-projects/github-pages-deploy-action@grails
         env:
