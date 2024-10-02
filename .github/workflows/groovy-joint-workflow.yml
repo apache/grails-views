@@ -25,7 +25,7 @@ jobs:
         with:
           path: ~/.m2/repository
           key: cache-local-maven-${{ github.sha }}
-      - name: "📥 Checkout Grails Core to fetch Gradle Plugin versions it uses"
+      - name: "📥 Checkout Grails Views to fetch Gradle Plugin versions it uses"
         uses: actions/checkout@v4
         with:
           sparse-checkout-cone-mode: false
