@@ -62,5 +62,5 @@ jobs:
           TARGET_REPOSITORY: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build/asciidoc
+          FOLDER: build/docs
           DOC_FOLDER: gh-pages

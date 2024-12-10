@@ -9,6 +9,7 @@ buildscript {
         classpath "org.grails:grails-gradle-plugin:$grailsGradlePluginVersion"
     }
 }
+
 plugins {
     id 'org.asciidoctor.jvm.convert' version '4.0.3'
     id 'java-library'
@@ -19,7 +20,6 @@ group 'org.grails.plugins'
 
 apply plugin: 'org.grails.grails-plugin'
 apply plugin: 'org.grails.grails-gsp'
-apply plugin: "org.grails.grails-doc"
 apply plugin: "org.grails.grails-publish"
 
 compileJava.options.release = 17
@@ -67,6 +67,7 @@ grailsPublish {
 }
 
 tasks.named('asciidoctor', AsciidoctorTask) { it ->
+    it.dependsOn(tasks.withType(Groovydoc))
     it.jvm {
         jvmArgs("--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens", "java.base/java.io=ALL-UNNAMED")
     }
@@ -85,12 +86,17 @@ tasks.named('asciidoctor', AsciidoctorTask) { it ->
             'version': project.projectVersion,
             'sourcedir': 'src/main/groovy'
     baseDirFollowsSourceDir()
-    outputDir = "${buildDir}/asciidoc"
+    outputDir = "${buildDir}/docs"
 }
 
-tasks.register('apiDocs', Copy) {
-    from groovydoc.outputs.files
-    into file("${buildDir}/asciidoc/api")
+groovydoc {
+    includeAuthor = false
+    includeMainForScripts = true
+    processScripts = true
+    destinationDir = file("${rootProject.buildDir}/docs/api")
 }
 
-asciidoctor.dependsOn(apiDocs)
+tasks.register('docs') {
+    group = JavaBasePlugin.DOCUMENTATION_GROUP
+    dependsOn = ['groovydoc', 'asciidoctor']
+}

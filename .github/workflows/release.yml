@@ -113,7 +113,7 @@ jobs:
         uses: micronaut-projects/github-actions/export-gradle-properties@master
       - name: "📜 Generate User Guide Documentation"
         id: docs
-        run: ./gradlew asciidoctor
+        run: ./gradlew docs
       - name: "🚀 Publish to Github Pages"
         id: docs
         if: success()
@@ -123,7 +123,7 @@ jobs:
           TARGET_REPOSITORY: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build/asciidoc
+          FOLDER: build/docs
           DOC_FOLDER: gh-pages
           COMMIT_EMAIL: ${{ env.GIT_USER_EMAIL }}
           COMMIT_NAME: ${{ env.GIT_USER_NAME }}
