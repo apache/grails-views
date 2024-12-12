@@ -47,7 +47,7 @@ jobs:
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
           SIGNING_PASSPHRASE: ${{ secrets.SIGNING_PASSPHRASE }}
           SECRING_FILE: ${{ secrets.SECRING_FILE }}
-        working-directory: ./plugin
+        working-directory: plugin
         run: >
           ../gradlew
           -Psigning.secretKeyRingFile=${{ github.workspace }}/secring.gpg 
@@ -79,7 +79,7 @@ jobs:
           NEXUS_PUBLISH_PASSWORD: ${{ secrets.NEXUS_PUBLISH_PASSWORD }}
           NEXUS_PUBLISH_URL: ${{ secrets.NEXUS_PUBLISH_RELEASE_URL }}
           NEXUS_PUBLISH_STAGING_PROFILE_ID: ${{ secrets.NEXUS_PUBLISH_STAGING_PROFILE_ID }}
-        working-directory: ./plugin
+        working-directory: plugin
         run: >
           ../gradlew
           findSonatypeStagingRepository
