@@ -112,10 +112,8 @@ jobs:
       - name: "📦 Export Gradle Properties"
         uses: micronaut-projects/github-actions/export-gradle-properties@master
       - name: "📜 Generate User Guide Documentation"
-        id: docs
         run: ./gradlew docs
       - name: "🚀 Publish to Github Pages"
-        id: docs
         if: success()
         uses: grails/github-pages-deploy-action@v2
         env:
