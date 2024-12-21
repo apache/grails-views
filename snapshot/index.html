@@ -704,14 +704,6 @@ json.message {
 </div>
 </div>
 <div class="paragraph">
-<p>If you are also using MongoDB you may want to add the <code>views-json-templates</code> dependency too which includes support for GeoJSON:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-groovy" data-lang="groovy">compile "org.grails.plugins:views-json-templates:4.0.0-SNAPSHOT"</code></pre>
-</div>
-</div>
-<div class="paragraph">
 <p>To enable Gradle compilation of JSON views for production environment add the following to the <code>buildscript</code> <code>dependencies</code> block:</p>
 </div>
 <div class="listingblock">
@@ -2709,18 +2701,6 @@ classes.dependsOn compileViews</code></pre>
 <div class="paragraph">
 <p>For example if you want to render all instances of type <code>foo.bar.Birthday</code> create a template called <code>src/main/gson/foo/bar/_birthday.gson</code> then compile the template and place the JAR on the classpath of your application.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-See the <a href="https://github.com/grails/grails-views/tree/master/json-templates/src/templates/grails/mongodb/geo">GeoJSON templates</a> for MongoDB for example of how it provides global templates for Mongo specific classes.
-</td>
-</tr>
-</table>
-</div>
 </div>
 <div class="sect3">
 <h4 id="_customizing_the_compile_task">2.14.3. Customizing the Compile Task</h4>
@@ -3185,7 +3165,7 @@ apply plugin: "org.grails.plugins.views-markup"</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 4.0.0-SNAPSHOT<br>
-Last updated 2024-12-21 13:18:57 UTC
+Last updated 2024-12-21 16:05:31 UTC
 </div>
 </div>
 </body>
