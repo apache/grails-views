@@ -1,5 +1,5 @@
 [versions]
-asciidoctor-gradle-jvm = '4.0.3'
+asciidoctor-gradle-jvm = '4.0.4'
 grails-gradle-plugin = '7.0.0-SNAPSHOT'
 grails-views = '4.0.0-SNAPSHOT'
 groovy-doc = '1.0.1'
