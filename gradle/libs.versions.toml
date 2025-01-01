@@ -1,10 +1,7 @@
 [versions]
 grails = '7.0.0-M1'
-grails-gradle-plugin = '7.0.0-M2'
-groovy = '4.0.24'
 java-baseline = '17'
 micronaut = '4.6.5'
-spring-boot-gradle-plugin = '3.4.1'
 
 [libraries]
 assetpipeline = { module = 'com.bertramlabs.plugins:asset-pipeline-grails' }
@@ -16,7 +13,6 @@ grails-datastore-core = { module = 'org.grails:grails-datastore-core' }
 grails-datastore-gorm-hibernate5 = { module = 'org.grails:grails-datastore-gorm-hibernate5' }
 grails-datastore-gorm-support = { module = 'org.grails:grails-datastore-gorm-support' }
 grails-encoder = { module = 'org.grails:grails-encoder' }
-grails-gradle-plugin = { module = 'org.grails:grails-gradle-plugin', version.ref = 'grails-gradle-plugin' }
 grails-mimetypes = { module = 'org.grails:grails-plugin-mimetypes' }
 grails-rest = { module = 'org.grails:grails-plugin-rest' }
 grails-testing-support-core = { module = 'org.grails:grails-testing-support' }
@@ -39,4 +35,3 @@ spring-context = { module = 'org.springframework:spring-context' }
 spring-web = { module = 'org.springframework:spring-web' }
 spring-webmvc = { module = 'org.springframework:spring-webmvc' }
 spring-boot = { module = 'org.springframework.boot:spring-boot' }
-spring-boot-gradle-plugin = { module = 'org.springframework.boot:spring-boot-gradle-plugin', version.ref = 'spring-boot-gradle-plugin' }
