@@ -1,6 +1,6 @@
 [versions]
-grails = '7.0.0-M1'
-grails-gradle-plugin = '7.0.0-M2'
+grails = '7.0.0-SNAPSHOT'
+grails-gradle-plugin = '7.0.0-SNAPSHOT'
 groovy = '4.0.24'
 java-baseline = '17'
 micronaut = '4.6.5'
