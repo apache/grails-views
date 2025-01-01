@@ -1,18 +1,17 @@
 plugins {
-    id 'com.gradle.develocity' version '3.18.1'
+    id 'com.gradle.develocity' version '3.19'
     id 'com.gradle.common-custom-user-data-gradle-plugin' version '2.0.2'
 }
 
 def isCI = System.getenv('CI') != null
 def isLocal = !isCI
 def isAuthenticated = System.getenv('DEVELOCITY_ACCESS_KEY') != null
-def isBuildCacheAuthenticated =
-        System.getenv('DEVELOCITY_BUILD_CACHE_NODE_USER') != null &&
-        System.getenv('DEVELOCITY_BUILD_CACHE_NODE_KEY') != null
 
 develocity {
     server = 'https://ge.grails.org'
     buildScan {
+        tag('grails')
+        tag('grails-views')
         publishing.onlyIf { isAuthenticated }
         uploadInBackground = isLocal
     }
@@ -21,30 +20,12 @@ develocity {
 buildCache {
     local { enabled = isLocal }
     remote(develocity.buildCache) {
-        push = isCI && isBuildCacheAuthenticated
+        push = isCI && isAuthenticated
         enabled = true
-        usernameAndPassword(
-                System.getenv('DEVELOCITY_BUILD_CACHE_NODE_USER') ?: '',
-                System.getenv('DEVELOCITY_BUILD_CACHE_NODE_KEY') ?: ''
-        )
     }
 }
 
 rootProject.name = 'grails-views'
-
-dependencyResolutionManagement {
-    versionCatalogs {
-        libs {
-            // Make it possible to override the Groovy version
-            // via environment variable
-            def groovyVersion = System.getenv('GROOVY_VERSION')
-            if (groovyVersion) {
-                logger.warn "Using custom version $groovyVersion of Groovy due to GROOVY_VERSION being set."
-                version('groovy', groovyVersion)
-            }
-        }
-    }
-}
 
 ['core', 'json', 'docs', 'json-testing-support', 'markup'].each {dirName ->
     include("views-$dirName")
