@@ -29,20 +29,8 @@ jobs:
       - name: "📝 Store the current release version"
         id: release_version
         run: echo "value=${GITHUB_REF:11}" >> $GITHUB_OUTPUT
-      - name: "⚙ Run pre-release"
+      - name: "⚙️ Run pre-release"
         uses: grails/github-actions/pre-release@main
-      - name: "🧩 Run Assemble"
-        if: success()
-        id: assemble
-        env:
-          GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew assemble
-      - name: "📤 Upload Distribution"
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: grails-views-${{ steps.release_version.outputs.value }}
-          path: ./**/build/libs/*
       - name: "🔐 Generate key file for artifact signing"
         env:
           SECRING_FILE: ${{ secrets.SECRING_FILE }}
@@ -57,7 +45,7 @@ jobs:
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
           SIGNING_PASSPHRASE: ${{ secrets.SIGNING_PASSPHRASE }}
         run: >
-          ./gradlew
+          ./gradlew --no-build-cache
           -Psigning.secretKeyRingFile=${{ github.workspace }}/secring.gpg 
           publishToSonatype 
           closeSonatypeStagingRepository
@@ -72,7 +60,6 @@ jobs:
       - name: "📥 Checkout repository"
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GH_TOKEN }}
           ref: v${{ needs.publish.outputs.release_version }}
       - name: "☕️ Setup JDK"
         uses: actions/setup-java@v4

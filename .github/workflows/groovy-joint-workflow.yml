@@ -131,6 +131,6 @@ jobs:
         env:
           GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: >
-          ./gradlew build
+          ./gradlew build --continue
           -PgroovyVersion=${{needs.build_groovy.outputs.groovyVersion}}
           -x groovydoc

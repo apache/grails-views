@@ -55,24 +55,19 @@ jobs:
       - name: "🔨 Build project"
         env:
           GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew build
+        run: ./gradlew build --continue
       - name: "📤 Publish Snapshot Artifacts to Artifactory (repo.grails.org)"
         if: success()
         env:
           ORG_GRADLE_PROJECT_artifactoryUsername: ${{ secrets.ARTIFACTORY_USERNAME }}
           ORG_GRADLE_PROJECT_artifactoryPassword: ${{ secrets.ARTIFACTORY_PASSWORD }}
-          GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: >
           ./gradlew
           -Dorg.gradle.internal.publish.checksums.insecure=true
           publish
       - name: "📖 Generate Snapshot Documentation"
         if: success()
-        env:
-          GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-        run: >
-          ./gradlew
-          views-docs:docs
+        run: ./gradlew views-docs:docs
       - name: "📤 Publish Snapshot Documentation to Github Pages"
         if: success()
         uses: grails/github-pages-deploy-action@grails
