@@ -35,7 +35,7 @@ jobs:
         env:
           SECRING_FILE: ${{ secrets.SECRING_FILE }}
         run: echo $SECRING_FILE | base64 -d > ${{ github.workspace }}/secring.gpg
-      - name: "📤 Publish release artifacts to Sonatype"
+      - name: "📤 Publish to and close Sonatype staging repository"
         env:
           GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
           ORG_GRADLE_PROJECT_sonatypeOssUsername: ${{ secrets.SONATYPE_USERNAME }}
@@ -70,7 +70,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           develocity-access-key: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
-      - name: "🚪 Nexus Staging Close And Release"
+      - name: "🚀 Release Sonatype Staging Repository"
         env:
           GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
           ORG_GRADLE_PROJECT_sonatypeOssUsername: ${{ secrets.SONATYPE_USERNAME }}
