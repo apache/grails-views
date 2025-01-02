@@ -1,5 +1,5 @@
 [versions]
-grails = '7.0.0-M1'
+grails = '7.0.0-SNAPSHOT'
 java-baseline = '17'
 micronaut = '4.6.5'
 
