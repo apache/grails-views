@@ -700,8 +700,8 @@ class FormFieldsTagLib {
 			}
 		}
 
-		boolean dateWidget = model.type in [Date, Calendar, java.sql.Date, java.sql.Time, LocalDate, LocalDateTime]
-		if (!dateWidget) {
+		boolean datePicker = model.type in [Date, Calendar, java.sql.Date, java.sql.Time, LocalDate, LocalDateTime]
+		if (!datePicker) {
 			attrs.remove('selectDateClass')
 		}
 		boolean checkBox = model.type in [boolean, Boolean]
@@ -724,7 +724,7 @@ class FormFieldsTagLib {
 			return renderAssociationInput(model, attrs)
 		} else if (oneToMany) {
 			return renderOneToManyInput(model, attrs)
-		} else if (dateWidget) {
+		} else if (datePicker) {
 			return renderDateTimeInput(model, attrs)
 		} else if (model.type in [byte[], Byte[], Blob]) {
 			return g.field(attrs + [type: "file"])
