@@ -90,7 +90,7 @@ class DomainModelServiceSpec extends Specification implements MocksDomain {
             1 * getName() >> "lastUpdated"
         }
         DomainProperty version = Mock(DomainProperty) {
-            1 * getName() >> "lastUpdated"
+            1 * getName() >> "version"
         }
         domainModelService.domainPropertyFactory = Mock(DomainPropertyFactoryImpl) {
             1 * build(persistentProperty1) >> dateCreated
