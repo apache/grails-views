@@ -106,6 +106,34 @@ class DomainModelServiceSpec extends Specification implements MocksDomain {
         properties.empty
     }
 
+    void "test getEditableProperties excluded by overriding default exclusions"() {
+        given:
+        PersistentProperty persistentProperty1 = Mock(PersistentProperty)
+        PersistentProperty persistentProperty2 = Mock(PersistentProperty)
+        PersistentProperty persistentProperty3 = Mock(PersistentProperty)
+        DomainProperty created = Mock(DomainProperty) {
+            1 * getName() >> "created"
+        }
+        DomainProperty modified = Mock(DomainProperty) {
+            1 * getName() >> "modified"
+        }
+        DomainProperty version = Mock(DomainProperty) {
+            1 * getName() >> "version"
+        }
+        domainModelService.domainPropertyFactory = Mock(DomainPropertyFactoryImpl) {
+            1 * build(persistentProperty1) >> created
+            1 * build(persistentProperty2) >> modified
+            1 * build(persistentProperty3) >> version
+        }
+        1 * domainClass.getPersistentProperties() >> [persistentProperty1, persistentProperty2, persistentProperty3]
+
+        when:
+        List<DomainProperty> properties = domainModelService.getInputProperties(domainClass, ['created', 'modified', 'version']).toList()
+
+        then: "properties that are excluded by overriding default exclusion are excluded"
+        properties.empty
+    }
+
     void "test getEditableProperties constraints display false"() {
         given:
         PersistentProperty bar = Mock()
