@@ -73,7 +73,7 @@ class FormFieldsTagLib {
 	List<String> exclusionsDisplay
 
 	enum ExclusionType {
-		List, Display, Inout
+		List, Display, Input
 	}
 
 	FormFieldsTemplateService formFieldsTemplateService
@@ -589,7 +589,7 @@ class FormFieldsTagLib {
 		}
 	}
 
-	private List<PersistentProperty> resolvePersistentProperties(PersistentEntity domainClass, Map attrs, ExclusionType exclusionType = ExclusionType.Inout) {
+	private List<PersistentProperty> resolvePersistentProperties(PersistentEntity domainClass, Map attrs, ExclusionType exclusionType = ExclusionType.Input) {
 		List<PersistentProperty> properties
 
 		boolean list = exclusionType == ExclusionType.List
@@ -603,7 +603,7 @@ class FormFieldsTagLib {
 			}
 		} else {
 			properties = list ? domainModelService.getListOutputProperties(domainClass) : domainModelService.getInputProperties(domainClass,
-					exclusionType == ExclusionType.Inout? exclusionsInput : exclusionsDisplay)
+					exclusionType == ExclusionType.Input? exclusionsInput : exclusionsDisplay)
 			// If 'except' is not set, but 'list' is, exclude 'id', 'dateCreated' and 'lastUpdated' by default
 			List<String> blacklist = attrs.containsKey('except') ? getList(attrs.except) : (list ? exclusionsList : [])
 
