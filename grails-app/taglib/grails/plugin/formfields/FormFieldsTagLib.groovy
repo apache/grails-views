@@ -65,6 +65,17 @@ class FormFieldsTagLib {
 	@Value('${grails.plugin.fields.localizeNumbers:true}')
 	Boolean localizeNumbers
 
+	@Value('${grails.plugin.fields.exclusions.list:#{T(java.util.Arrays).asList("id", "dateCreated", "lastUpdated")}}')
+	List<String> exclusionsList
+	@Value('${grails.plugin.fields.exclusions.input:#{T(java.util.Arrays).asList("version", "dateCreated", "lastUpdated")}}')
+	List<String> exclusionsInput
+	@Value('${grails.plugin.fields.exclusions.display:#{T(java.util.Arrays).asList("version", "dateCreated", "lastUpdated")}}')
+	List<String> exclusionsDisplay
+
+	enum ExclusionType {
+		List, Display, Inout
+	}
+
 	FormFieldsTemplateService formFieldsTemplateService
 	BeanPropertyAccessorFactory beanPropertyAccessorFactory
 	DomainPropertyFactory fieldsDomainPropertyFactory
@@ -355,7 +366,7 @@ class FormFieldsTagLib {
 			if (domainClass) {
 				String template = attrs.remove('template') ?: 'list'
 
-				List properties = resolvePersistentProperties(domainClass, attrs)
+				List properties = resolvePersistentProperties(domainClass, attrs, ExclusionType.Display)
 				out << render(template: "/templates/_fields/$template", model: attrs + [domainClass: domainClass, domainProperties: properties]) { prop ->
 					BeanPropertyAccessor propertyAccessor = resolveProperty(bean, prop.name)
 					Map model = buildModel(propertyAccessor, attrs, 'HTML')
@@ -448,7 +459,7 @@ class FormFieldsTagLib {
 		} else if (attrs.containsKey('properties')) {
 			return getList(attrs.remove('properties'))
 		} else {
-			List<String> properties = resolvePersistentProperties(domainClass, attrs, true)*.name
+			List<String> properties = resolvePersistentProperties(domainClass, attrs, ExclusionType.List)*.name
 			int maxProperties = attrs.containsKey('maxProperties') ? attrs.remove('maxProperties').toInteger() : 7
 			if (maxProperties && properties.size() > maxProperties) {
 				properties = properties[0..<maxProperties]
@@ -578,9 +589,10 @@ class FormFieldsTagLib {
 		}
 	}
 
-	private List<PersistentProperty> resolvePersistentProperties(PersistentEntity domainClass, Map attrs, boolean list = false) {
+	private List<PersistentProperty> resolvePersistentProperties(PersistentEntity domainClass, Map attrs, ExclusionType exclusionType = ExclusionType.Inout) {
 		List<PersistentProperty> properties
 
+		boolean list = exclusionType == ExclusionType.List
 		if (attrs.order) {
 			def orderBy = getList(attrs.order)
 			if (attrs.except) {
@@ -590,9 +602,10 @@ class FormFieldsTagLib {
 				fieldsDomainPropertyFactory.build(domainClass.getPropertyByName(propertyName))
 			}
 		} else {
-			properties = list ? domainModelService.getListOutputProperties(domainClass) : domainModelService.getInputProperties(domainClass)
+			properties = list ? domainModelService.getListOutputProperties(domainClass) : domainModelService.getInputProperties(domainClass,
+					exclusionType == ExclusionType.Inout? exclusionsInput : exclusionsDisplay)
 			// If 'except' is not set, but 'list' is, exclude 'id', 'dateCreated' and 'lastUpdated' by default
-			List<String> blacklist = attrs.containsKey('except') ? getList(attrs.except) : (list ? ['id', 'dateCreated', 'lastUpdated'] : [])
+			List<String> blacklist = attrs.containsKey('except') ? getList(attrs.except) : (list ? exclusionsList : [])
 
 			properties.removeAll { it.name in blacklist }
 		}
