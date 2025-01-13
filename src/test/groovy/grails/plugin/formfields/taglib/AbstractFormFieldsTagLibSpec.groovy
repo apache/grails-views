@@ -18,6 +18,7 @@ import grails.plugin.formfields.mock.*
 abstract class AbstractFormFieldsTagLibSpec extends Specification implements GrailsWebUnitTest, DataTest {
 
 	Person personInstance
+	Cyborg cyborgInstance
     Product productInstance
 
 	def setup() {
@@ -25,6 +26,7 @@ abstract class AbstractFormFieldsTagLibSpec extends Specification implements Gra
 		personInstance.address = new Address(street: "94 Evergreen Terrace", city: "Springfield", country: "USA")
 		personInstance.emails = [home: "bart@thesimpsons.net", school: "bart.simpson@springfieldelementary.edu"]
         productInstance = new Product(netPrice: 12.33, name: "<script>alert('XSS');</script>")
+		cyborgInstance = new Cyborg(name: "Hal", password: "monolith", gender: null)
 	}
 
 	def cleanup() {
