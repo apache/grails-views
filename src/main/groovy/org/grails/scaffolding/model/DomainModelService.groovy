@@ -16,6 +16,7 @@ interface DomainModelService {
      * @param domainClass The persistent entity
      */
     List<DomainProperty> getInputProperties(PersistentEntity domainClass)
+    List<DomainProperty> getInputProperties(PersistentEntity domainClass, List blackList)
 
     /**
      * The list of {@link DomainProperty} instances that are to be visible

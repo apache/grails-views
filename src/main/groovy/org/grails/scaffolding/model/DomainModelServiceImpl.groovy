@@ -91,8 +91,8 @@ class DomainModelServiceImpl implements DomainModelService {
      * @see {@link DomainModelServiceImpl#getProperties}
      * @param domainClass The persistent entity
      */
-    List<DomainProperty> getInputProperties(PersistentEntity domainClass) {
-        getProperties(domainClass, ['version', 'dateCreated', 'lastUpdated'])
+    List<DomainProperty> getInputProperties(PersistentEntity domainClass, List<String> blackList = null) {
+        getProperties(domainClass, new ArrayList<>(blackList ?: ['version', 'dateCreated', 'lastUpdated']))
     }
 
     /**

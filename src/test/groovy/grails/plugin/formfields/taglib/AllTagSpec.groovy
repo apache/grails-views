@@ -1,9 +1,9 @@
 package grails.plugin.formfields.taglib
 
+import grails.plugin.formfields.mock.Cyborg
 import grails.plugin.formfields.mock.Person
 import grails.plugin.formfields.*
 import grails.testing.web.taglib.TagLibUnitTest
-import org.grails.taglib.GrailsTagException
 import spock.lang.*
 
 @Unroll
@@ -13,6 +13,7 @@ class AllTagSpec extends AbstractFormFieldsTagLibSpec implements TagLibUnitTest<
 
     def setupSpec() {
         mockDomain(Person)
+        mockDomain(Cyborg)
     }
 
     def setup() {
@@ -56,6 +57,24 @@ class AllTagSpec extends AbstractFormFieldsTagLibSpec implements TagLibUnitTest<
         where:
         excluded << ['id', 'version', 'onLoad', 'lastUpdated', 'excludedProperty', 'displayFalseProperty']
         included << ['salutation', 'name', 'password', 'gender', 'dateOfBirth', 'address.street']
+    }
+
+    void 'all tag skips custom #excluded property and includes #included property'() {
+        given:
+        views["/_fields/default/_field.gsp"] = '${property} '
+        views["/_fields/default/_wrapper.gsp"] = '${widget}'
+        tagLib.exclusionsInput = ['id', 'created', 'modified', 'version']
+
+        when:
+        def output = applyTemplate('<f:all bean="cyborgInstance"/>', [cyborgInstance: cyborgInstance])
+
+        then:
+        !output.contains(excluded)
+        output.contains(included)
+
+        where:
+        excluded << ['id', 'created', 'modified', 'version', 'onLoad', 'excludedProperty', 'displayFalseProperty']
+        included << ['salutation', 'name', 'password', 'gender', 'dateOfBirth', 'address.street', 'minor']
     }
 
     @Issue('https://github.com/grails-fields-plugin/grails-fields/issues/12')

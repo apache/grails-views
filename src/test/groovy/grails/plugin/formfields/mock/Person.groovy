@@ -1,6 +1,13 @@
 package grails.plugin.formfields.mock
 
+import grails.gorm.annotation.AutoTimestamp
 import grails.persistence.Entity
+
+@Entity
+class Cyborg extends HomoSapiens {
+	@AutoTimestamp(AutoTimestamp.EventType.CREATED) Date created
+	@AutoTimestamp Date modified
+}
 
 @Entity
 class Person extends HomoSapiens {}
