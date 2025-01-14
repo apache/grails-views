@@ -713,9 +713,20 @@ class FormFieldsTagLib {
 			}
 		}
 
+		// TODO: https://github.com/gpc/fields/issues/392
+		boolean datePicker = model.type in [Date, Calendar, java.sql.Date, java.sql.Time, LocalDate, LocalDateTime]
+		if (!datePicker) {
+			attrs.remove('selectDateClass')
+		}
+		boolean checkBox = model.type in [boolean, Boolean]
+		String checkBoxClass = attrs.remove('checkBoxClass')
+		if (checkBox && checkBoxClass) {
+			attrs['class'] = checkBoxClass
+		}
+
 		if (model.type in [String, null]) {
 			return renderStringInput(model, attrs)
-		} else if (model.type in [boolean, Boolean]) {
+		} else if (checkBox) {
 			return g.checkBox(attrs)
 		} else if (model.type.isPrimitive() || model.type in Number) {
 			return renderNumericInput(propertyAccessor, model, attrs)
@@ -727,7 +738,7 @@ class FormFieldsTagLib {
 			return renderAssociationInput(model, attrs)
 		} else if (oneToMany) {
 			return renderOneToManyInput(model, attrs)
-		} else if (model.type in [Date, Calendar, java.sql.Date, java.sql.Time, LocalDate, LocalDateTime]) {
+		} else if (datePicker) {
 			return renderDateTimeInput(model, attrs)
 		} else if (model.type in [byte[], Byte[], Blob]) {
 			return g.field(attrs + [type: "file"])
