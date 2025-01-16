@@ -36,6 +36,7 @@ include 'grails-web-gsp'
 include 'grails-web-gsp-taglib'
 include 'grails-web-jsp'
 include 'grails-web-taglib'
+include 'grails-web-testing-support'
 
 // Examples
 include 'examples-sitemesh3'

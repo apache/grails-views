@@ -161,7 +161,7 @@ dependencies {
     testImplementation 'org.spockframework:spock-core'
     testImplementation 'org.grails:grails-gorm-testing-support'
     testImplementation 'org.grails:grails-testing-support'
-    testImplementation 'org.grails:grails-web-testing-support'
+    testImplementation project(':grails-web-testing-support')
 
     testRuntimeOnly 'org.glassfish.web:jakarta.servlet.jsp.jstl'
     testRuntimeOnly 'org.grails:grails-plugin-url-mappings'
