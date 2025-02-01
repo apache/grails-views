@@ -30,7 +30,7 @@
                 <g:if test="\${flash.message}">
                     <div class="alert alert-primary" role="alert"><i class="bi-info-circle"></i> \${flash.message}</div>
                 </g:if>
-                <f:display bean="sample" listClass="container" listItemClass="row mb-3" labelClass="form-label col-sm-3 text-sm-end" valueClass="col-sm-9" />
+                <f:display bean="${propertyName}" listClass="container" listItemClass="row mb-3" labelClass="form-label col-sm-3 text-sm-end" valueClass="col-sm-9" />
                 <g:form resource="\${this.${propertyName}}" controller="\${controllerName}" method="DELETE">
                     <fieldset class="bg-body-tertiary">
                         <g:link class="btn btn-outline-primary" action="edit" resource="\${this.${propertyName}}" controller="\${controllerName}">
