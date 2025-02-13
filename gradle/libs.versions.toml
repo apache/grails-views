@@ -1,7 +1,7 @@
 [versions]
 grails = '7.0.0-SNAPSHOT'
 java-baseline = '17'
-micronaut = '4.6.5'
+micronaut = '4.8.3'
 
 [libraries]
 assetpipeline = { module = 'com.bertramlabs.plugins:asset-pipeline-grails' }
