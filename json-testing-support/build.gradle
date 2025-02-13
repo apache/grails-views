@@ -9,33 +9,18 @@ group = 'org.grails'
 ext.set('projectDesc', 'JSON Views Testing Support')
 
 dependencies {
+    api project(':views-json') // Used in public API
+    api 'org.springframework:spring-web' // Used in public API
+    api 'org.grails:grails-datastore-core' // Used in public API
+    api 'org.spockframework:spock-core' // Used in public API
 
-    // Note: the bom has to be excluded on grails dependencies otherwise it will be detected as snapshot
-    // (even though none of these projects have a version that is snapshot).
-    // This behavior is only seen on a non-buildsnapshot project version.
-
-    api project(':views-json'), { // Used in public API
-        exclude group: 'org.grails', module: 'grails-bom'
-    }
-    api libs.spring.web // Used in public API
-    api libs.grails.datastore.core, { // Used in public API
-        exclude group: 'org.grails', module: 'grails-bom'
-    }
-    api libs.spock.core // Used in public API
-
-    implementation libs.grails.core, {
-        exclude group: 'org.grails', module: 'grails-bom'
-    }
-    implementation libs.grails.testing.support.core, {
-        exclude group: 'org.grails', module: 'grails-bom'
-    }
-    implementation libs.grails.web.urlmappings, {
-        exclude group: 'org.grails', module: 'grails-bom'
-    }
-    implementation libs.groovy.core
-    implementation libs.groovy.json
-    implementation libs.groovy.templates
-    implementation libs.spring.webmvc
+    implementation 'org.grails:grails-core'
+    implementation 'org.grails:grails-testing-support'
+    implementation 'org.grails:grails-web-url-mappings'
+    implementation 'org.apache.groovy:groovy'
+    implementation 'org.apache.groovy:groovy-json'
+    implementation 'org.apache.groovy:groovy-templates'
+    implementation 'org.springframework:spring-webmvc'
 }
 
 apply from: rootProject.layout.projectDirectory.file('gradle/java-config.gradle')

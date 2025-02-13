@@ -1,5 +1,6 @@
 def javaComponent = components.named('java')
 
+//TODO: Eventually this can be replaced with the new publishing plugin once it has gradle plugin support & version mapping
 publishing {
     publications {
         pluginMaven(MavenPublication) {

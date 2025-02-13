@@ -12,9 +12,9 @@ dependencies {
 
     // the gradle api is provided by java-gradle-plugin
 
-    implementation libs.jakarta.annotation.api
+    implementation 'jakarta.annotation:jakarta.annotation-api'
 
-    compileOnly libs.groovy.core // @CompileStatic
+    compileOnly 'org.apache.groovy:groovy' // @CompileStatic
 }
 
 gradlePlugin {
