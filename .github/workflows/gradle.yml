@@ -6,6 +6,7 @@ on:
   pull_request:
     branches:
       - '[2-9]+.[0-9]+.x'
+  workflow_dispatch:
 env:
   GIT_USER_NAME: 'grails-build'
   GIT_USER_EMAIL: 'grails-build@users.noreply.github.com'
@@ -35,7 +36,7 @@ jobs:
         run: ./gradlew check
   build_project:
     name: "Build Project"
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     permissions:
       contents: read

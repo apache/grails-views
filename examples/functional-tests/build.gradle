@@ -8,7 +8,6 @@ plugins {
 group = 'functional.tests'
 
 dependencies {
-
     implementation project(':examples-functional-tests-plugin')
     implementation project(':views-json')
     implementation project(':views-markup')
@@ -32,20 +31,20 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-logging'
     implementation 'org.springframework.boot:spring-boot-starter-tomcat'
 
-    compileOnly libs.jakarta.servlet.api // Provided by Tomcat
+    compileOnly 'org.slf4j:slf4j-api' // Provided by Tomcat
 
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'org.apache.tomcat:tomcat-jdbc'
-    runtimeOnly libs.assetpipeline
+    runtimeOnly 'com.bertramlabs.plugins:asset-pipeline-grails'
 
     testImplementation project(':views-json-testing-support')
-    testImplementation libs.grails.testing.support.core
+    testImplementation 'org.grails:grails-testing-support'
 
-    integrationTestImplementation libs.jackson.databind
-    integrationTestImplementation libs.micronaut.http.client
-    integrationTestImplementation libs.micronaut.jackson.databind
+    integrationTestImplementation 'com.fasterxml.jackson.core:jackson-databind'
+    integrationTestImplementation  "io.micronaut:micronaut-http-client:$micronautVersion"
+    integrationTestImplementation "io.micronaut:micronaut-jackson-databind:$micronautVersion"
 }
 
 java {
-    sourceCompatibility = JavaVersion.toVersion(libs.versions.java.baseline.get())
+    sourceCompatibility = JavaVersion.toVersion(javaVersion)
 }

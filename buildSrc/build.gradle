@@ -18,12 +18,15 @@ repositories {
     }
 }
 
+file("../gradle.properties").withReader {
+    Properties props = new Properties()
+    props.load(it)
+    project.ext.gradleProperties = props
+}
+
 dependencies {
-
     // Needs to be implementation, as Asciidoctor task is referenced in docs/build.gradle
-    implementation buildsrcLibs.asciidoctor.gradle.plugin
-
-    runtimeOnly buildsrcLibs.nexus.publish.gradle.plugin
-    runtimeOnly buildsrcLibs.grails.gradle.plugin
-    runtimeOnly buildsrcLibs.grails.views.gradle.plugin
+    implementation "org.asciidoctor:asciidoctor-gradle-jvm:${gradleProperties.asciidoctorVersion}"
+    runtimeOnly "org.grails:grails-gradle-plugin:${gradleProperties.grailsGradlePluginVersion}"
+    runtimeOnly "org.grails.plugins:views-gradle:${gradleProperties.projectVersion}"
 }

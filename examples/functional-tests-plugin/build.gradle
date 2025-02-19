@@ -9,9 +9,9 @@ group = 'functional.tests.plugin'
 dependencies {
     implementation project(':views-json')
     implementation 'org.grails:grails-plugin-rest'
-    compileOnly libs.slf4j.nop // Used for getting rid of warning about missing slf4j implementation during compileGsonViews task
+    compileOnly 'org.slf4j:slf4j-nop' // Used for getting rid of warning about missing slf4j implementation during compileGsonViews task
 }
 
 java  {
-    sourceCompatibility = JavaVersion.toVersion(libs.versions.java.baseline.get())
+    sourceCompatibility = JavaVersion.toVersion(javaVersion)
 }

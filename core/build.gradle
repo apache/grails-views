@@ -9,22 +9,21 @@ group = 'org.grails'
 ext.set('projectDesc', 'Grails Views Core')
 
 dependencies {
+    api 'com.github.ben-manes.caffeine:caffeine' // Used in public API
+    api 'org.grails:grails-datastore-core' // MappingContext is used in public API
+    api 'org.grails:grails-plugin-mimetypes' // MimeUtility is used in public API
+    api 'org.grails:grails-plugin-rest' // Used in public API
+    api 'org.grails:grails-web-url-mappings' // LinkGenerator is used in public API
+    api 'org.springframework:spring-context' // MessageSource is used in public API
 
-    api libs.caffeine // Used in public API
-    api libs.grails.datastore.core // MappingContext is used in public API
-    api libs.grails.mimetypes // MimeUtility is used in public API
-    api libs.grails.rest // Used in public API
-    api libs.grails.web.urlmappings // LinkGenerator is used in public API
-    api libs.spring.context // MessageSource is used in public API
+    implementation 'org.grails:grails-bootstrap'
+    implementation 'org.grails:grails-core'
+    implementation 'org.grails:grails-datastore-gorm-support'
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'org.springframework:spring-beans'
 
-    implementation libs.grails.bootstrap
-    implementation libs.grails.core
-    implementation libs.grails.datastore.gorm.support
-    implementation libs.slf4j.api
-    implementation libs.spring.beans
-
-    testImplementation libs.spock.core
-    testRuntimeOnly libs.slf4j.nop // Get rid of warnings about missing slf4j implementation during test task
+    testImplementation 'org.spockframework:spock-core'
+    testRuntimeOnly 'org.slf4j:slf4j-nop' // Get rid of warnings about missing slf4j implementation during test task
 }
 
 apply from: rootProject.layout.projectDirectory.file('gradle/java-config.gradle')
