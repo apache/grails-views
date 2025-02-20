@@ -26,6 +26,13 @@ dependencies {
 
     implementation 'org.grails.plugins:gsp'
     implementation 'org.grails.plugins:hibernate5'
+    runtimeOnly "org.hibernate:hibernate-ehcache:$hibernateVersion", {
+        // exclude javax variant of hibernate-core
+        exclude group: 'org.hibernate', module: 'hibernate-core'
+    }
+    runtimeOnly "org.jboss.spec.javax.transaction:jboss-transaction-api_1.3_spec:$jbossTransactionApiVersion", {
+        // required for hibernate-ehcache to work with javax variant of hibernate-core excluded
+    }
 
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
     implementation 'org.springframework.boot:spring-boot-starter-logging'
