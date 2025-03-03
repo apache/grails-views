@@ -1,4 +1,4 @@
-io.github.gradlenexus.publishplugin.InitializeNexusStagingRepository
+import io.github.gradlenexus.publishplugin.InitializeNexusStagingRepository
 
 buildscript {
     repositories {
