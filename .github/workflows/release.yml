@@ -118,7 +118,7 @@ jobs:
       - name: "📖 Generate documentation"
         env:
           GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew docs
+        run: ./gradlew docs --stacktrace
       - name: "📤 Publish documentation to Github Pages"
         if: success()
         uses: grails/github-pages-deploy-action@grails
