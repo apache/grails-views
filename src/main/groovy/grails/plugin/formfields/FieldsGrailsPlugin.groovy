@@ -23,7 +23,7 @@ class FieldsGrailsPlugin extends Plugin {
 
     static final String CONSTRAINTS_EVALULATOR_BEAN_NAME = 'validateableConstraintsEvaluator'
 
-    def grailsVersion = '5.0 > *'
+    def grailsVersion = '7.0.0-SNAPSHOT > *'
 
     def loadAfter = ['domainClass']
 

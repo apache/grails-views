@@ -6,7 +6,8 @@ buildscript {
         maven { url "https://repo.grails.org/grails/core" }
     }
     dependencies {
-        classpath "org.grails:grails-gradle-plugin:$grailsGradlePluginVersion"
+        classpath platform("org.grails:grails-bom:${grailsVersion}")
+        classpath "org.grails:grails-gradle-plugin"
     }
 }
 
@@ -30,12 +31,14 @@ repositories {
 }
 
 dependencies {
+    implementation platform("org.grails:grails-bom:${grailsVersion}")
+
     compileOnly 'org.springframework.boot:spring-boot-starter-logging'
     compileOnly "org.springframework.boot:spring-boot-starter-actuator"
     compileOnly "org.springframework.boot:spring-boot-autoconfigure"
     compileOnly "org.springframework.boot:spring-boot-starter-tomcat"
     compileOnly "org.grails:grails-plugin-controllers"
-    compileOnly "org.grails.plugins:gsp:${grailsVersion}"
+    compileOnly "org.grails.plugins:gsp"
 
     testImplementation "org.grails:grails-web-testing-support"
     testImplementation "org.grails:grails-gorm-testing-support"
@@ -47,9 +50,9 @@ dependencies {
         exclude module: 'asm'
     }
 
-    testRuntimeOnly "net.bytebuddy:byte-buddy:$byteBuddyVersion"
+    testRuntimeOnly "net.bytebuddy:byte-buddy"
 
-    testImplementation "org.grails:grails-datastore-gorm-hibernate5:$gormHibernate5Version"
+    testImplementation "org.grails:grails-datastore-gorm-hibernate5"
 }
 
 tasks.withType(Test).configureEach {
