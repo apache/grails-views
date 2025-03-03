@@ -50,7 +50,7 @@ dependencies {
         exclude module: 'asm'
     }
 
-    testRuntimeOnly "net.bytebuddy:byte-buddy:$byteBuddyVersion"
+    testRuntimeOnly "net.bytebuddy:byte-buddy"
 
     testImplementation "org.grails:grails-datastore-gorm-hibernate5"
 }
