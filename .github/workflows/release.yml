@@ -43,6 +43,8 @@ jobs:
       - name: "🧩 Run Assemble"
         if: success()
         id: assemble
+        env:
+          GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: ./gradlew --refresh-dependencies assemble
       - name: "🔐 Generate key file for artifact signing"
         env:
