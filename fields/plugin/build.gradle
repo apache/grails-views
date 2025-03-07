@@ -13,12 +13,15 @@ ext {
     pomTitle = 'Grails Fields Plugin'
     pomDescription = 'Customizable form-field rendering based on overrideable GSP template'
     pomDevelopers = [robfletcher: 'Rob Fletcher', graemerocher: "Graeme Rocher", sdelamo: "Sergio del Amo", sbglasius: 'Søren Berg Glasius']
+    mavenSnapshotPublishUrl = 'https://repo.grails.org/grails/plugins3-snapshots-local'
 }
 
 dependencies {
-    implementation platform("org.grails:grails-bom:${grailsVersion}")
+    implementation platform("org.grails:grails-bom:${grailsVersion}"), {
+        exclude group: 'org.grails.plugins', module: 'gsp'
+    }
 
-    compileOnly "org.grails.plugins:gsp"
+    implementation project(':grails-plugin-gsp')
     compileOnly "org.grails:grails-plugin-controllers"
     compileOnly "org.springframework.boot:spring-boot-autoconfigure"
     compileOnly "org.springframework.boot:spring-boot-starter-actuator"
@@ -40,4 +43,4 @@ dependencies {
 
 apply from: rootProject.layout.projectDirectory.file('gradle/java-config.gradle')
 apply from: rootProject.layout.projectDirectory.file('gradle/test-config.gradle')
-apply from: rootProject.layout.projectDirectory.file('gradle/publishing.gradle')
+apply from: rootProject.layout.projectDirectory.file('gradle/publish-config.gradle')

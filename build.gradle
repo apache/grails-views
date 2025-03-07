@@ -11,6 +11,10 @@ buildscript {
     }
 }
 
+ext {
+    isCI = System.getenv('CI') != null
+}
+
 String customGroovyVersion = findProperty('groovyVersion') ?: System.getenv('GROOVY_VERSION')
 if (customGroovyVersion) {
     logger.warn("Using custom Groovy version: $customGroovyVersion")
@@ -70,7 +74,16 @@ def publishedProjects = [
         'views-json-testing-support',
         'views-markup',
         'scaffolding',
-        'fields-plugin'
+        'fields-plugin',
+        'grails-gsp',
+        'grails-plugin-gsp',
+        'grails-plugin-sitemesh3',
+        'grails-taglib',
+        'grails-web-gsp',
+        'grails-web-gsp-taglib',
+        'grails-web-jsp',
+        'grails-web-taglib',
+        'grails-web-testing-support'
 ]
 subprojects {
     if (name in publishedProjects) {

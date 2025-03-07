@@ -1,13 +1,11 @@
-import org.asciidoctor.gradle.jvm.AsciidoctorTask
-
-apply plugin: 'org.asciidoctor.jvm.convert'
-
-configurations.register('documentation')
+apply plugin: 'groovy'
+apply plugin: 'org.grails.grails-doc'
 
 dependencies {
-    add('documentation', platform("org.grails:grails-bom:$grailsVersion"))
-    add('documentation', 'com.github.javaparser:javaparser-core')
-    add('documentation', 'org.apache.groovy:groovy-groovydoc')
+    implementation platform("org.grails:grails-bom:$grailsVersion")
+    implementation 'org.apache.groovy:groovy'
+    implementation 'org.apache.groovy:groovy-groovydoc'
+    implementation 'com.github.javaparser:javaparser-core'
 }
 
 tasks.register('pluginName') {
@@ -18,12 +16,18 @@ tasks.withType(Groovydoc).configureEach {
     def firstDocTitle
     def firstWindowTitle
     def sources = []
+    def projectClasspath = [configurations.compileClasspath]
     rootProject.subprojects
             .findAll { it.name in (project.findProperty('apiDocsProjects') ?: []) }
             .each {
                 firstDocTitle = firstDocTitle ?: (project.findProperty('apiDocsProjects') as Map)[it.name]['docTitle']
                 firstWindowTitle = firstWindowTitle ?: (project.findProperty('apiDocsProjects') as Map)[it.name]['windowTitle']
                 sources += it.files('src/main/groovy')
+                if(it.file('src/ast/groovy').exists()) {
+                    sources += it.files('src/ast/groovy')
+                }
+                //TODO: FIXME: compileClasspath isn't detected
+                //projectClasspath += it.configurations.compileClasspath
             }
     docTitle = firstDocTitle
     windowTitle = firstWindowTitle
@@ -33,26 +37,86 @@ tasks.withType(Groovydoc).configureEach {
     processScripts = false
     includeMainForScripts = false
     includeAuthor = false
-    classpath = configurations.documentation
-    groovyClasspath += configurations.documentation
+    classpath = files(projectClasspath)
+    groovyClasspath += files(projectClasspath)
 }
 
-tasks.named('asciidoctor', AsciidoctorTask) {
-    sourceDir layout.projectDirectory.file('src/docs')
-    sources { include 'index.adoc' }
-    outputDir = layout.buildDirectory.file('docs')
-    attributes findProperty('asciidoctorAttributes') as Map ?: [:]
-    baseDirFollowsSourceDir()
-    jvm {
-        jvmArgs '--add-opens', 'java.base/sun.nio.ch=ALL-UNNAMED', '--add-opens', 'java.base/java.io=ALL-UNNAMED'
+tasks.register('resolveGroovyVersion') {
+    group = 'documentation'
+    description = 'Resolve Groovy Version from the BOM'
+    ext.resolved = configurations.compileClasspath
+            .resolvedConfiguration
+            .resolvedArtifacts
+            .find {
+                it.moduleVersion.id.group == 'org.apache.groovy' &&
+                        it.moduleVersion.id.name.contains('groovy')
+            }.moduleVersion.id.version
+    logger.lifecycle('Resolved Groovy version for Guide links: {}', resolved)
+}
+
+// TODO: PublishGuide should eventually ensure the build directory exists
+tasks.register('docsBuild') {
+    doFirst {
+        project.layout.buildDirectory.get().asFile.mkdirs()
     }
-    inputs.dir(sourceDir)
-    outputs.dir(outputDir)
+    // Do not cache this task since the directory must exist if publishGuide is going to run
+    outputs.upToDateWhen { false }
+}
+
+tasks.register('publishGuide', grails.doc.gradle.PublishGuide) {
+    group = 'documentation'
+    description = 'Generate Guide'
+    dependsOn('docsBuild', 'resolveGroovyVersion')
+
+    targetDir = project.layout.buildDirectory.dir('docs').get().asFile
+    outputs.dir(targetDir) // ensure gradle understands what this task generates
+
+    String relativeProjectPath = rootProject.projectDir.toPath().relativize(project.projectDir.toPath()).toString()
+    logger.lifecycle("${project.name} Relative project path: {}", relativeProjectPath)
+    sourceRepo = "https://github.com/grails/grails-views/edit/${githubBranch}/${relativeProjectPath}/src/docs"
+    sourceDir = project.layout.projectDirectory.dir('src/docs').getAsFile()
+    inputs.dir(sourceDir) // ensure gradle understands what this task creates from
+    propertiesFiles = [rootProject.layout.projectDirectory.file('gradle.properties').asFile]
+    asciidoc = true
+    resourcesDir = rootProject.layout.projectDirectory.dir('etc/layout').asFile
+    properties = ([
+                          'safe'          : 'UNSAFE', // Make sure any asciidoc security is disabled
+                          'version'       : projectVersion,
+                          'title'         : project.findProperty('guideTitle'),
+                          'subtitle'      : project.findProperty('guideSubtitle'),
+                          // TODO: The javaee documentation has not been updated to jakarta
+                          'javaee'        : 'https://docs.oracle.com/javaee/7/api/',
+                          'jakartaee'     : 'https://jakarta.ee/specifications/platform/10/apidocs/',
+                          'javase'        : 'https://docs.oracle.com/en/java/javase/17/docs/api/index.html',
+                          'groovyapi'     : "https://docs.groovy-lang.org/${resolveGroovyVersion.resolved}/html/gapi/",
+                          'groovyjdk'     : "https://docs.groovy-lang.org/${resolveGroovyVersion.resolved}/html/groovy-jdk/",
+                          'grailsapi'     : "https://docs.grails.org/$grailsVersion/api/",
+                          'grailsdocs'    : "https://docs.grails.org/$grailsVersion/",
+                          'gormapi'       : 'https://gorm.grails.org/latest/api/',
+                          'springapi'     : 'https://docs.spring.io/spring/docs/current/javadoc-api/',
+                          'commandLineRef': "https://docs.grails.org/$grailsVersion/ref/Command%20Line",
+                          'controllersRef': "https://docs.grails.org/$grailsVersion/ref/Controllers"
+                  ] + project.findProperty('asciidoctorAttributes') as Map<String, String>) as Properties
+
+    doLast {
+        File destination = project.layout.buildDirectory.file('docs/guide/index.html').get().asFile
+        destination.delete()
+        project.layout.buildDirectory.file('docs/guide/single.html').get().asFile.renameTo(destination)
+        project.layout.buildDirectory.file('docs/index.html').get().asFile.text = '''
+        <html lang="en">
+            <head>
+                <title>Redirecting...</title>
+                <meta http-equiv="refresh" content="0; url=guide/index.html" />
+            </head>
+            <body></body>
+        </html>
+        '''.stripIndent(8)
+    }
 }
 
 tasks.register('guideDocs', Copy) {
     group = 'documentation'
-    dependsOn 'asciidoctor'
+    dependsOn 'publishGuide'
     def sourceDir = layout.projectDirectory.dir('src/docs')
     def targetDir = layout.buildDirectory.dir('docs')
     outputs.dir(targetDir)

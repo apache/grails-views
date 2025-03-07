@@ -1,15 +1,18 @@
-# Grails Views
+# grails-views repo
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.grails/views-core.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/org.grails/views-core)
 [![Java CI](https://github.com/grails/grails-views/actions/workflows/gradle.yml/badge.svg?event=push)](https://github.com/grails/grails-views/actions/workflows/gradle.yml)
 
-Additional View Technologies for Grails.
+This project contains view related technologies for the [Grails framework](https://grails.org).
 
-Initial implementation includes JSON views powered by Groovy's JsonBuilder.\
-However, this project provides the basis for implementing other view types.
+## Grails Server Pages (GSP)
+See [Grails Server Pages (GSP)](/gsp) for more information.
 
-View [the latest documentation](https://views.grails.org/latest/views/guide/index.html) for details. 
+## Additional Grails View Technologies
+See [grails-views](/views) for more information.
 
-# Fields
+## Fields Plugin
+See [fields](/fields) for more information.
 
-View [the latest documentation](https://views.grails.org/latest/fields/guide/index.html) for details. 
+## Scaffolding 
+See [scaffolding](/scaffolding) for more information.

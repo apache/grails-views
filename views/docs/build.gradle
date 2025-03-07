@@ -1,8 +1,7 @@
-plugins {
-    id 'groovy' // For groovydoc task
-}
-
 ext {
+    guideTitle = 'Grails Views'
+    guideSubtitle = 'Grails Views - Additional View Technologies for Grails'
+
     apiDocsProjects = [
             'views-core': [
                     docTitle   : 'Grails Views Core - ' + projectVersion,
@@ -38,9 +37,6 @@ ext {
             revnumber           : projectVersion,
             setanchors          : true,
             'source-highlighter': 'prettify',
-            toc                 : 'left',
-            toc2                : '',
-            toclevels           : '2',
             'version'           : projectVersion
     ]
 

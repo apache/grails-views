@@ -1,8 +1,7 @@
-plugins {
-    id 'groovy' // For groovydoc task
-}
-
 ext {
+    guideTitle = 'Grails Fields Plugin'
+    guideSubtitle = 'Grails Fields Plugin - customize the rendering of input fields for Grails artifacts'
+
     apiDocsProjects = [
             'fields': [
                     docTitle   : 'Grails Fields Plugin - ' + projectVersion,
@@ -26,11 +25,8 @@ ext {
             revnumber           : projectVersion,
             setanchors          : true,
             'source-highlighter': 'prettify',
-            toc                 : 'left',
-            toc2                : '',
-            toclevels           : '2',
             'version'           : projectVersion,
-            'sourcedir'         : rootProject.layout.projectDirectory.dir('fields/src/main/groovy')
+            'sourcedir'         : rootProject.layout.projectDirectory.dir('fields/src/main/groovy').asFile.toString()
     ]
 }
 

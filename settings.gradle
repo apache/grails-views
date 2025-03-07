@@ -60,3 +60,36 @@ project(':fields-plugin').projectDir = file('fields/plugin')
 
 include 'fields-docs'
 project(':fields-docs').projectDir = file('fields/docs')
+
+include 'gsp-docs'
+project(':gsp-docs').projectDir = file('gsp/docs')
+
+include 'grails-gsp'
+project(':grails-gsp').projectDir = file('gsp/grails-gsp')
+
+include 'grails-plugin-gsp'
+project(':grails-plugin-gsp').projectDir = file('gsp/grails-plugin-gsp')
+
+include 'grails-plugin-sitemesh3'
+project(':grails-plugin-sitemesh3').projectDir = file('gsp/grails-plugin-sitemesh3')
+
+include 'grails-taglib'
+project(':grails-taglib').projectDir = file('gsp/grails-taglib')
+
+include 'grails-web-gsp'
+project(':grails-web-gsp').projectDir = file('gsp/grails-web-gsp')
+
+include 'grails-web-gsp-taglib'
+project(':grails-web-gsp-taglib').projectDir = file('gsp/grails-web-gsp-taglib')
+
+include 'grails-web-jsp'
+project(':grails-web-jsp').projectDir = file('gsp/grails-web-jsp')
+
+include 'grails-web-taglib'
+project(':grails-web-taglib').projectDir = file('gsp/grails-web-taglib')
+
+include 'grails-web-testing-support'
+project(':grails-web-testing-support').projectDir = file('gsp/grails-web-testing-support')
+
+include 'gsp-examples-sitemesh3'
+project(':gsp-examples-sitemesh3').projectDir = file('gsp/examples/sitemesh3')

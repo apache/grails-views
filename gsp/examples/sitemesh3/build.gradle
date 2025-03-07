@@ -1,0 +1,57 @@
+buildscript {
+    repositories {
+        maven { url = 'https://repo.grails.org/grails/core' }
+        if (System.getenv('GITHUB_MAVEN_PASSWORD') && !grailsVersion.endsWith('-SNAPSHOT')) {
+            System.out.println("Adding Grails Core Staging Repo for project: $name")
+            maven {
+                url = 'https://maven.pkg.github.com/grails/grails-core'
+                credentials {
+                    username = 'DOES_NOT_MATTER'
+                    password = System.getenv('GITHUB_MAVEN_PASSWORD')
+                }
+            }
+        }
+    }
+    dependencies {
+        classpath platform("org.grails:grails-bom:$grailsVersion")
+        classpath 'org.grails:grails-gradle-plugin'
+        classpath 'com.bertramlabs.plugins:asset-pipeline-gradle'
+    }
+}
+
+version = '0.0.1'
+group = 'org.sitemesh.grails.plugins.sitemesh3'
+
+apply plugin: 'org.grails.grails-web'
+apply plugin: 'org.grails.grails-gsp'
+apply plugin: 'com.bertramlabs.asset-pipeline'
+
+dependencies {
+
+    implementation platform("org.grails:grails-bom:$grailsVersion")
+
+    implementation project(':grails-plugin-sitemesh3')
+    implementation 'org.grails:grails-core'
+    implementation 'org.grails:grails-plugin-controllers'
+    implementation 'org.grails:grails-plugin-rest'
+
+    runtimeOnly project(':grails-plugin-gsp')
+    runtimeOnly 'com.bertramlabs.plugins:asset-pipeline-grails'
+    runtimeOnly 'org.fusesource.jansi:jansi'
+    runtimeOnly 'org.grails:grails-plugin-url-mappings'
+    runtimeOnly 'org.grails:grails-plugin-i18n'
+    runtimeOnly 'org.springframework.boot:spring-boot-autoconfigure'
+    runtimeOnly 'org.springframework.boot:spring-boot-starter-logging'
+    runtimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
+
+    // JSP support
+    runtimeOnly 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
+    runtimeOnly 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    runtimeOnly 'org.glassfish.web:jakarta.servlet.jsp.jstl'
+
+    integrationTestImplementation testFixtures('org.grails.plugins:geb')
+    integrationTestImplementation 'org.grails:grails-testing-support'
+}
+
+apply from: rootProject.layout.projectDirectory.file('gradle/java-config.gradle')
+apply from: rootProject.layout.projectDirectory.file('gradle/test-config.gradle')

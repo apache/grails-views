@@ -15,6 +15,7 @@ dependencies {
         exclude group: 'org.grails', module: 'views-core'
         exclude group: 'org.grails', module: 'views-json-testing-support'
         exclude group: 'org.grails.plugins', module: 'scaffolding'
+        exclude group: 'org.grails.plugins', module: 'gsp'
     }
 
     implementation project(':views-examples-functional-tests-plugin')
@@ -33,7 +34,7 @@ dependencies {
     implementation 'org.grails:grails-plugin-url-mappings'
     implementation 'org.grails:grails-plugin-validation'
 
-    implementation 'org.grails.plugins:gsp'
+    implementation project(':grails-plugin-gsp')
     implementation 'org.grails.plugins:hibernate5'
 
     implementation 'org.springframework.boot:spring-boot-autoconfigure'

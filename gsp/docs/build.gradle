@@ -1,0 +1,64 @@
+ext {
+    guideTitle = 'Groovy Server Pages (GSP)'
+    guideSubtitle = 'GSP (Groovy Server Pages) - A server-side view rendering technology based on Groovy'
+
+    apiDocsProjects = [
+            'grails-gsp' : [
+                    docTitle   : 'Grails GSP - ' + projectVersion,
+                    windowTitle: 'grails-gsp ' + projectVersion + ' API'
+            ],
+            'grails-plugin-gsp' : [
+                    docTitle   : 'Grails GSP Plugin - ' + projectVersion,
+                    windowTitle: 'gsp ' + projectVersion + ' API'
+            ],
+            'grails-plugin-sitemesh3' : [
+                    docTitle   : 'Grails Sitemesh3 Plugin - ' + projectVersion,
+                    windowTitle: 'grails-plugin-sitemesh3 ' + projectVersion + ' API'
+            ],
+            'grails-taglib' : [
+                    docTitle   : 'Grails Taglib - ' + projectVersion,
+                    windowTitle: 'grails-taglib ' + projectVersion + ' API'
+            ],
+            'grails-web-gsp' : [
+                    docTitle   : 'Grails Web GSP - ' + projectVersion,
+                    windowTitle: 'grails-web-gsp ' + projectVersion + ' API'
+            ],
+            'grails-web-gsp-taglib' : [
+                    docTitle   : 'Grails Web GSP Taglib - ' + projectVersion,
+                    windowTitle: 'grails-web-gsp-taglib ' + projectVersion + ' API'
+            ],
+            'grails-web-jsp' : [
+                    docTitle   : 'Grails Web JSP - ' + projectVersion,
+                    windowTitle: 'grails-web-jsp ' + projectVersion + ' API'
+            ],
+            'grails-web-taglib' : [
+                    docTitle   : 'Grails Web Taglib - ' + projectVersion,
+                    windowTitle: 'grails-web-taglib ' + projectVersion + ' API'
+            ],
+            'grails-web-testing-support' : [
+                    docTitle   : 'Grails Web Testing Support - ' + projectVersion,
+                    windowTitle: 'grails-web-testing-support ' + projectVersion + ' API'
+            ]
+    ]
+
+    asciidoctorAttributes = [
+            copyright           : 'Apache License, Version 2.0',
+            docinfo1            : 'true',
+            doctype             : 'book',
+            encoding            : 'utf-8',
+            icons               : 'font',
+            id                  : name + ':' + projectVersion,
+            idprefix            : '',
+            idseparator         : '-',
+            lang                : 'en',
+            linkattrs           : true,
+            numbered            : '',
+            producer            : 'Asciidoctor',
+            revnumber           : projectVersion,
+            setanchors          : true,
+            'source-highlighter': 'prettify',
+            'version'           : projectVersion
+    ]
+}
+
+apply from: rootProject.layout.projectDirectory.file('gradle/docs-config.gradle')
