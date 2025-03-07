@@ -16,7 +16,7 @@
 
 package org.grails.gsp
 
-import grails.core.GrailsTagLibClass
+import grails.core.gsp.GrailsTagLibClass
 import org.grails.core.gsp.DefaultGrailsTagLibClass
 import org.grails.taglib.TagLibraryLookup
 import spock.lang.Specification

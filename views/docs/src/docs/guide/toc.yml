@@ -1,0 +1,25 @@
+introduction: Introduction
+json:
+  title: JSON Views
+  history: Version History
+  jsonInstallation: Installation
+  templates: Templates
+  rendering: Rendering Domain Classes
+  jsonViewApi: JSON View API
+  modelNaming: Model Naming
+  contentNegotiation: Content Negotiation
+  hal: HAL Support
+  jsonapi: JSON API Support
+  templateEngine: The JsonTemplateEngine
+  staticCompilation: Static Compilation
+  testing: Testing
+  pluginSupport: Plugin Support
+  jsonConfiguration: Configuration
+  converters: Custom Converters
+  intellij: IntelliJ Support
+  debugging: Debugging Views
+markup:
+  title: Markup Views
+  installation: Installation
+  viewApi: Markup View API
+  configuration: Configuration

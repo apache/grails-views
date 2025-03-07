@@ -17,10 +17,10 @@ package org.grails.taglib;
 
 import grails.core.GrailsApplication;
 import grails.core.GrailsClass;
-import grails.core.GrailsTagLibClass;
+import grails.core.gsp.GrailsTagLibClass;
 import grails.core.support.GrailsApplicationAware;
 import groovy.lang.GroovyObject;
-import org.grails.core.artefact.TagLibArtefactHandler;
+import org.grails.core.artefact.gsp.TagLibArtefactHandler;
 import org.grails.core.exceptions.GrailsConfigurationException;
 import org.grails.taglib.encoder.WithCodecHelper;
 import org.springframework.beans.BeansException;

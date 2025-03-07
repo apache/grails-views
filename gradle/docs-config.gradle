@@ -12,33 +12,34 @@ tasks.register('pluginName') {
     ext.value = project.name - '-docs'
 }
 
-tasks.withType(Groovydoc).configureEach {
-    def firstDocTitle
-    def firstWindowTitle
-    def sources = []
-    def projectClasspath = [configurations.compileClasspath]
-    rootProject.subprojects
+tasks.register('aggregateGroovydoc', Groovydoc) {
+    group = 'documentation'
+    description = 'Aggregates Groovy API documentation for all supporting projects.'
+
+    Set<Project> docProjects = rootProject.subprojects
             .findAll { it.name in (project.findProperty('apiDocsProjects') ?: []) }
-            .each {
-                firstDocTitle = firstDocTitle ?: (project.findProperty('apiDocsProjects') as Map)[it.name]['docTitle']
-                firstWindowTitle = firstWindowTitle ?: (project.findProperty('apiDocsProjects') as Map)[it.name]['windowTitle']
-                sources += it.files('src/main/groovy')
-                if(it.file('src/ast/groovy').exists()) {
-                    sources += it.files('src/ast/groovy')
-                }
-                //TODO: FIXME: compileClasspath isn't detected
-                //projectClasspath += it.configurations.compileClasspath
-            }
-    docTitle = firstDocTitle
-    windowTitle = firstWindowTitle
-    source = sources
-    destinationDir = rootProject.layout.buildDirectory.dir("docs/${pluginName.value}/groovydoc").get().asFile
+
+    for (Project docProject : docProjects) {
+        docProject.sourceSets.main.allSource.srcDirs.each { File srcDir -> if(srcDir.exists()) inputs.dir(srcDir) }
+    }
+
+    docTitle = project.findProperty('apiDocTitle') as String
+    windowTitle = project.findProperty('apiWindowTitle') as String
+    source = files(docProjects.collect { it.sourceSets.main.allSource }.flatten()).filter { !it.name.endsWith('.factories') }
+    classpath = files(configurations.compileClasspath + docProjects.configurations.compileClasspath)
+
     access = GroovydocAccess.PROTECTED
-    processScripts = false
-    includeMainForScripts = false
     includeAuthor = false
-    classpath = files(projectClasspath)
-    groovyClasspath += files(projectClasspath)
+    includeMainForScripts = false
+    processScripts = false
+    destinationDir = project.layout.buildDirectory.dir('docs/api').get().asFile
+
+    dependsOn(['docsBuild'] + docProjects.collect { ":$it.name:groovydoc" })
+
+    outputs.dir(project.layout.buildDirectory.dir('docs/api').get().asFile)
+    doLast {
+        delete(rootProject.layout.buildDirectory.dir('tmp'))
+    }
 }
 
 tasks.register('resolveGroovyVersion') {
@@ -66,7 +67,7 @@ tasks.register('docsBuild') {
 tasks.register('publishGuide', grails.doc.gradle.PublishGuide) {
     group = 'documentation'
     description = 'Generate Guide'
-    dependsOn('docsBuild', 'resolveGroovyVersion')
+    dependsOn('docsBuild', 'resolveGroovyVersion', 'aggregateGroovydoc')
 
     targetDir = project.layout.buildDirectory.dir('docs').get().asFile
     outputs.dir(targetDir) // ensure gradle understands what this task generates
@@ -99,10 +100,10 @@ tasks.register('publishGuide', grails.doc.gradle.PublishGuide) {
                   ] + project.findProperty('asciidoctorAttributes') as Map<String, String>) as Properties
 
     doLast {
-        File destination = project.layout.buildDirectory.file('docs/guide/index.html').get().asFile
+        File destination = project.layout.buildDirectory.file('docs/guide/guide/index.html').get().asFile
         destination.delete()
-        project.layout.buildDirectory.file('docs/guide/single.html').get().asFile.renameTo(destination)
-        project.layout.buildDirectory.file('docs/index.html').get().asFile.text = '''
+        project.layout.buildDirectory.file('docs/guide/guide/single.html').get().asFile.renameTo(destination)
+        project.layout.buildDirectory.file('docs/guide/index.html').get().asFile.text = '''
         <html lang="en">
             <head>
                 <title>Redirecting...</title>
@@ -114,40 +115,19 @@ tasks.register('publishGuide', grails.doc.gradle.PublishGuide) {
     }
 }
 
-tasks.register('guideDocs', Copy) {
-    group = 'documentation'
-    dependsOn 'publishGuide'
-    def sourceDir = layout.projectDirectory.dir('src/docs')
-    def targetDir = layout.buildDirectory.dir('docs')
-    outputs.dir(targetDir)
-    from sourceDir
-    into targetDir
-    include '**/*.png', '**/*.jpg', '**/*.gif', '**/*.svg'
-    finalizedBy findProperty('docsFinalizeTasks') as List ?: []
-}
-
-tasks.register('copyGuide', Copy) {
-    def sourceDir = layout.buildDirectory.dir('docs')
-    def targetDir = rootProject.layout.buildDirectory.dir("docs/${pluginName.value}/guide")
-    from(sourceDir)
-    into(targetDir)
-    dependsOn('guideDocs')
-    dependsOn(findProperty('docsFinalizeTasks') as List ?: [])
-    outputs.dir(targetDir)
-}
-
-tasks.register('copyApiDocs', Copy) {
-    group = 'documentation'
-    dependsOn('groovydoc')
-    for (String projectName : (findProperty('apiDocsProjects') as Map).keySet()) {
-        from(layout.buildDirectory.dir("docs/${projectName}/groovydoc")) {
-            into rootProject.layout.buildDirectory.dir("docs/${projectName}/groovydoc")
-        }
-    }
-}
-
-tasks.register('aggregateDocs') {
-    dependsOn('copyGuide', 'copyApiDocs')
+tasks.register('aggregateDocs', Copy) {
     group = 'documentation'
     description = 'Aggregate all documentation from all subprojects into the root docs directory'
+
+    dependsOn('publishGuide')
+    dependsOn(findProperty('docsFinalizeTasks') as List ?: [])
+
+    def sourceDir = layout.buildDirectory.dir('docs')
+    def targetDir = rootProject.layout.buildDirectory.dir("docs/${pluginName.value}")
+
+    from(sourceDir)
+    into(targetDir)
+
+    inputs.dir(sourceDir)
+    outputs.dir(targetDir)
 }

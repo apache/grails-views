@@ -7,8 +7,8 @@ logic.
 
 ## Documentation
 
-* Latest Guide - https://views.grails.org/latest/fields/guide
+* Latest Guide - https://views.grails.org/latest/fields
 * Latest API - https://views.grails.org/latest/fields/api
 
-* Snapshot Guide - https://views.grails.org/snapshot/fields/guide
+* Snapshot Guide - https://views.grails.org/snapshot/fields
 * Snapshot API - https://views.grails.org/snapshot/fields/api

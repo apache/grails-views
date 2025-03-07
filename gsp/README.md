@@ -4,8 +4,8 @@ This project contains the sources for GSP, the server-side view rendering techno
 
 ## Documentation
 
-* Latest Guide - https://views.grails.org/latest/gsp/guide
+* Latest Guide - https://views.grails.org/latest/gsp
 * Latest API - https://views.grails.org/latest/gsp/api
 
-* Snapshot Guide - https://views.grails.org/snapshot/gsp/guide
+* Snapshot Guide - https://views.grails.org/snapshot/gsp
 * Snapshot API - https://views.grails.org/snapshot/gsp/api

@@ -2,12 +2,9 @@ ext {
     guideTitle = 'Grails Fields Plugin'
     guideSubtitle = 'Grails Fields Plugin - customize the rendering of input fields for Grails artifacts'
 
-    apiDocsProjects = [
-            'fields': [
-                    docTitle   : 'Grails Fields Plugin - ' + projectVersion,
-                    windowTitle: 'fields ' + projectVersion + ' API'
-            ]
-    ]
+    apiDocsProjects = ['fields-plugin']
+    apiDocTitle = "Grails Fields Plugin API - ${projectVersion}"
+    apiWindowTitle = "Grails Fields Plugin API - ${projectVersion}"
 
     asciidoctorAttributes = [
             copyright           : 'Apache License, Version 2.0',
