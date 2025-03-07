@@ -1,0 +1,37 @@
+plugins {
+    id 'groovy' // For groovydoc task
+}
+
+ext {
+    apiDocsProjects = [
+            'fields': [
+                    docTitle   : 'Grails Fields Plugin - ' + projectVersion,
+                    windowTitle: 'fields ' + projectVersion + ' API'
+            ]
+    ]
+
+    asciidoctorAttributes = [
+            copyright           : 'Apache License, Version 2.0',
+            docinfo1            : 'true',
+            doctype             : 'book',
+            encoding            : 'utf-8',
+            icons               : 'font',
+            id                  : name + ':' + projectVersion,
+            idprefix            : '',
+            idseparator         : '-',
+            lang                : 'en',
+            linkattrs           : true,
+            numbered            : '',
+            producer            : 'Asciidoctor',
+            revnumber           : projectVersion,
+            setanchors          : true,
+            'source-highlighter': 'prettify',
+            toc                 : 'left',
+            toc2                : '',
+            toclevels           : '2',
+            'version'           : projectVersion,
+            'sourcedir'         : rootProject.layout.projectDirectory.dir('fields/src/main/groovy')
+    ]
+}
+
+apply from: rootProject.layout.projectDirectory.file('gradle/docs-config.gradle')
