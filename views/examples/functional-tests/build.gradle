@@ -17,7 +17,7 @@ dependencies {
         exclude group: 'org.grails.plugins', module: 'scaffolding'
     }
 
-    implementation project(':examples-views-functional-tests-plugin')
+    implementation project(':views-examples-functional-tests-plugin')
     implementation project(':views-json')
     implementation project(':views-markup')
 

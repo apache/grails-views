@@ -7,6 +7,10 @@ if (project.hasProperty('mavenSnapshotPublishUrl')) {
 
 extensions.configure(GrailsPublishExtension) {
     // Explicit `it` is required here
+    String pomArtifactId = findProperty('pomArtifactId')
+    if(pomArtifactId) {
+        it.artifactId = pomArtifactId
+    }
     it.githubSlug = 'grails/grails-views'
     it.license.name = 'Apache-2.0'
     it.title = findProperty('pomTitle') ?: 'Grails Views'

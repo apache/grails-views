@@ -2,7 +2,7 @@ package functional.tests.plugin
 
 import grails.plugins.*
 
-class ExamplesViewsFunctionalTestsPluginGrailsPlugin extends Plugin {
+class ViewsExamplesFunctionalTestsPluginGrailsPlugin extends Plugin {
 
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "7.0.0-SNAPSHOT > *"

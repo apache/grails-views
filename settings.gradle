@@ -1,5 +1,5 @@
 pluginManagement {
-    includeBuild("views-gradle-plugin")
+    includeBuild("views/gradle-plugin")
 }
 
 plugins {
@@ -31,19 +31,32 @@ buildCache {
 
 rootProject.name = 'grails-views'
 
-include (
-    'views-core',
-    'views-json',
-    'views-docs',
-    'views-json-testing-support',
-    'views-markup',
-    'scaffolding',
-    'fields',
-    'fields-docs'
-)
 
-include 'examples-views-functional-tests'
-project(':examples-views-functional-tests').projectDir = file('examples/views-functional-tests')
+include 'views-core'
+project(':views-core').projectDir = file('views/core')
 
-include 'examples-views-functional-tests-plugin'
-project(':examples-views-functional-tests-plugin').projectDir = file('examples/views-functional-tests-plugin')
+include 'views-json'
+project(':views-json').projectDir = file('views/json')
+
+include 'views-docs'
+project(':views-docs').projectDir = file('views/docs')
+
+include 'views-json-testing-support'
+project(':views-json-testing-support').projectDir = file('views/json-testing-support')
+
+include 'views-markup'
+project(':views-markup').projectDir = file('views/markup')
+
+include 'views-examples-functional-tests'
+project(':views-examples-functional-tests').projectDir = file('views/examples/functional-tests')
+
+include 'views-examples-functional-tests-plugin'
+project(':views-examples-functional-tests-plugin').projectDir = file('views/examples/functional-tests-plugin')
+
+include 'scaffolding'
+
+include 'fields-plugin'
+project(':fields-plugin').projectDir = file('fields/plugin')
+
+include 'fields-docs'
+project(':fields-docs').projectDir = file('fields/docs')

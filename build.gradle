@@ -70,7 +70,7 @@ def publishedProjects = [
         'views-json-testing-support',
         'views-markup',
         'scaffolding',
-        'fields'
+        'fields-plugin'
 ]
 subprojects {
     if (name in publishedProjects) {

@@ -9,6 +9,7 @@ version = projectVersion
 group = 'org.grails.plugins'
 
 ext {
+    pomArtifactId = 'fields'
     pomTitle = 'Grails Fields Plugin'
     pomDescription = 'Customizable form-field rendering based on overrideable GSP template'
     pomDevelopers = [robfletcher: 'Rob Fletcher', graemerocher: "Graeme Rocher", sdelamo: "Sergio del Amo", sbglasius: 'Søren Berg Glasius']
