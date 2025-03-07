@@ -1,0 +1,24 @@
+version: 2
+updates:
+- package-ecosystem: gradle
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  target-branch: 4.0.x
+  ignore:
+    - dependency-name: "*"
+      update-types: ["version-update:semver-minor", "version-update:semver-major"]
+  labels:
+  - "type: dependency upgrade"
+- package-ecosystem: gradle
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  target-branch: 7.0.x
+  ignore:
+    - dependency-name: "*"
+      update-types: ["version-update:semver-patch"]
+  labels:
+    - "type: dependency upgrade"

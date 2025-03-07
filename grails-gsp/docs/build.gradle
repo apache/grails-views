@@ -1,0 +1,99 @@
+import grails.doc.gradle.PublishGuide
+
+buildscript {
+    repositories {
+        maven { url = 'https://repo.grails.org/grails/core' }
+
+        if (System.getenv('GITHUB_MAVEN_PASSWORD') && !grailsVersion.endsWith('-SNAPSHOT')) {
+            System.out.println("Adding Grails Core Staging Repo for buildSrc in project: $name")
+            maven {
+                url = 'https://maven.pkg.github.com/grails/grails-core'
+                credentials {
+                    username = 'DOES_NOT_MATTER'
+                    password = System.getenv('GITHUB_MAVEN_PASSWORD')
+                }
+            }
+        }
+    }
+    dependencies {
+        classpath "org.grails:grails-docs:$grailsVersion"
+    }
+}
+
+apply plugin: 'groovy'
+
+dependencies {
+    implementation platform("org.grails:grails-bom:$grailsVersion")
+    implementation 'org.apache.groovy:groovy'
+}
+
+tasks.register('resolveGroovyVersion') {
+    group = 'documentation'
+    description = 'Resolve Groovy Version from the BOM'
+    ext.resolved = configurations.compileClasspath
+            .resolvedConfiguration
+            .resolvedArtifacts
+            .find {
+                it.moduleVersion.id.group == 'org.apache.groovy' &&
+                it.moduleVersion.id.name.contains('groovy')
+            }.moduleVersion.id.version
+    logger.lifecycle('Resolved Groovy version for Guide links: {}', resolved)
+}
+
+
+// TODO: PublishGuide should eventually ensure the build directory exists
+tasks.register('docsBuild') {
+    doFirst {
+        project.layout.buildDirectory.get().asFile.mkdirs()
+    }
+    // Do not cache this task since the directory must exist if publishGuide is going to run
+    outputs.upToDateWhen { false }
+}
+
+tasks.register('publishGuide', PublishGuide) {
+    group = 'documentation'
+    description = 'Generate Guide'
+    dependsOn('docsBuild', 'resolveGroovyVersion')
+
+    targetDir = project.layout.buildDirectory.dir('docs').get().asFile
+    outputs.dir(targetDir) // ensure gradle understands what this task generates
+    sourceRepo = "https://github.com/grails/grails-gsp/edit/${githubBranch}/src/main/docs"
+    sourceDir = project.layout.projectDirectory.dir('src/main/docs').getAsFile()
+    inputs.dir(sourceDir) // ensure gradle understands what this task creates from
+    propertiesFiles = [rootProject.layout.projectDirectory.file('gradle.properties').asFile]
+    asciidoc = true
+    resourcesDir = project.file('src/main/docs/resources')
+    properties = [
+            'safe'          : 'UNSAFE', // Make sure any asciidoc security is disabled
+            'version'       : projectVersion,
+            'title'         : 'Groovy Server Pages (GSP)',
+            'subtitle'      : 'GSP (Groovy Server Pages) - A server-side view rendering technology based on Groovy',
+            // TODO: The javaee documentation has not been updated to jakarta
+            'javaee'        : 'https://docs.oracle.com/javaee/7/api/',
+            'jakartaee'     : 'https://jakarta.ee/specifications/platform/10/apidocs/',
+            'javase'        : 'https://docs.oracle.com/en/java/javase/17/docs/api/index.html',
+            'groovyapi'     : "https://docs.groovy-lang.org/${resolveGroovyVersion.resolved}/html/gapi/",
+            'groovyjdk'     : "https://docs.groovy-lang.org/${resolveGroovyVersion.resolved}/html/groovy-jdk/",
+            'grailsapi'     : "https://docs.grails.org/$grailsVersion/api/",
+            'grailsdocs'    : "https://docs.grails.org/$grailsVersion/",
+            'gormapi'       : 'https://gorm.grails.org/latest/api/',
+            'springapi'     : 'https://docs.spring.io/spring/docs/current/javadoc-api/',
+            'commandLineRef': "https://docs.grails.org/$grailsVersion/ref/Command%20Line",
+            'controllersRef': "https://docs.grails.org/$grailsVersion/ref/Controllers"
+    ] as Properties
+
+    doLast {
+        File destination = project.layout.buildDirectory.file('docs/guide/index.html').get().asFile
+        destination.delete()
+        project.layout.buildDirectory.file('docs/guide/single.html').get().asFile.renameTo(destination)
+        project.layout.buildDirectory.file('docs/index.html').get().asFile.text = '''
+        <html lang="en">
+            <head>
+                <title>Redirecting...</title>
+                <meta http-equiv="refresh" content="0; url=guide/index.html" />
+            </head>
+            <body></body>
+        </html>
+        '''.stripIndent(8)
+    }
+}

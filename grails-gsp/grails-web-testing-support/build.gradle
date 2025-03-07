@@ -1,0 +1,32 @@
+version = projectVersion
+group = 'org.grails'
+
+apply plugin: 'groovy'
+apply plugin: "java-library"
+
+ext {
+    pomTitle = 'Grails Web Testing Support'
+    pomDescription = 'Support for writing concise expressive tests for Grails Web Artifacts'
+    pomDevelopers = [
+            [id: 'jeffscottbrown', name: 'Jeff Brown'],
+            [id: 'jameskleeh', name: 'James Kleeh']
+    ]
+}
+
+// Note: documentation for this project is published to grails-doc as part of the other testing documentation
+
+dependencies {
+    implementation platform("org.grails:grails-bom:$grailsVersion")
+
+    api project(':grails-plugin-gsp')
+    api 'org.grails:grails-plugin-rest'
+    api 'org.grails:grails-plugin-interceptors'
+    api 'jakarta.servlet:jakarta.servlet-api'
+
+    api 'org.grails:grails-testing-support'
+    api "org.javassist:javassist:${javassistVersion}"
+}
+
+apply from: rootProject.file('gradle/java-config.gradle')
+apply from: rootProject.file('gradle/test-config.gradle')
+apply from: rootProject.file('gradle/publish-config.gradle')

@@ -1,0 +1,18 @@
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        showStandardStreams = true
+        exceptionFormat = 'full'
+    }
+    if (isCiBuild) {
+        maxParallelForks = findProperty('testMaxParallelFork') ?: 2
+        forkEvery = findProperty('testForkEvery') ?: 0
+    } else {
+        maxParallelForks = findProperty('testMaxParallelFork') ?: 4
+        forkEvery = findProperty('testForkEvery') ?: 0
+    }
+    if (findProperty('testJvmArgs')) {
+        jvmArgs = findProperty('testJvmArgs')
+    }
+}

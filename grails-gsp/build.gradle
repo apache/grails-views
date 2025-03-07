@@ -1,0 +1,63 @@
+import io.github.gradlenexus.publishplugin.InitializeNexusStagingRepository
+
+buildscript {
+    repositories {
+        maven { url = 'https://repo.grails.org/grails/core' }
+    }
+    dependencies {
+        classpath 'io.github.gradle-nexus:publish-plugin:2.0.0'
+    }
+}
+
+ext {
+    isCiBuild = System.getenv('CI')
+    isSnapshot = projectVersion.endsWith('-SNAPSHOT')
+    isReleaseVersion = !isSnapshot
+}
+
+group = 'org.grails'
+version = projectVersion
+
+allprojects {
+    repositories {
+        mavenCentral()
+        maven { url = 'https://repo.grails.org/grails/core' }
+        // mavenLocal() // Keep, this will be uncommented and used by CI (groovy-joint-workflow)
+        if (findProperty('groovyVersion')?.endsWith('-SNAPSHOT')) {
+            maven {
+                name = 'ASF Snapshot repo'
+                url = 'https://repository.apache.org/content/repositories/snapshots'
+            }
+        }
+        if (System.getenv('GITHUB_MAVEN_PASSWORD') && !grailsVersion.endsWith('-SNAPSHOT')) {
+            System.out.println("Adding Grails Core Staging Repo for project: $name")
+            maven {
+                url = 'https://maven.pkg.github.com/grails/grails-core'
+                credentials {
+                    username = 'DOES_NOT_MATTER'
+                    password = System.getenv('GITHUB_MAVEN_PASSWORD')
+                }
+            }
+        }
+    }
+}
+
+if (isReleaseVersion) {
+    apply plugin: 'io.github.gradle-nexus.publish-plugin'
+    nexusPublishing {
+        repositories {
+            sonatype {
+                nexusUrl = uri('https://s01.oss.sonatype.org/service/local/')
+                username = System.getenv('SONATYPE_USERNAME') ?: project.findProperty('sonatypeOssUsername') ?: ''
+                password = System.getenv('SONATYPE_PASSWORD') ?: project.findProperty('sonatypeOssPassword') ?: ''
+                stagingProfileId = System.getenv('SONATYPE_STAGING_PROFILE_ID') ?: project.findProperty('sonatypeOssStagingProfileId') ?: ''
+            }
+        }
+    }
+    //do not generate extra load on Nexus with new staging repository if signing fails
+    tasks.withType(InitializeNexusStagingRepository).configureEach {
+        shouldRunAfter = tasks.withType(Sign)
+    }
+}
+
+apply from: layout.projectDirectory.file('gradle/documentation-config.gradle')
