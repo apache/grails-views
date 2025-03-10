@@ -6,4 +6,5 @@ embeddedProperties: Embedded Properties
 themes: Themes
 includingTemplatesInPlugins: Including Templates in Plugins
 performance: Performance
-changeLog: Change Log
+scaffolding: Scaffolding
+changelog: Change Log
