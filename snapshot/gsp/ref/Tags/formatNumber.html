@@ -1,0 +1,465 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script src="/cdn-cgi/apps/head/3cOPSgo5Omz84ycX7CvigfX4cpw.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-82213539-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-82213539-2');
+    </script>
+    <title>Groovy Server Pages (GSP) 7.0.0-SNAPSHOT</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <script type="text/javascript">
+function addJsClass(el) {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+    <style>
+        .contribute-btn {
+            bottom: 0px;
+        }
+    </style>
+</head>
+
+<body class="body" onload="addJsClass();">
+
+<div id="navigation">
+    <div class="navTitle">
+        
+        Groovy Server Pages (GSP)
+    </div>
+
+    <div class="navLinks">
+        <ul>
+            <li>
+                <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                    <a href="../../guide/index.html" class="button">Table of contents</a>
+
+                    <div id="nav-summary-childs">
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
+                        </div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../../guide/GSPBasics.html"><strong>2</strong><span>GSP Basics</span></a>
+                        </div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../../guide/tags.html"><strong>3</strong><span>GSP Tags</span></a>
+                        </div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../../guide/viewsAndTemplates.html"><strong>4</strong><span>Views and Templates</span></a>
+                        </div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../../guide/layouts.html"><strong>5</strong><span>Layouts with Sitemesh</span></a>
+                        </div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../../guide/resources.html"><strong>6</strong><span>Static Resources</span></a>
+                        </div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../../guide/makingChangesToADeployedApplication.html"><strong>7</strong><span>Making Changes to a Deployed Application</span></a>
+                        </div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="../../guide/taglibs.html"><strong>8</strong><span>Tag Libraries</span></a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </li>
+            <li class="separator selected">
+                <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="reference corner-all">
+
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+                
+                <div class='contribute-btn'>
+                    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/grails/grails-views/edit/7.0.x/gsp/docs/src/docs/ref/Tags/formatNumber.adoc"'>
+                        <i class='fa fa-pencil-square-o'></i> Improve this doc
+                    </button>
+                </div>
+                
+
+                <div class="sect1">
+<h2 id="formatnumber">1. formatNumber</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="purpose">1.1. Purpose</h3>
+<div class="paragraph">
+<p>Formats a number using the patterns defined by the <a href="https://docs.oracle.com/en/java/javase/17/docs/api/index.htmljava.base/java/text/DecimalFormat.html">DecimalFormat</a> class. Also supports attributes used in the JSTL <code>formatNumber</code> tag.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="examples">1.2. Examples</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="xml">&lt;g:formatNumber number="${myNumber}" format="\\$###,##0" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Example of formatting an EUR currency amount:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="xml">&lt;g:formatNumber number="${myCurrencyAmount}" type="currency" currencyCode="EUR" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Example of formatting a USD currency amount:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="xml">&lt;g:formatNumber number="${myCurrencyAmount}" type="currency" currencyCode="USD" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For USD, the currency symbol will be based on the locale of the request. For the "en_US" locale, the result is "$123.45" and for "fi_FI" locale, the formatting is "123,45 USD". The formatting rules come from the <a href="https://docs.oracle.com/en/java/javase/17/docs/api/index.htmljava.base/java/util/Currency.html">Currency</a> class.</p>
+</div>
+<div class="paragraph">
+<p>Example of left padding a number with zeros:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="xml">&lt;g:formatNumber number="${myNumber}" type="number" minIntegerDigits="9" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Example of formatting a number showing 2 fraction digits:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="xml">&lt;g:formatNumber number="${myNumber}" type="number" maxFractionDigits="2" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Example of formatting a number showing 2 fraction digits, rounding with RoundingMode.HALF_DOWN:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="xml">&lt;g:formatNumber number="${myNumber}" type="number"
+                maxFractionDigits="2" roundingMode="HALF_DOWN" /&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="description">1.3. Description</h3>
+<div class="paragraph">
+<p>Attributes</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>number</code> (required) - The number object to format</p>
+</li>
+<li>
+<p><code>format</code> (optional) - The formatting pattern to use for the number, see <a href="https://docs.oracle.com/en/java/javase/17/docs/api/index.htmljava.base/java/text/DecimalFormat.html">DecimalFormat</a></p>
+</li>
+<li>
+<p><code>formatName</code> (optional) - Look up <code>format</code> from the default MessageSource / ResourceBundle (i18n/<strong>.properties file) with this key. Look up <code>format</code> from the default MessageSource / ResourceBundle (i18n/</strong>.properties file) with this key. If <code>format</code> and <code>formatName</code> are empty, <code>format</code> is looked up with &#8216;default.number.format&#8217; key. If the key is missing, '0' formatting pattern is used.</p>
+</li>
+<li>
+<p><code>type</code> (optional) - The type of formatter to use: 'number', 'currency' or 'percent' . <code>format</code> or <code>formatName</code> aren&#8217;t used when <code>type</code> is specified.</p>
+</li>
+<li>
+<p><code>locale</code> (optional) - Override the locale of the request , String or <a href="https://docs.oracle.com/en/java/javase/17/docs/api/index.htmljava.base/java/util/Locale.html">Locale</a> value</p>
+</li>
+<li>
+<p><code>groupingUsed</code> (optional) - Set whether grouping will be used in this format.</p>
+</li>
+<li>
+<p><code>minIntegerDigits</code> (optional) - Sets the minimum number of digits allowed in the integer portion of a number.</p>
+</li>
+<li>
+<p><code>maxIntegerDigits</code> (optional) - Sets the maximum number of digits allowed in the integer portion of a number.</p>
+</li>
+<li>
+<p><code>minFractionDigits</code> (optional) - Sets the minimum number of digits allowed in the fraction portion of a number.</p>
+</li>
+<li>
+<p><code>maxFractionDigits</code> (optional) - Sets the maximum number of digits allowed in the fraction portion of a number.</p>
+</li>
+<li>
+<p><code>currencyCode</code> (optional) - The standard currency code ('EUR', 'USD', etc.), uses formatting settings for the currency. type='currency' attribute is recommended.</p>
+</li>
+<li>
+<p><code>currencySymbol</code> (optional) - Force the currency symbol to some symbol, recommended way is to use <code>currencyCode</code> attribute instead (takes symbol information from <a href="https://docs.oracle.com/en/java/javase/17/docs/api/index.htmljava.base/java/util/Currency.html">Currency</a>)</p>
+</li>
+<li>
+<p><code>roundingMode</code> (optional) - Sets the <a href="https://docs.oracle.com/en/java/javase/17/docs/api/index.htmljava.base/java/math/RoundingMode.html">RoundingMode</a> used in this DecimalFormat. Usual values: <code>HALF_UP</code>, <code>HALF_DOWN</code>. If roundingMode is <code>UNNECESSARY</code> and an <code>ArithemeticException</code> occurs, the original number formatted with default number formatting will be returned.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                    <div class="menu-block">
+                        <h1 class="menu-title" onclick="toggleRef(nextElement(this))">Tag Libraries</h1>
+                        <div class="menu-sub">
+                            
+                            <div class="menu-item"><a href="../../ref/Tag%20Libraries/Usage.html">Usage</a></div>
+                            
+                            
+                            <div class="menu-item"><a href="../../ref/Tag%20Libraries/actionName.html">actionName</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tag%20Libraries/controllerName.html">controllerName</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tag%20Libraries/flash.html">flash</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tag%20Libraries/pageScope.html">pageScope</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tag%20Libraries/params.html">params</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tag%20Libraries/request.html">request</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tag%20Libraries/response.html">response</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tag%20Libraries/servletContext.html">servletContext</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tag%20Libraries/session.html">session</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="menu-block">
+                        <h1 class="menu-title" onclick="toggleRef(nextElement(this))">Tags</h1>
+                        <div class="menu-sub selected">
+                            
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/actionSubmit.html">actionSubmit</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/actionSubmitImage.html">actionSubmitImage</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/applyLayout.html">applyLayout</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/checkBox.html">checkBox</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/collect.html">collect</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/cookie.html">cookie</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/country.html">country</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/countrySelect.html">countrySelect</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/createLink.html">createLink</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/createLinkTo.html">createLinkTo</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/currencySelect.html">currencySelect</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/datePicker.html">datePicker</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/each.html">each</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/eachError.html">eachError</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/else.html">else</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/elseif.html">elseif</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/external.html">external</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/field.html">field</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/fieldError.html">fieldError</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/fieldValue.html">fieldValue</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/findAll.html">findAll</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/form.html">form</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/formActionSubmit.html">formActionSubmit</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/formatBoolean.html">formatBoolean</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/formatDate.html">formatDate</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/formatNumber.html">formatNumber</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/grep.html">grep</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/hasErrors.html">hasErrors</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/header.html">header</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/hiddenField.html">hiddenField</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/if.html">if</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/img.html">img</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/include.html">include</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/isAvailable.html">isAvailable</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/isNotAvailable.html">isNotAvailable</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/javascript.html">javascript</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/join.html">join</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/layoutBody.html">layoutBody</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/layoutHead.html">layoutHead</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/layoutTitle.html">layoutTitle</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/link.html">link</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/localeSelect.html">localeSelect</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/message.html">message</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/meta.html">meta</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/pageProperty.html">pageProperty</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/paginate.html">paginate</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/passwordField.html">passwordField</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/radio.html">radio</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/radioGroup.html">radioGroup</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/render.html">render</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/renderErrors.html">renderErrors</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/resource.html">resource</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/select.html">select</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/set.html">set</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/sortableColumn.html">sortableColumn</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/submitButton.html">submitButton</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/textArea.html">textArea</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/textField.html">textField</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/timeZoneSelect.html">timeZoneSelect</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/unless.html">unless</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/uploadForm.html">uploadForm</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Tags/while.html">while</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    Apache License, Version 2.0
+    
+</div>
+
+
+<script type="text/javascript" src="../../js/docs.js"></script>
+
+</body>
+</html>

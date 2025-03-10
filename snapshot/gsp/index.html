@@ -1,0 +1,382 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>Groovy Server Pages (GSP)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="./css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
+    <link rel="stylesheet" href="./css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
+    <script src="./js/docs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+    <script type="text/javascript">
+        function addJsClass(el) {
+            var classes = document.body.className.split(" ");
+            classes.push("js");
+            document.body.className = classes.join(" ");
+        }
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+<div id="navigation">
+    <div class="navTitle">
+        
+        Groovy Server Pages (GSP)
+    </div>
+    <div class="navLinks">
+        <ul>
+            <li>
+                <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                    <a href="./guide/index.html" class="button">Table of contents</a>
+                    <div id="nav-summary-childs" style="display:none;">
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/introduction.html"><strong>1</strong><span>Introduction</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/GSPBasics.html"><strong>2</strong><span>GSP Basics</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/tags.html"><strong>3</strong><span>GSP Tags</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/viewsAndTemplates.html"><strong>4</strong><span>Views and Templates</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/layouts.html"><strong>5</strong><span>Layouts with Sitemesh</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/resources.html"><strong>6</strong><span>Static Resources</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/makingChangesToADeployedApplication.html"><strong>7</strong><span>Making Changes to a Deployed Application</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/taglibs.html"><strong>8</strong><span>Tag Libraries</span></a></div>
+                        
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a href="./api/index.html" class="button">API Reference</a>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="corner-all">
+                <div class="project">
+                    <h1>Groovy Server Pages (GSP)</h1>
+                    <p></p>
+                    <p>GSP (Groovy Server Pages) - A server-side view rendering technology based on Groovy</p>
+                    <p><strong>Version:</strong> 7.0.0-SNAPSHOT</p>
+
+                </div>
+                
+                <div id="table-of-content">
+                    <h2>Table of Contents</h2>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/introduction.html"><strong>1</strong><span>Introduction</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/GSPBasics.html"><strong>2</strong><span>GSP Basics</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/GSPBasics.html#variablesAndScopes"><strong>2.1</strong><span>Variables and Scopes</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/GSPBasics.html#logicAndIteration"><strong>2.2</strong><span>Logic and Iteration</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/GSPBasics.html#pageDirectives"><strong>2.3</strong><span>Page Directives</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/GSPBasics.html#expressions"><strong>2.4</strong><span>Expressions</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/tags.html"><strong>3</strong><span>GSP Tags</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/tags.html#tagVariablesAndScopes"><strong>3.1</strong><span>Variables and Scopes</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/tags.html#tagLogicAndIteration"><strong>3.2</strong><span>Logic and Iteration</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/tags.html#searchAndFiltering"><strong>3.3</strong><span>Search and Filtering</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/tags.html#linksAndResources"><strong>3.4</strong><span>Links and Resources</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/tags.html#formsAndFields"><strong>3.5</strong><span>Forms and Fields</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/tags.html#tagsAsMethodCalls"><strong>3.6</strong><span>Tags as Method Calls</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/viewsAndTemplates.html"><strong>4</strong><span>Views and Templates</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/layouts.html"><strong>5</strong><span>Layouts with Sitemesh</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/layouts.html#sitemeshContentBlocks"><strong>5.1</strong><span>Sitemesh Content Blocks</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/resources.html"><strong>6</strong><span>Static Resources</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/makingChangesToADeployedApplication.html"><strong>7</strong><span>Making Changes to a Deployed Application</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/taglibs.html"><strong>8</strong><span>Tag Libraries</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/taglibs.html#taglibVariablesAndScopes"><strong>8.1</strong><span>Variables and Scopes</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/taglibs.html#simpleTags"><strong>8.2</strong><span>Simple Tags</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/taglibs.html#logicalTags"><strong>8.3</strong><span>Logical Tags</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/taglibs.html#iterativeTags"><strong>8.4</strong><span>Iterative Tags</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/taglibs.html#namespaces"><strong>8.5</strong><span>Tag Namespaces</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/taglibs.html#usingJSPTagLibraries"><strong>8.6</strong><span>Using JSP Tag Libraries</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="./guide/taglibs.html#tagReturnValue"><strong>8.7</strong><span>Tag return value</span></a></div>
+                    
+                    <div style="clear:both" ></div>
+                </div>
+                
+                
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+             <div class="local-title">
+                    <a href="./guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Tag Libraries</h1><div class="menu-sub">
+                        
+                        <div class="menu-item"><a href="./ref/Tag%20Libraries/Usage.html">Usage</a></div>
+                        
+                        
+                        <div class="menu-item"><a href="./ref/Tag%20Libraries/actionName.html">actionName</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tag%20Libraries/controllerName.html">controllerName</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tag%20Libraries/flash.html">flash</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tag%20Libraries/pageScope.html">pageScope</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tag%20Libraries/params.html">params</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tag%20Libraries/request.html">request</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tag%20Libraries/response.html">response</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tag%20Libraries/servletContext.html">servletContext</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tag%20Libraries/session.html">session</a>
+                        </div>
+                        
+                        </div>
+                    </div>
+                    
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Tags</h1><div class="menu-sub">
+                        
+                        
+                        <div class="menu-item"><a href="./ref/Tags/actionSubmit.html">actionSubmit</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/actionSubmitImage.html">actionSubmitImage</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/applyLayout.html">applyLayout</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/checkBox.html">checkBox</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/collect.html">collect</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/cookie.html">cookie</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/country.html">country</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/countrySelect.html">countrySelect</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/createLink.html">createLink</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/createLinkTo.html">createLinkTo</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/currencySelect.html">currencySelect</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/datePicker.html">datePicker</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/each.html">each</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/eachError.html">eachError</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/else.html">else</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/elseif.html">elseif</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/external.html">external</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/field.html">field</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/fieldError.html">fieldError</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/fieldValue.html">fieldValue</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/findAll.html">findAll</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/form.html">form</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/formActionSubmit.html">formActionSubmit</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/formatBoolean.html">formatBoolean</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/formatDate.html">formatDate</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/formatNumber.html">formatNumber</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/grep.html">grep</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/hasErrors.html">hasErrors</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/header.html">header</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/hiddenField.html">hiddenField</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/if.html">if</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/img.html">img</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/include.html">include</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/isAvailable.html">isAvailable</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/isNotAvailable.html">isNotAvailable</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/javascript.html">javascript</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/join.html">join</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/layoutBody.html">layoutBody</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/layoutHead.html">layoutHead</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/layoutTitle.html">layoutTitle</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/link.html">link</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/localeSelect.html">localeSelect</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/message.html">message</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/meta.html">meta</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/pageProperty.html">pageProperty</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/paginate.html">paginate</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/passwordField.html">passwordField</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/radio.html">radio</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/radioGroup.html">radioGroup</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/render.html">render</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/renderErrors.html">renderErrors</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/resource.html">resource</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/select.html">select</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/set.html">set</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/sortableColumn.html">sortableColumn</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/submitButton.html">submitButton</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/textArea.html">textArea</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/textField.html">textField</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/timeZoneSelect.html">timeZoneSelect</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/unless.html">unless</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/uploadForm.html">uploadForm</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/while.html">while</a>
+                        </div>
+                        
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    Apache License, Version 2.0
+    
+</div>
+
+
+</body>
+</html>

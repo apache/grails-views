@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>Grails Fields Plugin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="./css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
+    <link rel="stylesheet" href="./css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
+    <script src="./js/docs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+    <script type="text/javascript">
+        function addJsClass(el) {
+            var classes = document.body.className.split(" ");
+            classes.push("js");
+            document.body.className = classes.join(" ");
+        }
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+<div id="navigation">
+    <div class="navTitle">
+        
+        Grails Fields Plugin
+    </div>
+    <div class="navLinks">
+        <ul>
+            <li>
+                <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                    <a href="./guide/index.html" class="button">Table of contents</a>
+                    <div id="nav-summary-childs" style="display:none;">
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/introduction.html"><strong>1</strong><span>Introduction</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/installation.html"><strong>2</strong><span>Installation</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/usage.html"><strong>3</strong><span>Usage</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/customizingFieldRendering.html"><strong>4</strong><span>Customizing Field Rendering</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/embeddedProperties.html"><strong>5</strong><span>Embedded Properties</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/themes.html"><strong>6</strong><span>Themes</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/includingTemplatesInPlugins.html"><strong>7</strong><span>Including Templates in Plugins</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/performance.html"><strong>8</strong><span>Performance</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/scaffolding.html"><strong>9</strong><span>Scaffolding</span></a></div>
+                        
+                        <div class="toc-item" style="margin-left:0"><a href="./guide/changelog.html"><strong>10</strong><span>Change Log</span></a></div>
+                        
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a href="./api/index.html" class="button">API Reference</a>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="corner-all">
+                <div class="project">
+                    <h1>Grails Fields Plugin</h1>
+                    <p></p>
+                    <p>Grails Fields Plugin - customize the rendering of input fields for Grails artifacts</p>
+                    <p><strong>Version:</strong> 7.0.0-SNAPSHOT</p>
+
+                </div>
+                
+                <div id="table-of-content">
+                    <h2>Table of Contents</h2>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/introduction.html"><strong>1</strong><span>Introduction</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/installation.html"><strong>2</strong><span>Installation</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/usage.html"><strong>3</strong><span>Usage</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/customizingFieldRendering.html"><strong>4</strong><span>Customizing Field Rendering</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/embeddedProperties.html"><strong>5</strong><span>Embedded Properties</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/themes.html"><strong>6</strong><span>Themes</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/includingTemplatesInPlugins.html"><strong>7</strong><span>Including Templates in Plugins</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/performance.html"><strong>8</strong><span>Performance</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/scaffolding.html"><strong>9</strong><span>Scaffolding</span></a></div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="./guide/changelog.html"><strong>10</strong><span>Change Log</span></a></div>
+                    
+                    <div style="clear:both" ></div>
+                </div>
+                
+                
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+             <div class="local-title">
+                    <a href="./guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Tags</h1><div class="menu-sub">
+                        
+                        
+                        <div class="menu-item"><a href="./ref/Tags/all.html">all</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/display.html">display</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/displayWidget.html">displayWidget</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/field.html">field</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/input.html">input</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/table.html">table</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/widget.html">widget</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="./ref/Tags/with.html">with</a>
+                        </div>
+                        
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    Apache License, Version 2.0
+    
+</div>
+
+
+</body>
+</html>
