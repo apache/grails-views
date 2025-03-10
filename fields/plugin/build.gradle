@@ -13,7 +13,7 @@ ext {
     pomTitle = 'Grails Fields Plugin'
     pomDescription = 'Customizable form-field rendering based on overrideable GSP template'
     pomDevelopers = [robfletcher: 'Rob Fletcher', graemerocher: "Graeme Rocher", sdelamo: "Sergio del Amo", sbglasius: 'Søren Berg Glasius']
-    mavenSnapshotPublishUrl = 'https://repo.grails.org/grails/plugins3-snapshots-local'
+    snapshotPublishUrl = 'https://repo.grails.org/grails/plugins3-snapshots-local'
 }
 
 dependencies {

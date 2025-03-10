@@ -25,10 +25,7 @@ file("../gradle.properties").withReader {
 }
 
 dependencies {
-    implementation platform("org.grails:grails-bom:${gradleProperties.grailsVersion}"), {
-        exclude group: 'org.grails.plugins', module: 'views-gradle'
-        exclude group: 'org.grails.plugins', module: 'views-json'
-    }
+    implementation platform("org.grails:grails-bom:${gradleProperties.grailsVersion}")
     implementation "org.grails:grails-gradle-plugin"
     implementation "org.grails.plugins:views-gradle"
     implementation "org.grails:grails-docs"

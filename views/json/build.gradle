@@ -9,7 +9,7 @@ group = 'org.grails.plugins'
 
 ext {
     pomDescription = 'Grails JSON Views'
-    mavenSnapshotPublishUrl = 'https://repo.grails.org/grails/plugins3-snapshots-local'
+    snapshotPublishUrl = 'https://repo.grails.org/grails/plugins3-snapshots-local'
 }
 
 dependencies {

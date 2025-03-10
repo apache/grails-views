@@ -1,18 +1,11 @@
 import io.github.gradlenexus.publishplugin.InitializeNexusStagingRepository
 
-import static com.bmuschko.gradle.nexus.NexusPlugin.getSIGNING_KEYRING
-import static com.bmuschko.gradle.nexus.NexusPlugin.getSIGNING_KEY_ID
-import static com.bmuschko.gradle.nexus.NexusPlugin.getSIGNING_PASSWORD
-
 buildscript {
     repositories {
         maven { url = 'https://repo.grails.org/grails/core' }
     }
     dependencies {
-        classpath platform("org.grails:grails-bom:${grailsVersion}"), {
-            exclude group: 'org.grails.plugins', module: 'views-gradle'
-            exclude group: 'org.grails.plugins', module: 'views-json'
-        }
+        classpath platform("org.grails:grails-bom:${grailsVersion}")
         classpath 'org.grails:grails-gradle-plugin'
     }
 }
@@ -105,9 +98,9 @@ tasks.withType(Groovydoc).configureEach {
 ext.set('isRelease', System.getenv('GRAILS_PUBLISH_RELEASE') != null ? Boolean.parseBoolean(System.getenv('GRAILS_PUBLISH_RELEASE')) : !ext.gradleProperties.projectVersion.endsWith('SNAPSHOT'))
 ext.set('isSnapshot', !ext.isRelease)
 
-ext.set('signing.keyId', project.findProperty(SIGNING_KEY_ID) ?: System.getenv('SIGNING_KEY'))
-ext.set('signing.password', project.findProperty(SIGNING_PASSWORD) ?: System.getenv('SIGNING_PASSPHRASE'))
-ext.set('signing.secretKeyRingFile', project.findProperty(SIGNING_KEYRING) ?: System.getenv('SIGNING_KEYRING'))
+ext.set('signing.keyId', project.findProperty('signing.keyId') ?: System.getenv('SIGNING_KEY'))
+ext.set('signing.password', project.findProperty('signing.password') ?: System.getenv('SIGNING_PASSPHRASE'))
+ext.set('signing.secretKeyRingFile', project.findProperty('signing.secretKeyRingFile') ?: System.getenv('SIGNING_KEYRING'))
 ext.set('pomInfo', {
     delegate.url 'https://views.grails.org/latest/'
     delegate.licenses {

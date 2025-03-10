@@ -11,7 +11,7 @@ ext {
     pomTitle = 'Grails Scaffolding Plugin'
     pomDescription = 'Provides scaffolding for Grails applications'
     pomDevelopers = [puneetbehl: 'Puneet Behl']
-    mavenSnapshotPublishUrl = 'https://repo.grails.org/grails/plugins3-snapshots-local'
+    snapshotPublishUrl = 'https://repo.grails.org/grails/plugins3-snapshots-local'
 }
 
 dependencies {

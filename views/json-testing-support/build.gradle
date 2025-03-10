@@ -8,7 +8,7 @@ group = 'org.grails'
 
 ext {
     pomDescription = 'JSON Views Testing Support'
-    mavenSnapshotPublishUrl = 'https://repo.grails.org/grails/libs-snapshots-local'
+    snapshotPublishUrl = 'https://repo.grails.org/grails/libs-snapshots-local'
 }
 
 dependencies {

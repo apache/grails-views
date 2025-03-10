@@ -13,7 +13,7 @@ ext {
     pomDevelopers = [
             [id: 'codeconsole', name: 'Scott Murphy Heiberg']
     ]
-    mavenSnapshotPublishUrl = 'https://repo.grails.org/grails/plugins3-snapshots-local'
+    snapshotPublishUrl = 'https://repo.grails.org/grails/plugins3-snapshots-local'
 }
 
 dependencies {

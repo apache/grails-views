@@ -13,7 +13,7 @@ ext {
             [id: 'jeffscottbrown', name: 'Jeff Brown'],
             [id: 'jameskleeh', name: 'James Kleeh']
     ]
-    mavenSnapshotPublishUrl = 'https://repo.grails.org/grails/libs-snapshots-local'
+    snapshotPublishUrl = 'https://repo.grails.org/grails/libs-snapshots-local'
 }
 
 // Note: documentation for this project is published to grails-doc as part of the other testing documentation
