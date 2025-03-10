@@ -8,11 +8,10 @@ version = projectVersion
 group = 'org.grails'
 
 ext {
+    pomArtifactId = 'grails-plugins-sitemesh3'
     pomTitle = 'SiteMesh 3 Grails Plugin'
     pomDescription = 'SiteMesh is a web-page layout and decoration framework and web- application integration framework to aid in creating sites consisting of many pages for which a consistent look/feel, navigation and layout scheme is required.'
-    pomDevelopers = [
-            [id: 'codeconsole', name: 'Scott Murphy Heiberg']
-    ]
+    pomDevelopers = [codeconsole: 'Scott Murphy Heiberg']
     snapshotPublishUrl = 'https://repo.grails.org/grails/plugins3-snapshots-local'
 }
 
