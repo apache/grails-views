@@ -1,6 +1,6 @@
 package org.grails.web.pages;
 
-import grails.core.GrailsTagLibClass;
+import grails.core.gsp.GrailsTagLibClass;
 import grails.gsp.TagLib;
 import org.grails.core.gsp.DefaultGrailsTagLibClass;
 import org.grails.taglib.TagLibraryLookup;

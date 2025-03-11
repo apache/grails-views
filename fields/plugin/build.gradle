@@ -31,7 +31,7 @@ dependencies {
     testImplementation "org.apache.groovy:groovy-dateutil"
     testImplementation "org.grails:grails-datastore-gorm-hibernate5"
     testImplementation "org.grails:grails-gorm-testing-support"
-    testImplementation "org.grails:grails-web-testing-support"
+    testImplementation project(':grails-web-testing-support')
     testImplementation 'org.javassist:javassist:3.29.0-GA'
     testImplementation("org.jodd:jodd-wot:$joddWotVersion") {
         exclude module: 'slf4j-api'

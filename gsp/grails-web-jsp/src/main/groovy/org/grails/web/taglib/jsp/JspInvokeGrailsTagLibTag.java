@@ -39,7 +39,7 @@ import jakarta.servlet.jsp.tagext.BodyTagSupport;
 import jakarta.servlet.jsp.tagext.DynamicAttributes;
 
 import grails.core.GrailsApplication;
-import org.grails.core.artefact.TagLibArtefactHandler;
+import org.grails.core.artefact.gsp.TagLibArtefactHandler;
 import org.grails.buffer.FastStringPrintWriter;
 import org.grails.gsp.GroovyPage;
 import org.grails.taglib.GrailsTagException;
