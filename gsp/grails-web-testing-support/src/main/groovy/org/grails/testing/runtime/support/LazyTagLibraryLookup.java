@@ -19,7 +19,7 @@
 
 package org.grails.testing.runtime.support;
 
-import grails.core.GrailsTagLibClass;
+import grails.core.gsp.GrailsTagLibClass;
 import groovy.lang.GroovyObject;
 import org.grails.plugins.web.GroovyPagesGrailsPlugin;
 import org.grails.taglib.TagLibraryLookup;
@@ -54,10 +54,6 @@ public class LazyTagLibraryLookup extends TagLibraryLookup {
         try {
             defaultTagLibClass = Class.forName("org.grails.core.gsp.DefaultGrailsTagLibClass");
         } catch (ClassNotFoundException e) {
-            try {
-                defaultTagLibClass = Class.forName("org.grails.core.DefaultGrailsTagLibClass");
-            } catch (ClassNotFoundException f) {
-            }
         }
 
         try {
@@ -100,7 +96,7 @@ public class LazyTagLibraryLookup extends TagLibraryLookup {
     }
 
     @Override
-    protected void putTagLib(Map<String, Object> tags, String name, grails.core.GrailsTagLibClass taglib) {
+    protected void putTagLib(Map<String, Object> tags, String name, GrailsTagLibClass taglib) {
         if (applicationContext.containsBean(taglib.getFullName())) {
             super.putTagLib(tags, name, taglib);
         }

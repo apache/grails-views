@@ -1,7 +1,7 @@
 package grails.gsp
 import grails.core.DefaultGrailsApplication
 import grails.spring.BeanBuilder
-import org.grails.core.artefact.TagLibArtefactHandler
+import org.grails.core.artefact.gsp.TagLibArtefactHandler
 import org.grails.core.io.SimpleMapResourceLoader
 import org.grails.gsp.GroovyPagesTemplateEngine
 import org.grails.plugins.web.taglib.ApplicationTagLib

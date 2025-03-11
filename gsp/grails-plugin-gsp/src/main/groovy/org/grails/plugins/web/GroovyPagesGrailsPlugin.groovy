@@ -26,7 +26,7 @@ import grails.util.Metadata
 import grails.web.pages.GroovyPagesUriService
 import groovy.transform.CompileStatic
 import groovy.util.logging.Commons
-import org.grails.core.artefact.TagLibArtefactHandler
+import org.grails.core.artefact.gsp.TagLibArtefactHandler
 import org.grails.gsp.GroovyPageResourceLoader
 import org.grails.gsp.GroovyPagesTemplateEngine
 import org.grails.gsp.io.CachingGroovyPageStaticResourceLocator
