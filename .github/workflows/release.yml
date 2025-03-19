@@ -2,18 +2,15 @@ name: "Release"
 on:
   release:
     types: [published]
-env:
-  GIT_USER_NAME: 'grails-build'
-  GIT_USER_EMAIL: 'grails-build@users.noreply.github.com'
+permissions:
+  content: write # pre-release & post-release workflows to update tags & create commits
+  packages: read # staging workflow for grails-core
 jobs:
   publish:
     name: "Publish to Sonatype Staging Repository"
     outputs:
       release_version: ${{ steps.release_version.outputs.value }}
     runs-on: ubuntu-24.04
-    permissions:
-      contents: write
-      packages: read
     steps:
       - name: "📥 Checkout repository"
         uses: actions/checkout@v4
@@ -30,7 +27,7 @@ jobs:
         id: release_version
         run: echo "value=${GITHUB_REF:11}" >> $GITHUB_OUTPUT
       - name: "⚙️ Run pre-release"
-        uses: grails/github-actions/pre-release@main
+        uses: apache/grails-github-actions/pre-release@asf
       - name: "🔐 Generate key file for artifact signing"
         env:
           SECRING_FILE: ${{ secrets.SECRING_FILE }}
@@ -71,9 +68,6 @@ jobs:
     name: "Release Gradle Plugin from Sonatype Staging Repository"
     needs: publish
     runs-on: ubuntu-24.04
-    permissions:
-      contents: write
-      packages: read
     steps:
       - name: "📥 Checkout repository"
         uses: actions/checkout@v4
@@ -106,9 +100,6 @@ jobs:
     name: "Release Sonatype Staging Repository"
     needs: [publish, release_gradle]
     runs-on: ubuntu-24.04
-    permissions:
-      contents: write
-      packages: read
     steps:
       - name: "📥 Checkout repository"
         uses: actions/checkout@v4
@@ -136,16 +127,12 @@ jobs:
           findSonatypeStagingRepository
           releaseSonatypeStagingRepository
       - name: "⚙️ Run post-release"
-        if: success()
-        uses: grails/github-actions/post-release@main
+        uses: apache/grails-github-actions/post-release@asf
   docs:
     environment: release
     name: "Publish Documentation"
     needs: publish
     runs-on: ubuntu-24.04
-    permissions:
-      contents: write
-      packages: read
     steps:
       - name: "📥 Checkout repository"
         uses: actions/checkout@v4
@@ -165,8 +152,7 @@ jobs:
           GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: ./gradlew aggregateDocs
       - name: "🚀 Publish to Github Pages"
-        if: success()
-        uses: grails/grails-github-actions/deploy-github-pages@main
+        uses: apache/grails-github-actions/deploy-github-pages@asf
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GRADLE_PUBLISH_RELEASE: 'true'

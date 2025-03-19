@@ -7,14 +7,14 @@ on:
     branches:
       - '[2-9]+.[0-9]+.x'
   workflow_dispatch:
+permissions:
+  contents: write
+  packages: read
 jobs:
   test_project:
     name: "Test Project"
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-24.04
-    permissions:
-      contents: read
-      packages: read
     steps:
       - name: "📥 Checkout repository"
         uses: actions/checkout@v4
@@ -40,9 +40,6 @@ jobs:
     name: "Build Project"
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
-    permissions:
-      contents: write
-      packages: read
     steps:
       - name: "📥 Checkout repository"
         uses: actions/checkout@v4
@@ -65,7 +62,6 @@ jobs:
         working-directory: 'views/gradle-plugin'
         run: ./gradlew build --rerun-tasks --stacktrace
       - name: "📤 Publish Snapshot Artifacts to Artifactory (repo.grails.org)"
-        if: success()
         env:
           GRADLE_PUBLISH_RELEASE: 'false'
           MAVEN_PUBLISH_USERNAME: ${{ secrets.MAVEN_PUBLISH_USERNAME }}
@@ -75,11 +71,9 @@ jobs:
           cd views/gradle-plugin && 
           ./gradlew --no-build-cache publish
       - name: "📖 Generate Snapshot Documentation"
-        if: success()
         run: ./gradlew aggregateDocs
       - name: "🚀 Publish to Github Pages"
-        if: success()
-        uses: grails/grails-github-actions/deploy-github-pages@main
+        uses: apache/grails-github-actions/deploy-github-pages@asf
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GRADLE_PUBLISH_RELEASE: 'false'
