@@ -31,11 +31,6 @@ jobs:
         env:
           GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: ./gradlew check --stacktrace
-      - name: "🧪 Run Gradle Plugin Tests"
-        env:
-          GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-        working-directory: 'views/gradle-plugin'
-        run: ./gradlew check --rerun-tasks --stacktrace
   build_project:
     name: "Build Project"
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
@@ -56,20 +51,13 @@ jobs:
         env:
           GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: ./gradlew build --continue --stacktrace
-      - name: "🧪 Test Views Gradle Plugin"
-        env:
-          GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-        working-directory: 'views/gradle-plugin'
-        run: ./gradlew build --rerun-tasks --stacktrace
-      - name: "📤 Publish Snapshot Artifacts to Artifactory (repo.grails.org)"
+      - name: "📤 Publish Snapshot Artifacts"
         env:
           GRADLE_PUBLISH_RELEASE: 'false'
           MAVEN_PUBLISH_URL: ${{ secrets.GRAILS_NEXUS_PUBLISH_SNAPSHOT_URL }}
           MAVEN_PUBLISH_USERNAME: ${{ secrets.NEXUS_USER }}
           MAVEN_PUBLISH_PASSWORD: ${{ secrets.NEXUS_PW  }}
         run: > 
-          ./gradlew --no-build-cache publish && 
-          cd views/gradle-plugin && 
           ./gradlew --no-build-cache publish
       - name: "📖 Generate Snapshot Documentation"
         run: ./gradlew aggregateDocs

@@ -32,22 +32,6 @@ jobs:
         env:
           SECRING_FILE: ${{ secrets.SECRING_FILE }}
         run: echo $SECRING_FILE | base64 -d > ${{ github.workspace }}/secring.gpg
-      - name: "📤 Publish to and close Sonatype staging repository for the gradle plugin"
-        env:
-          GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          GRAILS_PUBLISH_RELEASE: 'true'
-          NEXUS_PUBLISH_USERNAME: ${{ secrets.NEXUS_PUBLISH_USERNAME }}
-          NEXUS_PUBLISH_PASSWORD: ${{ secrets.NEXUS_PUBLISH_PASSWORD }}
-          NEXUS_PUBLISH_URL: ${{ secrets.NEXUS_PUBLISH_RELEASE_URL }}
-          NEXUS_PUBLISH_STAGING_PROFILE_ID: ${{ secrets.NEXUS_PUBLISH_STAGING_PROFILE_ID }}
-          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
-          SIGNING_PASSPHRASE: ${{ secrets.SIGNING_PASSPHRASE }}
-        working-directory: 'views/gradle-plugin'
-        run: >
-          ./gradlew --no-build-cache
-          -Psigning.secretKeyRingFile=${{ github.workspace }}/secring.gpg 
-          publishToSonatype 
-          closeSonatypeStagingRepository
       - name: "📤 Publish to and close Sonatype staging repository for grails-views"
         env:
           GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
@@ -63,42 +47,10 @@ jobs:
           -Psigning.secretKeyRingFile=${{ github.workspace }}/secring.gpg 
           publishToSonatype 
           closeSonatypeStagingRepository
-  release_gradle:
-    environment: 'release-gradle'
-    name: "Release Gradle Plugin from Sonatype Staging Repository"
-    needs: publish
-    runs-on: ubuntu-24.04
-    steps:
-      - name: "📥 Checkout repository"
-        uses: actions/checkout@v4
-        with:
-          ref: v${{ needs.publish.outputs.release_version }}
-      - name: "☕️ Setup JDK"
-        uses: actions/setup-java@v4
-        with:
-          java-version: 17
-          distribution: liberica
-      - name: "🐘 Setup Gradle"
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          develocity-access-key: ${{ secrets.GRAILS_DEVELOCITY_ACCESS_KEY }}
-      - name: "🚀 Release Sonatype Staging Repository"
-        env:
-          GITHUB_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          GRAILS_PUBLISH_RELEASE: 'true'
-          NEXUS_PUBLISH_USERNAME: ${{ secrets.NEXUS_PUBLISH_USERNAME }}
-          NEXUS_PUBLISH_PASSWORD: ${{ secrets.NEXUS_PUBLISH_PASSWORD }}
-          NEXUS_PUBLISH_URL: ${{ secrets.NEXUS_PUBLISH_RELEASE_URL }}
-          NEXUS_PUBLISH_STAGING_PROFILE_ID: ${{ secrets.NEXUS_PUBLISH_STAGING_PROFILE_ID }}
-        working-directory: 'views/gradle-plugin'
-        run: >
-          ./gradlew
-          findSonatypeStagingRepository
-          releaseSonatypeStagingRepository
   release:
     environment: 'release'
     name: "Release Sonatype Staging Repository"
-    needs: [publish, release_gradle]
+    needs: [publish]
     runs-on: ubuntu-24.04
     steps:
       - name: "📥 Checkout repository"
