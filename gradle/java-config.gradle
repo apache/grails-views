@@ -1,5 +1,0 @@
-java {
-    sourceCompatibility = JavaVersion.toVersion(javaVersion)
-    withJavadocJar()
-    withSourcesJar()
-}

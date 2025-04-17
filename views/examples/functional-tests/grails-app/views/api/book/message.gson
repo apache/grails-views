@@ -1,7 +1,0 @@
-model {
-    String value
-}
-
-json {
-    message "Controller says ${value}"
-}

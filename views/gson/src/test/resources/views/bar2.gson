@@ -1,4 +1,0 @@
-package foo
-json.person {
-    name "bob"
-}
